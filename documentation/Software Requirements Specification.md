@@ -18,7 +18,7 @@
   * the user selects the menu item "Dresses";
   * a list view of all dresses is displayed.
   
-  ! [Pic 1.1](documentation/pictures/Pic. 1.1 View list of dresses.png)
+  ! [Pic 1.1](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/blob/dev/documentation/pictures/Pic.%201.1%20View%20list%20of%20dresses.png)
 
 Pic. 1.1 Viewing the list of dresses
 
