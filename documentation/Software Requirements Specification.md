@@ -139,7 +139,7 @@ Filter data by date:
    Data is updated after selecting filtering data and clicking the "Update" button.
    
    
-   ### 2.1 Adding dress for rent
+   ### 2.2 Adding dress for rent
    This program mode is designed to add a new rented dress in list.
   
   Main scenario:
@@ -165,6 +165,61 @@ Filter data by date:
   * Client - the person who rents the dress;
   * Rental date - the date on which the dress is rented;
   
+  Limitations for data validation:
+   * Dress - one value is selected from the list of available dresses. If there is no dress in system, you cannot add a new rented dress.
+  * Client - maximum 50 characters.
+  
+  ### 2.3 Editing rented dress
+  
+   This program mode is designed to edit a dress.
+ 
+  Main scenario:
+  * the user is in the rented dress list view mode and clicks the "Edit" button in the column "Action" for the selected rented dress;
+  * the form for editing a rented dress is displayed;
+  * the user edits data and clicks the "Save" button;
+  * if the data was entered incorrectly, then the warning about incorrect data would be displayed;
+  * if the data was correct, then the rented dress would be added to the database;
+  * if an error occurred while saving data, an error message is displayed: "Error saving data";
+  * if the rented dress was added successfully, the form for viewing the list of rented dresses with updated data would open. 
+  
+  Discard changes:
+  * the user is in the rented dresses list view mode and clicks the "Edit" button in the column "Action" for the selected rented dress;
+  * the form for editing a rented dress is displayed;
+  * the user edits data and clicks the "Cancel" button;
+  * data is not saved to the database, the form for viewing the list of rented dresses with updated data would be open.
+  
+   ![Pic 2.3](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/raw/dev/documentation/pictures/Pic.%202.3%20Editing%20rented%20dress.png)
+   Pic. 2.3 Editing rented dress 
+   
+   When editing a rented dress, the following details are entered:
+  * Dress - dress name;
+  * Client - the person who rents the dress;
+  * Rental date - the date on which the dress is rented;
+  
   Limitations for data validation: 
-  * Client - maximum 30 characters.
+  * Dress - one value is selected from the list of available dresses. If there is no dress in system, you cannot add a new rented dress.
+  * Client - maximum 50 characters.
+  
+  ## 2.4 Rented dress removal
+  This program mode is designed to remove a rented dress.
+ 
+  Main scenario:
+  * the user is in the rented dresses list view mode and clicks the "Remove" button in the column "Action" for the selected rented dress;
+  * the confirmation dialog for removal is displayed "Are you sure you want to remove the dress <dress name> rented by <client> on <rental date>?";
+  * the user clicks the "Yes" button;
+  * the rented dress is deleted in the database;
+  * if an error occured while deleting data, an error message is displayed "Error data deletion";
+  * if the rented dress has been removed successfully, the form for viewing the list of rented dresses with updated data would open.
+  
+  Discard removal:
+  * the user is in the rented dresses list view mode and clicks the "Remove" button in the column "Action" for the selected rented dress;
+  * the confirmation dialog for removal is displayed "Are you sure you want to remove the dress <dress name> rented by <client> on <rental date>??";
+  * the user clicks the "Cancel" button;
+  * the form for viewing the list of rented dresses with updated data would be open.
+  
+   ![Pic 2.4](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/raw/dev/documentation/pictures/Pic.%202.4%20Confirmation%20of%20rented%20dress%20removal.png)
+   Pic. 2.4 Confitmation of rented dress removal
+  
+  
+  
   
