@@ -89,7 +89,22 @@ the total number of dresses and the total number of rents is displayed at the en
   This program mode is designed to remove a dress.
  
   Main scenario:
+  * the user is in the dress list view mode and clicks the "Remove" button in the column "Action" for the selected dress;
+  * there is a check for the possibility of removing the dress, i.e. whether this dress is on the list of rented dresses;
+  * if the dress is on the list of rented dresses, the warning dialog "This dress cannot be remove because it is on the list of rented dresses";
+  * if the dress can be removed, the confirmation dialog for removal is displayed "Are you sure you want to remove the dress <dress name>?";
+  * the user clicks the "Yes" button;
+  * the dress is deleted in the database;
+  * if an error occured while deleting data, an error message is displayed "Error data deletion";
+  * if the dress has been removed successfully, the form for viewing the list of dresses with updated data would open.
   
+  Discard removal:
+  * the user is in the dress list view mode and clicks the "Remove" button in the column "Action" for the selected dress;
+  * the confirmation dialog for removal is displayed "Are you sure you want to remove the dress <dress name>?";
+  * the user clicks the "No" button;
+  * the form for viewing the list of dresses with updated data would be open.
   
+   ![Pic 1.4](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/raw/dev/documentation/pictures/Pic.%201.4%20Confirmation%20of%20dress%20removal.png)
+   Pic. 1.4 Confitmation of dress removal
 
   
