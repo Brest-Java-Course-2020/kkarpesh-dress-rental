@@ -7,6 +7,7 @@ public class RentedDress {
     private Integer rentedDressId;
     private String client;
     private LocalDate dateOfRent;
+    private Integer dressId;
 
     public Integer getRentedDressId() {
         return rentedDressId;
@@ -32,12 +33,21 @@ public class RentedDress {
         this.dateOfRent = dateOfRent;
     }
 
+    public Integer getDressId() {
+        return dressId;
+    }
+
+    public void setDressId(Integer dressId) {
+        this.dressId = dressId;
+    }
+
     @Override
     public String toString() {
         return "RentedDress{" +
                 "rentedDressId=" + rentedDressId +
                 ", client='" + client + '\'' +
                 ", dateOfRent=" + dateOfRent +
+                ", dressId=" + dressId +
                 '}';
     }
 }
