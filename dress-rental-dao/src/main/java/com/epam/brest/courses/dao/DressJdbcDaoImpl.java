@@ -4,6 +4,7 @@ package com.epam.brest.courses.dao;
 import com.epam.brest.courses.model.Dress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,8 +19,11 @@ public class DressJdbcDaoImpl implements DressDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final String ALL_DRESSES = "SELECT d.dressId, d.dressName FROM dress d ORDER BY d.dressName";
-    private static final String DRESS_BY_ID = "SELECT d.dressId, d.dressName FROM dress d WHERE dressId = :dressId";
+    @Value("${dress.select}")
+    private String selectAllDresses;
+
+    @Value("${dress.select}")
+    private String selectById;
 
     public DressJdbcDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -28,14 +32,14 @@ public class DressJdbcDaoImpl implements DressDao {
     @Override
     public List<Dress> getDresses() {
         LOGGER.debug("Get all dresses");
-        List <Dress> dresses = namedParameterJdbcTemplate.query(ALL_DRESSES, new DressRowMapper());
+        List <Dress> dresses = namedParameterJdbcTemplate.query(selectAllDresses, new DressRowMapper());
         return dresses;
     }
 
     @Override
     public Dress getDressById(Integer dressId) {
         LOGGER.debug("Get dress by ID {}, dressId");
-        Dress dress = namedParameterJdbcTemplate.queryForObject(DRESS_BY_ID, new MapSqlParameterSource("dressId", dressId), new DressRowMapper());
+        Dress dress = namedParameterJdbcTemplate.queryForObject(selectById, new MapSqlParameterSource("dressId", dressId), new DressRowMapper());
         return dress;
     }
 

@@ -35,9 +35,6 @@ class DressJdbcDaoImplMockTest {
 
     @Test
     void getDresses() {
-        List<Dress> dresses =dressJdbcDao.getDresses();
-        assertNotNull(dresses);
-        verify(namedParameterJdbcTemplate).query(anyString(), any(RowMapper.class));
     }
 
     @Test
