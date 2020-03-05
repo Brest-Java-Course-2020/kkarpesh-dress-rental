@@ -1,6 +1,6 @@
 package com.epam.brest.courses.dao;
 
-import com.epam.brest.courses.model.RentedDress;
+import com.epam.brest.courses.model.Rent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,27 +20,27 @@ public class RentedDressJdbcDaoImpl implements RentedDressDao {
 
 
     @Override
-    public List<RentedDress> getRentedDresses() {
+    public List<Rent> getRentedDresses() {
         return null;
     }
 
     @Override
-    public RentedDress getRentedDressById(Integer rentedDressId) {
+    public Rent getRentedDressById(Integer rentedDressId) {
         return null;
     }
 
     @Override
-    public List<RentedDress> getRentedDressesByDate(Date dateFrom, Date dateTo) {
+    public List<Rent> getRentedDressesByDate(Date dateFrom, Date dateTo) {
         return null;
     }
 
     @Override
-    public RentedDress addRentedDress(RentedDress rentedDress) {
+    public Rent addRentedDress(Rent rent) {
         return null;
     }
 
     @Override
-    public void updateRentedDress(RentedDress rentedDress) {
+    public void updateRentedDress(Rent rent) {
 
     }
 

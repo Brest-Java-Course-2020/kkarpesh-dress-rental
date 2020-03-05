@@ -1,21 +1,21 @@
 package com.epam.brest.courses.dao;
 
-import com.epam.brest.courses.model.RentedDress;
+import com.epam.brest.courses.model.Rent;
 
 import java.util.Date;
 import java.util.List;
 
 public interface RentedDressDao {
 
-    List<RentedDress> getRentedDresses();
+    List<Rent> getRentedDresses();
 
-    RentedDress getRentedDressById(Integer rentedDressId);
+    Rent getRentedDressById(Integer rentedDressId);
 
-    List <RentedDress> getRentedDressesByDate(Date dateFrom, Date dateTo);
+    List <Rent> getRentedDressesByDate(Date dateFrom, Date dateTo);
 
-    RentedDress addRentedDress(RentedDress rentedDress);
+    Rent addRentedDress(Rent rent);
 
-    void updateRentedDress(RentedDress rentedDress);
+    void updateRentedDress(Rent rent);
 
     void deleteRentedDress(Integer rentedDressId);
 

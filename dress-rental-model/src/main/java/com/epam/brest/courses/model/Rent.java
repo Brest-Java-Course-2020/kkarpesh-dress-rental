@@ -2,19 +2,19 @@ package com.epam.brest.courses.model;
 
 import java.time.LocalDate;
 
-public class RentedDress {
+public class Rent {
 
-    private Integer rentedDressId;
+    private Integer rentId;
     private String client;
-    private LocalDate dateOfRent;
+    private LocalDate rentDate;
     private Integer dressId;
 
-    public Integer getRentedDressId() {
-        return rentedDressId;
+    public Integer getRentId() {
+        return rentId;
     }
 
-    public void setRentedDressId(Integer rentedDressId) {
-        this.rentedDressId = rentedDressId;
+    public void setRentId(Integer rentId) {
+        this.rentId = rentId;
     }
 
     public String getClient() {
@@ -25,12 +25,12 @@ public class RentedDress {
         this.client = client;
     }
 
-    public LocalDate getDateOfRent() {
-        return dateOfRent;
+    public LocalDate getRentDate() {
+        return rentDate;
     }
 
-    public void setDateOfRent(LocalDate dateOfRent) {
-        this.dateOfRent = dateOfRent;
+    public void setRentDate(LocalDate rentDate) {
+        this.rentDate = rentDate;
     }
 
     public Integer getDressId() {
@@ -43,10 +43,10 @@ public class RentedDress {
 
     @Override
     public String toString() {
-        return "RentedDress{" +
-                "rentedDressId=" + rentedDressId +
+        return "Rent{" +
+                "rentId=" + rentId +
                 ", client='" + client + '\'' +
-                ", dateOfRent=" + dateOfRent +
+                ", rentDate=" + rentDate +
                 ", dressId=" + dressId +
                 '}';
     }
