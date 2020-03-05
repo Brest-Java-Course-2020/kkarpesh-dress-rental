@@ -6,7 +6,7 @@ CREATE TABLE dress (
 );
 
 DROP TABLE IF EXISTS rent;
-CREATE TABLE rent {
+CREATE TABLE rent (
     rent_id INT NOT NULL AUTO_INCREMENT,
     client VARCHAR(50) NOT NULL,
     rent_date DATE NOT NULL,

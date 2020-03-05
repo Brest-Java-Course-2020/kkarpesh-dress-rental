@@ -8,13 +8,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.Date;
 import java.util.List;
 
-public class RentedDressJdbcDaoImpl implements RentedDressDao {
+public class RentDaoJdbc implements RentDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RentedDressJdbcDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RentDaoJdbc.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public RentedDressJdbcDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public RentDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 

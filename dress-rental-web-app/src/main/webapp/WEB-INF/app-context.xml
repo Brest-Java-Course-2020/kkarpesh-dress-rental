@@ -53,7 +53,7 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="dressDao" class="com.epam.brest.courses.dao.DressJdbcDaoImpl">
+    <bean id="dressDao" class="com.epam.brest.courses.dao.DressDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 

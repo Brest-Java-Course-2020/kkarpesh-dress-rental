@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>
-            <artifactId>dress-rental-test</artifactId>
+            <artifactId>dress-rental-test-db</artifactId>
         </dependency>
 
         <dependency>

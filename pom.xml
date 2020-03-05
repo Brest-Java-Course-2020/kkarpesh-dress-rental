@@ -11,7 +11,7 @@
     <modules>
         <module>dress-rental-dao</module>
         <module>dress-rental-model</module>
-        <module>dress-rental-test</module>
+        <module>dress-rental-test-db</module>
         <module>dress-rental-web-app</module>
         <module>dress-rental-service</module>
     </modules>
@@ -41,7 +41,7 @@
             </dependency>
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
-                <artifactId>dress-rental-test</artifactId>
+                <artifactId>dress-rental-test-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
