@@ -1,12 +1,12 @@
 package com.epam.brest.courses.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Rent {
 
     private Integer rentId;
     private String client;
-    private LocalDate rentDate;
+    private Date rentDate;
     private Integer dressId;
 
     public Integer getRentId() {
@@ -25,11 +25,11 @@ public class Rent {
         this.client = client;
     }
 
-    public LocalDate getRentDate() {
+    public Date getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(LocalDate rentDate) {
+    public void setRentDate(Date rentDate) {
         this.rentDate = rentDate;
     }
 

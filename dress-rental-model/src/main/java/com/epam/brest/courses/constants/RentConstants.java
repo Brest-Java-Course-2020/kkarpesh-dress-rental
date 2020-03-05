@@ -1,12 +1,18 @@
 package com.epam.brest.courses.constants;
 
 public class RentConstants {
-    private final static String RENT_ID = "rentId";
-    private final static String CLIENT = "client";
-    private final static String RENT_DATE = "rentDate";
+    public final static String RENT_ID = "rentId";
+    public final static String CLIENT = "client";
+    public final static String RENT_DATE = "rentDate";
+    public final static String DRESS_ID = "dressId";
+
+    public final static String COLUMN_RENT_ID = "rent_id";
+    public final static String COLUMN_CLIENT = "client";
+    public final static String COLUMN_RENT_DATE = "rent_date";
+    public final static String COLUMN_DRESS_ID = "dress_id";
 
 
-    private final static int RENT_CLIENT_SIZE = 50;
+    public final static int RENT_CLIENT_SIZE = 50;
 
 
 }

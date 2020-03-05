@@ -48,12 +48,12 @@ public interface RentDao {
      */
     Integer delete(Integer rentId);
 
-    /**
-     * Find rents by date.
-     *
-     * @param dateFrom period start date.
-     * @param dateTo period finish date.
-     * @return rents list for the specified period.
-     */
-    List <Rent> findRentsByDate(LocalDate dateFrom, LocalDate dateTo);
+//    /**
+//     * Find rents by date.
+//     *
+//     * @param dateFrom period start date.
+//     * @param dateTo period finish date.
+//     * @return rents list for the specified period.
+//     */
+//    List <Rent> findByDate(LocalDate dateFrom, LocalDate dateTo);
 }
