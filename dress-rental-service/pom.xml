@@ -14,11 +14,19 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>
+            <artifactId>dress-rental-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.brest.courses</groupId>
             <artifactId>dress-rental-dao</artifactId>
         </dependency>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>
             <artifactId>dress-rental-test-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.brest.courses</groupId>
+            <artifactId>dress-rental-service-api</artifactId>
         </dependency>
 
         <dependency>

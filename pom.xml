@@ -14,6 +14,7 @@
         <module>dress-rental-test-db</module>
         <module>dress-rental-web-app</module>
         <module>dress-rental-service</module>
+        <module>dress-rental-service-api</module>
     </modules>
 
     <properties>
@@ -52,6 +53,11 @@
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
                 <artifactId>dress-rental-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.courses</groupId>
+                <artifactId>dress-rental-service-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

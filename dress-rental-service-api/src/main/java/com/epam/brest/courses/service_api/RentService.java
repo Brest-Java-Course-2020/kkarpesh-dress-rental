@@ -1,13 +1,12 @@
-package com.epam.brest.courses.dao;
+package com.epam.brest.courses.service_api;
 
 import com.epam.brest.courses.model.Rent;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface RentDao {
+public interface RentService {
 
     /**
      * Find all rents.
@@ -47,5 +46,13 @@ public interface RentDao {
      * @return number of deleted records in the database.
      */
     Integer delete(Integer rentId);
+
+    /**
+     * Find rents by date.
+     *
+     * @param dateFrom period start date.
+     * @param dateTo period finish date.
+     * @return rents list for the specified period.
+     */
 
 }

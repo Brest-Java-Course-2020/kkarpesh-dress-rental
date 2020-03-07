@@ -23,12 +23,11 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.*"/>
 
-    <context:property-placeholder location="classpath:application.properties"/>
-
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:dao.properties</value>
+                <value>classpath:application.properties</value>
             </list>
         </property>
     </bean>
@@ -57,9 +56,18 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="dressService" class="com.epam.brest.courses.service.DressService">
+    <bean id="rentDao" class="com.epam.brest.courses.dao.RentDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="dressService" class="com.epam.brest.courses.service.DressServiceImpl">
         <constructor-arg ref="dressDao"/>
     </bean>
+
+    <bean id="rentService" class="com.epam.brest.courses.service.RentServiceImpl">
+        <constructor-arg ref="rentDao"/>
+    </bean>
+
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

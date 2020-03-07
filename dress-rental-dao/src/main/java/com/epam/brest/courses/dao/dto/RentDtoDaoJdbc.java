@@ -7,15 +7,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class RentDtoDaoJdbc implements RentDtoDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DressDaoJdbc.class);
 
-    @Value("${rentDto.findAllWIthDressName")
+    @Value("${rentDto.findAllWIthDressNameByDate}")
     private String findAllWIthDressNameSql;
 
 
@@ -26,9 +29,12 @@ public class RentDtoDaoJdbc implements RentDtoDao {
     }
 
     @Override
-    public List<RentDto> findAllWIthDressName() {
-        LOGGER.debug("Find all rents with number of orders");
-        List<RentDto> rents = namedParameterJdbcTemplate.query(findAllWIthDressNameSql, BeanPropertyRowMapper.newInstance(RentDto.class));
+    public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom, LocalDate dateTo) {
+        LOGGER.debug("Find all rents with dress name from {} to {}", dateFrom, dateTo);
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("dateFrom", dateFrom);
+        namedParameters.addValue("dateTo", dateTo);
+        List<RentDto> rents = namedParameterJdbcTemplate.query(findAllWIthDressNameSql, namedParameters, BeanPropertyRowMapper.newInstance(RentDto.class));
         return rents;
     }
 }

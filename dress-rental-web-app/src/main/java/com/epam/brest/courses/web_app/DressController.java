@@ -1,7 +1,7 @@
 package com.epam.brest.courses.web_app;
 
 import com.epam.brest.courses.model.Dress;
-import com.epam.brest.courses.service.DressService;
+import com.epam.brest.courses.service.DressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import java.util.List;
 public class DressController {
 
     @Autowired
-    private DressService dressService;
+    private DressServiceImpl dressServiceImpl;
 
     @GetMapping(value = "/")
     public final String defaultPageRedirect(){
@@ -22,7 +22,7 @@ public class DressController {
 
     @GetMapping(value = "/dresses")
     public final String getDresses(Model model){
-        List<Dress> dresses = dressService.getDresses();
+        List<Dress> dresses = dressServiceImpl.findAll();
         model.addAttribute("dresses", dresses);
         return "dresses";
     }

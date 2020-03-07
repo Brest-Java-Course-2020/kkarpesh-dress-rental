@@ -36,9 +36,6 @@ public class RentDaoJdbc implements RentDao {
     @Value("${rent.delete}")
     private String deleteSql;
 
-    @Value("${rent.findByDate}")
-    private String findByDateSql;
-
     private final BeanPropertyRowMapper<Rent> rentRowMapper = BeanPropertyRowMapper.newInstance(Rent.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -91,5 +88,4 @@ public class RentDaoJdbc implements RentDao {
         SqlParameterSource namedParameters = new MapSqlParameterSource(RENT_ID, rentId);
         return namedParameterJdbcTemplate.update(deleteSql, namedParameters);
     }
-
 }

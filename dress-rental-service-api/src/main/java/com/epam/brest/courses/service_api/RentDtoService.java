@@ -1,11 +1,12 @@
-package com.epam.brest.courses.dao.dto;
+package com.epam.brest.courses.service_api;
 
+import com.epam.brest.courses.model.Rent;
 import com.epam.brest.courses.model.dto.RentDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface RentDtoDao {
+public interface RentDtoService {
 
     /**
      * Find rents with dress name for the specified period.

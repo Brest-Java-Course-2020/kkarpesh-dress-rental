@@ -1,11 +1,11 @@
-package com.epam.brest.courses.dao;
+package com.epam.brest.courses.service_api;
 
 import com.epam.brest.courses.model.Dress;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface DressDao {
+public interface DressService {
 
     /**
      * Find all dresses.
