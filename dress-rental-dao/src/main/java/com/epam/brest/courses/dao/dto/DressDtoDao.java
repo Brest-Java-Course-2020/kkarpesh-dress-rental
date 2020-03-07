@@ -1,4 +1,4 @@
-package com.epam.brest.courses.dao;
+package com.epam.brest.courses.dao.dto;
 
 import com.epam.brest.courses.model.dto.DressDto;
 

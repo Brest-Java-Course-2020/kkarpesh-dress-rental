@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -38,7 +39,7 @@ public class DressDaoJdbc implements DressDao {
     @Value("${dress.delete}")
     private String deleteSql;
 
-    private final DressRowMapper dressRowMapper = new DressRowMapper();
+    private final BeanPropertyRowMapper<Dress> dressRowMapper = BeanPropertyRowMapper.newInstance(Dress.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
