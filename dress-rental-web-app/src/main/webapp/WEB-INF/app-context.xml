@@ -23,6 +23,8 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.*"/>
 
+    <import resource="classpath*:test-db.xml"/>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -32,21 +34,6 @@
         </property>
     </bean>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test_db;MODE=MYSQL;DB_CLOSE_DELAY=-1"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
-    </bean>
-
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="dataSource"/>-->
-<!--    </bean>-->
-
-    <jdbc:initialize-database>
-        <jdbc:script location="classpath:create-db.sql"/>
-        <jdbc:script location="classpath:populate-db.sql"/>
-    </jdbc:initialize-database>
 
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
