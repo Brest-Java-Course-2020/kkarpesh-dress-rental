@@ -1,4 +1,4 @@
-package com.epam.brest.courses.service_api;
+package com.epam.brest.courses.service_api.dto;
 
 import com.epam.brest.courses.model.dto.DressDto;
 

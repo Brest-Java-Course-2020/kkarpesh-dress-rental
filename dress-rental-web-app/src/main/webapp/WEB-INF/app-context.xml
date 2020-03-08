@@ -55,18 +55,29 @@
     <bean id="dressDao" class="com.epam.brest.courses.dao.DressDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
+    <bean id="dressService" class="com.epam.brest.courses.service.DressServiceImpl">
+        <constructor-arg ref="dressDao"/>
+    </bean>
+    <bean id="dressDtoDao" class="com.epam.brest.courses.dao.dto.DressDtoDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+    <bean id="dressDtoService" class="com.epam.brest.courses.service.dto.DressDtoServiceImpl">
+        <constructor-arg ref="dressDtoDao"/>
+    </bean>
 
     <bean id="rentDao" class="com.epam.brest.courses.dao.RentDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-
-    <bean id="dressService" class="com.epam.brest.courses.service.DressServiceImpl">
-        <constructor-arg ref="dressDao"/>
-    </bean>
-
     <bean id="rentService" class="com.epam.brest.courses.service.RentServiceImpl">
         <constructor-arg ref="rentDao"/>
     </bean>
+    <bean id="rentDtoDao" class="com.epam.brest.courses.dao.dto.RentDtoDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+    <bean id="rentDtoService" class="com.epam.brest.courses.service.dto.RentDtoServiceImpl">
+        <constructor-arg ref="rentDtoDao"/>
+    </bean>
+
 
 
     <!-- Thymeleaf Template Resolver -->
