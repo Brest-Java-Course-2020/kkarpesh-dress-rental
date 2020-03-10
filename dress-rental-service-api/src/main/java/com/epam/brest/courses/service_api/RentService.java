@@ -2,7 +2,6 @@ package com.epam.brest.courses.service_api;
 
 import com.epam.brest.courses.model.Rent;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

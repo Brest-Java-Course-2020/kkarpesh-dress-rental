@@ -1,7 +1,6 @@
 package com.epam.brest.courses.dao.dto;
 
 import com.epam.brest.courses.dao.DressDaoJdbc;
-import com.epam.brest.courses.dao.dto.DressDtoDao;
 import com.epam.brest.courses.model.dto.DressDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

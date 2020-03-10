@@ -2,8 +2,6 @@ package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.model.Rent;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

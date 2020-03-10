@@ -1,6 +1,5 @@
 package com.epam.brest.courses.service_api.dto;
 
-import com.epam.brest.courses.model.Rent;
 import com.epam.brest.courses.model.dto.RentDto;
 
 import java.time.LocalDate;

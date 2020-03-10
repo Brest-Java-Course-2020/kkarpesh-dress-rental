@@ -1,7 +1,6 @@
 package com.epam.brest.courses.web_app;
 
 import com.epam.brest.courses.model.dto.RentDto;
-import com.epam.brest.courses.service.RentServiceImpl;
 import com.epam.brest.courses.service.dto.RentDtoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +13,6 @@ import java.util.List;
 
 @Controller
 public class RentController {
-
-    @Autowired
-    private RentServiceImpl rentService;
 
     @Autowired
     private RentDtoServiceImpl rentDtoService;
