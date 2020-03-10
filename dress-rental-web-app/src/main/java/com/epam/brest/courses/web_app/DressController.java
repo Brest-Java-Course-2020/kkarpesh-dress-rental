@@ -15,11 +15,6 @@ public class DressController {
     @Autowired
     private DressServiceImpl dressServiceImpl;
 
-    @GetMapping(value = "/")
-    public final String defaultPageRedirect(){
-        return "redirect:dresses";
-    }
-
     @GetMapping(value = "/dresses")
     public final String getDresses(Model model){
         List<Dress> dresses = dressServiceImpl.findAll();
