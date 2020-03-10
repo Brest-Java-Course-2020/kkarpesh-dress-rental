@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rents</title>
+</head>
+<body>
+
+<form action="/rents">
+    <label for="dateFrom">from:</label>
+    <input type="date" id="dateFrom" name="dateFrom">
+    <label for="dateTo">to:</label>
+    <input type="date" id="dateTo" name="dateTo">
+    <input type="submit">
+</form>
+<div>
+    <table>
+        <tr>
+            <th>Dress name</th>
+            <th>Client</th>
+            <th>Rent date</th>
+        </tr>
+        <tr th:each="rent : ${rents}">
+            <td th:text="${rent.getDressName()}"></td>
+            <td th:text="${rent.getClient()}"></td>
+            <td th:text="${rent.getRentDate()}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

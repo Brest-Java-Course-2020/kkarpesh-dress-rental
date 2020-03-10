@@ -16,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 class RentDtoDaoJdbcTest {
 
-    private final RentDtoDao rentDtoDao;
-
     @Autowired
-    public RentDtoDaoJdbcTest(RentDtoDao rentDtoDao) {
-        this.rentDtoDao = rentDtoDao;
-    }
+    private RentDtoDao rentDtoDao;
+
+//    @Autowired
+//    public RentDtoDaoJdbcTest(RentDtoDao rentDtoDao) {
+//        this.rentDtoDao = rentDtoDao;
+//    }
 
     @Test
     void findAllWIthDressNameByDate() {
