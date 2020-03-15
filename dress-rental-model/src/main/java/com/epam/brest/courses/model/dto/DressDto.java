@@ -34,10 +34,9 @@ public class DressDto {
 
     @Override
     public String toString() {
-        return "DressDto{" +
-                "dressId=" + dressId +
-                ", dressName='" + dressName + '\'' +
-                ", numberOfOrders=" + numberOfOrders +
-                '}';
+        return "DressDto{"
+                + "dressId=" + dressId
+                + ", dressName='" + dressName + '\''
+                + ", numberOfOrders=" + numberOfOrders + '}';
     }
 }

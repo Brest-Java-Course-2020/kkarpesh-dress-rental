@@ -16,7 +16,7 @@ public class DressController {
     private DressServiceImpl dressServiceImpl;
 
     @GetMapping(value = "/dresses")
-    public final String getDresses(Model model){
+    public final String getDresses(Model model) {
         List<Dress> dresses = dressServiceImpl.findAll();
         model.addAttribute("dresses", dresses);
         return "dresses";

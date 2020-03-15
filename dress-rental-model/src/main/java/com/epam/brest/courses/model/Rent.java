@@ -43,11 +43,10 @@ public class Rent {
 
     @Override
     public String toString() {
-        return "Rent{" +
-                "rentId=" + rentId +
-                ", client='" + client + '\'' +
-                ", rentDate=" + rentDate +
-                ", dressId=" + dressId +
-                '}';
+        return "Rent{"
+                + "rentId=" + rentId
+                + ", client='" + client + '\''
+                + ", rentDate=" + rentDate
+                + ", dressId=" + dressId + '}';
     }
 }

@@ -15,7 +15,8 @@ import java.util.Optional;
 @Transactional
 public class DressServiceImpl implements DressService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(DressServiceImpl.class);
+    private final static Logger LOGGER
+            = LoggerFactory.getLogger(DressServiceImpl.class);
 
     private final DressDao dressDao;
 

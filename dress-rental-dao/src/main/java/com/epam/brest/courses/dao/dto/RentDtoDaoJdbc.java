@@ -14,25 +14,30 @@ import java.util.List;
 
 public class RentDtoDaoJdbc implements RentDtoDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressDaoJdbc.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(DressDaoJdbc.class);
 
     @Value("${rentDto.findAllWIthDressNameByDate}")
     private String findAllWIthDressNameSql;
 
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public RentDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public RentDtoDaoJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom, LocalDate dateTo) {
-        LOGGER.debug("Find all rents with dress name from {} to {}", dateFrom, dateTo);
+    public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
+                                                    LocalDate dateTo) {
+        LOGGER.debug("Find all rents with dress name from {} to {}",
+                dateFrom, dateTo);
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("dateFrom", dateFrom);
         namedParameters.addValue("dateTo", dateTo);
-        List<RentDto> rents = namedParameterJdbcTemplate.query(findAllWIthDressNameSql, namedParameters, BeanPropertyRowMapper.newInstance(RentDto.class));
+        List<RentDto> rents = jdbcTemplate.query(findAllWIthDressNameSql,
+                namedParameters,
+                BeanPropertyRowMapper.newInstance(RentDto.class));
         return rents;
     }
 }

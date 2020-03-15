@@ -5,6 +5,10 @@ import com.epam.brest.courses.model.Dress;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A simple DAO interface to handle the database operation
+ * required to manipulate a Dress entity.
+ */
 public interface DressDao {
 
     /**

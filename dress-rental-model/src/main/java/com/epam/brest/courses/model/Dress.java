@@ -23,9 +23,8 @@ public class Dress {
 
     @Override
     public String toString() {
-        return "Dress{" +
-                "dressId=" + dressId +
-                ", dressName='" + dressName + '\'' +
-                '}';
+        return "Dress{"
+                + "dressId=" + dressId
+                + ", dressName='" + dressName + '\'' + '}';
     }
 }

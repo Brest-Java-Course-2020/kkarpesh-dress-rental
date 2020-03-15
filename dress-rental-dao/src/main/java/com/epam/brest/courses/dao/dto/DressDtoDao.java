@@ -11,5 +11,5 @@ public interface DressDtoDao {
      *
      * @return dresses list.
      */
-    List <DressDto> findAllWithNumberOfOrders();
+    List<DressDto> findAllWithNumberOfOrders();
 }

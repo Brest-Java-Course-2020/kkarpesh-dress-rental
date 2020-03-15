@@ -14,7 +14,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class DressDtoServiceImpl implements DressDtoService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressDtoServiceImpl.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(DressDtoServiceImpl.class);
 
     private final DressDtoDao dressDtoDao;
 

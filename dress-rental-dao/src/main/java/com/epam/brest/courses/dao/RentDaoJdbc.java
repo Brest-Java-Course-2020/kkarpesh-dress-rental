@@ -19,7 +19,8 @@ import static com.epam.brest.courses.constants.RentConstants.*;
 
 public class RentDaoJdbc implements RentDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RentDaoJdbc.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(RentDaoJdbc.class);
 
     @Value("${rent.findAll}")
     private String findAllSql;
@@ -36,26 +37,29 @@ public class RentDaoJdbc implements RentDao {
     @Value("${rent.delete}")
     private String deleteSql;
 
-    private final BeanPropertyRowMapper<Rent> rentRowMapper = BeanPropertyRowMapper.newInstance(Rent.class);
+    private final BeanPropertyRowMapper<Rent> rentRowMapper
+            = BeanPropertyRowMapper.newInstance(Rent.class);
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public RentDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public RentDaoJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Rent> findAll() {
         LOGGER.debug("Find all rents");
-        List<Rent> rents = namedParameterJdbcTemplate.query(findAllSql, rentRowMapper);
+        List<Rent> rents = jdbcTemplate.query(findAllSql, rentRowMapper);
         return rents;
     }
 
     @Override
     public Optional<Rent> findById(Integer rentId) {
         LOGGER.debug("Find rent by id {}", rentId);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(RENT_ID, rentId);
-        List<Rent> result = namedParameterJdbcTemplate.query(findByIdSql, namedParameters, rentRowMapper);
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(RENT_ID, rentId);
+        List<Rent> result = jdbcTemplate
+                .query(findByIdSql, namedParameters, rentRowMapper);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(result));
     }
 
@@ -67,7 +71,7 @@ public class RentDaoJdbc implements RentDao {
         namedParameters.addValue(RENT_DATE, rent.getRentDate());
         namedParameters.addValue(DRESS_ID, rent.getDressId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(createSql, namedParameters, keyHolder);
+        jdbcTemplate.update(createSql, namedParameters, keyHolder);
         return keyHolder.getKey().intValue();
     }
 
@@ -79,13 +83,14 @@ public class RentDaoJdbc implements RentDao {
         namedParameters.addValue(CLIENT, rent.getClient());
         namedParameters.addValue(RENT_DATE, rent.getRentDate());
         namedParameters.addValue(DRESS_ID, rent.getDressId());
-        return namedParameterJdbcTemplate.update(updateSql, namedParameters);
+        return jdbcTemplate.update(updateSql, namedParameters);
     }
 
     @Override
     public Integer delete(Integer rentId) {
         LOGGER.debug("Delete rent with id = {}", rentId);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(RENT_ID, rentId);
-        return namedParameterJdbcTemplate.update(deleteSql, namedParameters);
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(RENT_ID, rentId);
+        return jdbcTemplate.update(deleteSql, namedParameters);
     }
 }

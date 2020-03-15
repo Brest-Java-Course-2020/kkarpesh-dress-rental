@@ -5,6 +5,10 @@ import com.epam.brest.courses.model.Rent;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A simple DAO interface to handle the database operation
+ * required to manipulate a Rent entity.
+ */
 public interface RentDao {
 
     /**

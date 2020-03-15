@@ -15,7 +15,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class RentDtoServiceImpl implements RentDtoService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RentDtoServiceImpl.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(RentDtoServiceImpl.class);
 
     private final RentDtoDao rentDtoDao;
 
@@ -24,8 +25,11 @@ public class RentDtoServiceImpl implements RentDtoService {
     }
 
     @Override
-    public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom, LocalDate dateTo) {
-        LOGGER.debug("Find all rents with dress name from {} to {}", dateFrom, dateTo);
+    public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
+                                                    LocalDate dateTo) {
+        LOGGER.debug("Find all rents with dress name from {} to {}",
+                dateFrom,
+                dateTo);
         return rentDtoDao.findAllWIthDressNameByDate(dateFrom, dateTo);
     }
 }

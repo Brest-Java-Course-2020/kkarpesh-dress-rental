@@ -14,5 +14,6 @@ public interface RentDtoService {
      * @param dateTo period finish date.
      * @return rents list with dress name for the specified period.
      */
-    List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom, LocalDate dateTo);
+    List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
+                                             LocalDate dateTo);
 }

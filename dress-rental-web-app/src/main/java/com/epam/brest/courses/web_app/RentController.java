@@ -18,11 +18,15 @@ public class RentController {
     private RentDtoServiceImpl rentDtoService;
 
     @GetMapping(value = "/rents")
-    public final String getRents(@RequestParam(value = "dateFrom") String dateFrom, @RequestParam (value = "dateTo") String dateTo, Model model) {
+    public final String getRents(
+            @RequestParam(value = "dateFrom") String dateFrom,
+            @RequestParam(value = "dateTo") String dateTo,
+            Model model) {
         LocalDate date1 = LocalDate.parse(dateFrom);
         LocalDate date2 = LocalDate.parse(dateTo);
 
-        List<RentDto> rents = rentDtoService.findAllWIthDressNameByDate(date1, date2);
+        List<RentDto> rents
+                = rentDtoService.findAllWIthDressNameByDate(date1, date2);
         model.addAttribute("rents", rents);
         return "rents";
 

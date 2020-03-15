@@ -46,11 +46,10 @@ public class RentDto {
 
     @Override
     public String toString() {
-        return "RentDto{" +
-                "rentId=" + rentId +
-                ", client='" + client + '\'' +
-                ", rentDate=" + rentDate +
-                ", dressName='" + dressName + '\'' +
-                '}';
+        return "RentDto{"
+                + "rentId=" + rentId
+                + ", client='" + client + '\''
+                + ", rentDate=" + rentDate
+                + ", dressName='" + dressName + '\'' + '}';
     }
 }

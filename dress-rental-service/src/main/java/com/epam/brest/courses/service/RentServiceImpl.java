@@ -15,7 +15,8 @@ import java.util.Optional;
 @Transactional
 public class RentServiceImpl implements RentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RentServiceImpl.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(RentServiceImpl.class);
 
     private final RentDao rentDao;
 

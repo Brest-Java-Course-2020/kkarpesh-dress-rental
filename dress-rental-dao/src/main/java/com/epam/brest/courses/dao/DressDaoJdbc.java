@@ -22,7 +22,8 @@ import static com.epam.brest.courses.constants.DressConstants.*;
 
 public class DressDaoJdbc implements DressDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressDaoJdbc.class);
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(DressDaoJdbc.class);
 
     @Value("${dress.findAll}")
     private String findAllSql;
@@ -39,53 +40,59 @@ public class DressDaoJdbc implements DressDao {
     @Value("${dress.delete}")
     private String deleteSql;
 
-    private final BeanPropertyRowMapper<Dress> dressRowMapper = BeanPropertyRowMapper.newInstance(Dress.class);
+    private final BeanPropertyRowMapper<Dress> dressRowMapper
+            = BeanPropertyRowMapper.newInstance(Dress.class);
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public DressDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public DressDaoJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Dress> findAll() {
         LOGGER.debug("Get all dresses");
-        List<Dress> dresses = namedParameterJdbcTemplate.query(findAllSql, dressRowMapper);
+        List<Dress> dresses
+                = jdbcTemplate.query(findAllSql, dressRowMapper);
         return dresses;
     }
 
     @Override
     public Optional<Dress> findById(Integer dressId) {
         LOGGER.debug("Find dress by ID {}, dressId");
-        SqlParameterSource namedParameters = new MapSqlParameterSource(DRESS_ID, dressId);
-        List<Dress> dresses = namedParameterJdbcTemplate.query(findByIdSql, namedParameters, dressRowMapper);
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(DRESS_ID, dressId);
+        List<Dress> dresses = jdbcTemplate
+                .query(findByIdSql, namedParameters, dressRowMapper);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(dresses));
     }
 
     @Override
     public Integer create(Dress dress) {
         LOGGER.debug("Create new dress {}", dress);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(DRESS_NAME, dress.getDressName());
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(DRESS_NAME, dress.getDressName());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(createSql, namedParameters,keyHolder);
+        jdbcTemplate.update(createSql, namedParameters, keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     @Override
     public Integer update(Dress dress) {
         LOGGER.debug("Update dress {}", dress);
-        Map<String,Object> namedParameters = new HashMap<>();
+        Map<String, Object> namedParameters = new HashMap<>();
         namedParameters.put(DRESS_ID, dress.getDressId());
         namedParameters.put(DRESS_NAME, dress.getDressName());
-        return namedParameterJdbcTemplate.update(updateSql, namedParameters);
+        return jdbcTemplate.update(updateSql, namedParameters);
 
     }
 
     @Override
     public Integer delete(Integer dressId) {
         LOGGER.debug("Delete dress with id = {}", dressId);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(DRESS_ID, dressId);
-        return namedParameterJdbcTemplate.update(deleteSql,namedParameters);
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(DRESS_ID, dressId);
+        return jdbcTemplate.update(deleteSql, namedParameters);
     }
 
 }
