@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <title>Dresses</title>
 </head>
+
 <body>
+
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="dresses.html">
@@ -59,31 +59,31 @@
                             <td>Tulle dress with fringes</td>
                             <td>5</td>
                             <td>
-                                <a href="#editDressModal" class="edit" data-toggle="modal">Edit</a>
-                                <a href="#deleteDressModal" class="delete" data-toggle="modal">Delete</a>
+                                <a href="#editDressModal" data-toggle="modal">Edit</a>
+                                <a href="#deleteDressModal" data-toggle="modal">Delete</a>
                             </td>
                         </tr>
                         <tr>
                             <td>Dress with gathered waist</td>
                             <td>4</td>
                             <td>
-                                <a href="#editDressModal" class="edit" data-toggle="modal">Edit</a>
-                                <a href="#deleteDressModal" class="delete" data-toggle="modal">Delete</a>
+                                <a href="#editDressModal" data-toggle="modal">Edit</a>
+                                <a href="#deleteDressModal" data-toggle="modal">Delete</a>
                             </td>
                         </tr>
                         <tr>
                             <td>Elastic trim embroidered dress</td>
                             <td>0</td>
                             <td>
-                                <a href="#editDressModal" class="edit" data-toggle="modal">Edit</a>
-                                <a href="#deleteDressModal" class="delete" data-toggle="modal">Delete</a>
+                                <a href="#editDressModal" data-toggle="modal">Edit</a>
+                                <a href="#deleteDressModal" data-toggle="modal">Delete</a>
                             </td>
                         </tr>
                         <tr>
                             <td><b>Total: 3</b></td>
                             <td><b>9</b></td>
+                            <td></td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +93,8 @@
 </main>
 
 <footer>
-
+    <hr/>
+    <p class="text-center">&copy; 2020</p>
 </footer>
 
 <!-- Add Modal HTML -->
@@ -101,7 +102,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form>
-                <div class="modal-header">
+                <div class="modal-header alert-success">
                     <h4 class="modal-title">Add Dress</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
@@ -119,6 +120,7 @@
         </div>
     </div>
 </div>
+
 <!--Edit modal HTML-->
 <div id="editDressModal" class="modal fade">
     <div class="modal-dialog">
@@ -163,5 +165,10 @@
         </div>
     </div>
 </div>
+
+<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
