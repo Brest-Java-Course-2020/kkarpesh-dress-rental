@@ -30,6 +30,12 @@ public class RentDtoServiceImpl implements RentDtoService {
         LOGGER.debug("Find all rents with dress name from {} to {}",
                 dateFrom,
                 dateTo);
+        if (dateFrom == null) {
+            dateFrom = LocalDate.MIN;
+        }
+        if (dateTo == null) {
+            dateTo = LocalDate.MAX;
+        }
         return rentDtoDao.findAllWIthDressNameByDate(dateFrom, dateTo);
     }
 }
