@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
-class RentDtoDaoJdbcTest {
+class RentDtoDaoJdbcIT {
 
     @Autowired
     private RentDtoDao rentDtoDao;

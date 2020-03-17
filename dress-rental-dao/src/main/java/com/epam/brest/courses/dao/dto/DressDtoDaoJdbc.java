@@ -15,7 +15,7 @@ public class DressDtoDaoJdbc implements DressDtoDao {
     private static final Logger LOGGER
             = LoggerFactory.getLogger(DressDaoJdbc.class);
 
-    @Value("${dressDto.findAllWithNumberOfOrders")
+    @Value("${dressDto.findAllWithNumberOfOrders}")
     private String findAllWithNumberOfOrdersSql;
 
 

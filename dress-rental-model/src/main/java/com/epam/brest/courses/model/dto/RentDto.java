@@ -1,5 +1,7 @@
 package com.epam.brest.courses.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class RentDto {
@@ -8,6 +10,7 @@ public class RentDto {
 
     private String client;
 
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
     private Date rentDate;
 
     private String dressName;
