@@ -8,13 +8,12 @@ import com.epam.brest.courses.service_api.dto.DressDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
 
+@EnableSwagger2
 @RestController
 @RequestMapping("dresses")
 public class DressRestController {
@@ -36,5 +35,24 @@ public class DressRestController {
     public List<DressDto> findAllwithNumberOfOrders(){
         LOGGER.debug("Find all dresses with number of orders");
         return dressDtoService.findAllWithNumberOfOrders();
+    }
+
+    @PostMapping
+    public Integer create (@RequestBody Dress dress){
+        LOGGER.debug("Create new dress {}", dress);
+        return dressService.create(dress);
+    }
+
+    @PutMapping("/{id}")
+    public Integer update (@PathVariable Integer id, @RequestBody Dress dress){
+        LOGGER.debug("Update dress {}", id);
+        dress.setDressId(id);
+        return dressService.update(dress);
+    }
+
+    @DeleteMapping("/{id}")
+    public Integer delete (@PathVariable Integer id){
+        LOGGER.debug("Delete dress with id = {}", id);
+        return dressService.delete(id);
     }
 }

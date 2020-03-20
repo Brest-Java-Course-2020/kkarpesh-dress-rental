@@ -43,14 +43,14 @@
 
     <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center ">
 
-        <form>
+        <form action="#" th:action="@{/rents}" method="get">
             <div class="form-row">
                 <div class="col-auto">
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Show data from:</div>
                         </div>
-                        <input type="date" class="form-control" id="dateFrom" placeholder="dateFrom">
+                        <input type="date" class="form-control" th:name="dateFrom" id="dateFrom" placeholder="dateFrom">
                     </div>
                 </div>
                 <div class="col-auto">
@@ -58,7 +58,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">to:</div>
                         </div>
-                        <input type="date" class="form-control" id="dateTo" placeholder="dateTo">
+                        <input type="date" class="form-control" th:name="dateTo" id="dateTo" placeholder="dateTo">
                     </div>
                 </div>
                 <div class="col-auto">

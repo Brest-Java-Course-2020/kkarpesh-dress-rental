@@ -20,16 +20,19 @@ public class RentController {
 
     @GetMapping(value = "/rents")
     public final String getRents(
-            @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-                        @RequestParam(value = "dateFrom") String dateFrom,
-            @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-                        @RequestParam(value = "dateTo") String dateTo,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(value = "dateFrom", required = false) LocalDate dateFrom,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(value = "dateTo", required = false) LocalDate dateTo,
             Model model) {
-        LocalDate date1 = LocalDate.parse(dateFrom);
-        LocalDate date2 = LocalDate.parse(dateTo);
-
+        if (dateFrom == null) {
+            dateFrom = LocalDate.MIN;
+        }
+        if (dateTo == null) {
+            dateTo = LocalDate.MAX;
+        }
         List<RentDto> rents
-                = rentDtoService.findAllWIthDressNameByDate(date1, date2);
+                = rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);
         model.addAttribute("rents", rents);
         return "rents";
 
