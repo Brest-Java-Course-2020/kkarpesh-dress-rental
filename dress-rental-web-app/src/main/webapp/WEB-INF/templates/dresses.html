@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="../../resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.min.css"
+          th:href="@{/resources/static/css/bootstrap.min.css}">
 
     <title>Dresses</title>
 </head>
@@ -16,7 +18,9 @@
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="dresses.html">
-            <img src="../../resources/static/img/logo.svg" width="32" height="32" alt="Dress Rental">
+            <img src="../../resources/static/img/logo.svg"
+                 th:src="@{/resources/static/img/logo.svg}"
+                 width="32" height="32" alt="Dress Rental">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -24,10 +28,10 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="dresses.html">DRESSES</a>
+                    <a class="nav-link" href="dresses.html" th:href="@{/dresses}">DRESSES</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rents.html">RENTED DRESSES</a>
+                    <a class="nav-link" href="rents.html" th:href="@{/rents}">RENTED DRESSES</a>
                 </li>
             </ul>
         </div>
@@ -69,8 +73,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Total: 3</b></td>
-                            <td><b>9</b></td>
+                            <td><b>Total: "undefined"</b></td>
+                            <td><b>undefined</b></td>
                             <td></td>
                         </tr>
                         </tbody>
@@ -90,7 +94,7 @@
 <div id="addDressModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="#" th:action="@{/dresses/}" th:object="${dress}" method="post">
+            <form action="#" th:action="@{/dresses/}" th:object="${dress}" th:method="post">
                 <div class="modal-header alert-success">
                     <h4 class="modal-title">Add Dress</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -154,29 +158,14 @@
     </div>
 </div>
 
-<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"></script>
-<script src="../../resources/static/js/popper.min.js"></script>
-<script src="../../resources/static/js/bootstrap.min.js"></script>
-
-<script>
-    $('#editDressModal').on('show.bs.modal', function(e) {
-        var name = $(e.relatedTarget).data('name');
-        var id = $(e.relatedTarget).data('id');
-
-        $(e.currentTarget).find('input[name="dressName"]').val(name);
-        $(e.currentTarget).find('input[name="dressId"]').val(id);
-    });
-
-    $('#deleteDressModal').on('show.bs.modal', function(e) {
-        var name = $(e.relatedTarget).data('name');
-        var id = $(e.relatedTarget).data('id');
-
-        $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + name + '"?');
-        document.getElementById('deleteDressUrl').href = '/dresses/delete/' + id;
-
-    });
-
-</script>
+<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"
+        th:src="@{/resources/static/js/jquery-3.4.1.slim.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script src="../../resources/static/js/main.js"
+        th:src="@{/resources/static/js/main.js}"></script>
 
 </body>
 </html>
