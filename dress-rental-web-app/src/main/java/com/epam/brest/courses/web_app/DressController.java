@@ -31,31 +31,18 @@ public class DressController {
         return "dresses";
     }
 
-    @GetMapping("/{id}")
-    public final String getById(@PathVariable int id, Model model) {
-        Optional<Dress> dress = dressService.findById(id);
-
-        if (dress.isPresent()) {
-            model.addAttribute("dress", dress.get());
-            return "dresses";
-        } else {
-            return "dresses";
-        }
-    }
-
     @PostMapping
-    public final String create(Dress dress){
-        dressService.create(dress);
-        return "redirect:/dresses";
-    }
-
-    @PostMapping("/{id}")
-    public final String update(){
+    public final String createOrUpdate(Dress dress) {
+        if (dress.getDressId() == null) {
+            dressService.create(dress);
+        } else {
+            dressService.update(dress);
+        }
         return "redirect:/dresses";
     }
 
     @GetMapping("/delete/{id}")
-    public final String delete(@PathVariable int id){
+    public final String delete(@PathVariable Integer id) {
         dressService.delete(id);
         return "redirect:/dresses";
     }

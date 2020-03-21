@@ -60,8 +60,12 @@
                             <td th:text="${dress.getDressName()}"></td>
                             <td th:text="${dress.getNumberOfOrders()}"></td>
                             <td>
-                                <a href="#editDressModal" data-toggle="modal">Edit</a>
-                                <a href="#deleteDressModal" data-toggle="modal">Delete</a>
+                                <a href="#editDressModal" data-toggle="modal"
+                                   th:attr="data-id=${dress.dressId},
+                                   data-name=${dress.dressName}">Edit</a>
+                                <a href="#deleteDressModal" data-toggle="modal"
+                                   th:attr="data-id=${dress.dressId},
+                                   data-name=${dress.dressName}">Delete</a>
                             </td>
                         </tr>
                         <tr>
@@ -110,15 +114,16 @@
 <div id="editDressModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="#" th:action="@{/dresses/}" th:object="${dress}" th:method="post">
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Dress</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <input type="hidden" name="dressId" id="dressId" th:value="*{dressId}" required>
                         <label>Dress name</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" name="dressName" id="dressName" th:value="*{dressName}"required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -134,7 +139,6 @@
 <div id="deleteDressModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
                 <div class="modal-header alert-danger">
                     <h4 class="modal-title">Delete Dress</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -144,9 +148,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <a id="deleteDressUrl" href="#" class="btn btn-danger" value="Delete">Delete</a>
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -154,6 +157,26 @@
 <script src="../../resources/static/js/jquery-3.4.1.slim.min.js"></script>
 <script src="../../resources/static/js/popper.min.js"></script>
 <script src="../../resources/static/js/bootstrap.min.js"></script>
+
+<script>
+    $('#editDressModal').on('show.bs.modal', function(e) {
+        var name = $(e.relatedTarget).data('name');
+        var id = $(e.relatedTarget).data('id');
+
+        $(e.currentTarget).find('input[name="dressName"]').val(name);
+        $(e.currentTarget).find('input[name="dressId"]').val(id);
+    });
+
+    $('#deleteDressModal').on('show.bs.modal', function(e) {
+        var name = $(e.relatedTarget).data('name');
+        var id = $(e.relatedTarget).data('id');
+
+        $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + name + '"?');
+        document.getElementById('deleteDressUrl').href = '/dresses/delete/' + id;
+
+    });
+
+</script>
 
 </body>
 </html>
