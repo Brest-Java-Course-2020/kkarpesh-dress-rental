@@ -1,8 +1,8 @@
-INSERT INTO dress (dress_id, dress_name) VALUES (1, 'JACQUARD SHIRT DRESS');
-INSERT INTO dress (dress_id, dress_name) VALUES (2, 'RUFFLED PRINTED DRESS');
-INSERT INTO dress (dress_id, dress_name) VALUES (3, 'PRINTED SATIN DRESS');
-INSERT INTO dress (dress_id, dress_name) VALUES (4, 'PRINTED DRESS WITH KNOT');
-INSERT INTO dress (dress_id, dress_name) VALUES (5, 'FLORAL PRINT DRESS');
+INSERT INTO dress (dress_id, dress_name) VALUES (1, 'Jacquard shirt dress');
+INSERT INTO dress (dress_id, dress_name) VALUES (2, 'Ruffled printed dress');
+INSERT INTO dress (dress_id, dress_name) VALUES (3, 'Printed satin dress');
+INSERT INTO dress (dress_id, dress_name) VALUES (4, 'Printed dress with knot');
+INSERT INTO dress (dress_id, dress_name) VALUES (5, 'Floral print dress');
 
 
 

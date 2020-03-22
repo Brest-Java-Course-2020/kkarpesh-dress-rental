@@ -61,8 +61,8 @@
                         </thead>
                         <tbody>
                         <tr th:each="dress : ${dresses}">
-                            <td th:text="${dress.getDressName()}"></td>
-                            <td th:text="${dress.getNumberOfOrders()}"></td>
+                            <td th:text="${dress.dressName}"></td>
+                            <td th:text="${dress.numberOfOrders}"></td>
                             <td>
                                 <a href="#editDressModal" data-toggle="modal"
                                    th:attr="data-id=${dress.dressId},

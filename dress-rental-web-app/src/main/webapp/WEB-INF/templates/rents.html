@@ -96,12 +96,12 @@
                             </thead>
                             <tbody>
                             <tr th:each="rent : ${rents}">
-                                <td th:text="${rent.getDressName()}"></td>
-                                <td th:text="${rent.getClient()}"></td>
-                                <td th:text="${rent.getRentDate()}"></td>
+                                <td th:text="${rent.dressName}"></td>
+                                <td th:text="${rent.client}"></td>
+                                <td th:text="${rent.rentDate}"></td>
                                 <td>
                                     <a href="#editRentModal" data-toggle="modal"
-                                    th:attr="data-id=${rent.rentId}, data-dress=${rent.dressId},
+                                    th:attr="data-id=${rent.rentId}, data-dressid=${rent.dressId},
                                     data-client=${rent.client}, data-date=${rent.rentDate}">Edit</a>
                                     <a href="#deleteRentModal" data-toggle="modal"
                                     th:attr="data-id=${rent.rentId}, data-dressname=${rent.dressName},
