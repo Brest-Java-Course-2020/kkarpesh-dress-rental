@@ -26,6 +26,6 @@ class RentDtoDaoJdbcIT {
         List<RentDto> rents = rentDtoDao.findAllWIthDressNameByDate(dateFrom, dateTo);
         System.out.println(rents.toString());
         assertTrue(rents.size()==2);
-
     }
+
 }

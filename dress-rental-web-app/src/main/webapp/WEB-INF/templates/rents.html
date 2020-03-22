@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="../../resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.min.css"
+          th:href="@{/resources/static/css/bootstrap.min.css}">
 
     <title>Rents</title>
 </head>
@@ -16,7 +18,9 @@
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="index.html">
-            <img src="../../resources/static/img/logo.svg" width="32" height="32" alt="Dress Rental">
+            <img src="../../resources/static/img/logo.svg"
+                 th:src="@{/resources/static/img/logo.svg}"
+                 width="32" height="32" alt="Dress Rental">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -24,10 +28,10 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="dresses.html">DRESSES</a>
+                    <a class="nav-link" href="dresses.html" th:href="@{/dresses}">DRESSES</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="rents.html">RENTED DRESSES</a>
+                    <a class="nav-link" href="rents.html" th:href="@{/rents}">RENTED DRESSES</a>
                 </li>
             </ul>
         </div>
@@ -42,31 +46,35 @@
     </nav>
 
     <nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center ">
-
-        <form action="#" th:action="@{/rents}" method="get">
-            <div class="form-row">
-                <div class="col-auto">
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Show data from:</div>
+        <div>
+            <form action="#" th:action="@{/rents}" th:method="get">
+                <div class="form-row">
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Show data from:</div>
+                            </div>
+                            <input type="date" class="form-control" name="dateFrom" id="dateFrom">
                         </div>
-                        <input type="date" class="form-control" th:name="dateFrom" id="dateFrom" placeholder="dateFrom">
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">to:</div>
+                            </div>
+                            <input type="date" class="form-control" name="dateTo" id="dateTo">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-info mb-2">Refresh</button>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">to:</div>
-                        </div>
-                        <input type="date" class="form-control" th:name="dateTo" id="dateTo" placeholder="dateTo">
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-info mb-2">Refresh</button>
-                </div>
+            </form>
+            <div class="navbar-brand mr-auto justify-content-right ">
+                Rents from: <span th:text="${dateFrom}"></span>
+                to: <span th:text="${dateTo}"></span>
             </div>
-        </form>
-
+        </div>
     </nav>
 
 </header>
@@ -92,12 +100,16 @@
                                 <td th:text="${rent.getClient()}"></td>
                                 <td th:text="${rent.getRentDate()}"></td>
                                 <td>
-                                    <a href="#editRentModal" data-toggle="modal">Edit</a>
-                                    <a href="#deleteRentModal" data-toggle="modal">Delete</a>
+                                    <a href="#editRentModal" data-toggle="modal"
+                                    th:attr="data-id=${rent.rentId}, data-dress=${rent.dressId},
+                                    data-client=${rent.client}, data-date=${rent.rentDate}">Edit</a>
+                                    <a href="#deleteRentModal" data-toggle="modal"
+                                    th:attr="data-id=${rent.rentId}, data-dressname=${rent.dressName},
+                                    data-client=${rent.client}, data-date=${rent.rentDate}">Delete</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>Total: 3</b></td>
+                                <td><b>Total: "undefined"</b></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -120,7 +132,7 @@
 <div id="addRentModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="#" th:action="@{/rents/}" th:object="${rent}" th:method="post">
                 <div class="modal-header alert-success">
                     <h4 class="modal-title">Add Rent</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -128,19 +140,20 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Dress name</label>
-                        <select itemtype="text" class="form-control" required>
-                            <option>Tulle dress with fringes</option>
-                            <option>Dress with gathered waist</option>
-                            <option>Elastic trim embroidered dress</option>
+                        <select itemtype="text" class="form-control" th:field="*{dressId}" required>
+                            <option th:each="dress : ${dresses}"
+                                    th:value="${dress.dressId}"
+                                    th:text="${dress.dressName}"
+                                    >Tulle dress with fringes</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Client</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" th:field="*{client}"required>
                     </div>
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="date" class="form-control" required>
+                        <input type="date" class="form-control" th:field="*{rentDate}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -155,27 +168,28 @@
 <div id="editRentModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="#" th:action="@{/rents/}" th:object="${rent}" th:method="post">
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Rent</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="rentId" id="rentId" th:value="*{rentId}" required>
                     <div class="form-group">
                         <label>Dress name</label>
-                        <select itemtype="text" class="form-control" required>
-                            <option>Tulle dress with fringes</option>
-                            <option>Dress with gathered waist</option>
-                            <option>Elastic trim embroidered dress</option>
+                        <select itemtype="text" class="form-control" name="dressId" id="dressId" th:value="*{dressId}" required>
+                            <option th:each="dress : ${dresses}"
+                                    th:value="${dress.dressId}"
+                                    th:text="${dress.dressName}">Tulle dress with fringes</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Client</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" name="client" id="client" th:value="*{client}" required>
                     </div>
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="date" class="form-control" required>
+                        <input type="date" class="form-control" name="rentDate" id="rentDate" th:value="*{rentDate}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -191,7 +205,6 @@
 <div id="deleteRentModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
                 <div class="modal-header alert-danger">
                     <h4 class="modal-title">Delete Rent</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -201,16 +214,20 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <a id="deleteRentUrl" href="#" class="btn btn-danger" value="Delete">Delete</a>
                 </div>
-            </form>
         </div>
     </div>
 </div>
 
-<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"></script>
-<script src="../../resources/static/js/popper.min.js"></script>
-<script src="../../resources/static/js/bootstrap.min.js"></script>
+<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"
+        th:src="@{/resources/static/js/jquery-3.4.1.slim.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script src="../../resources/static/js/main.js"
+        th:src="@{/resources/static/js/main.js}"></script>
 
 </body>
 </html>

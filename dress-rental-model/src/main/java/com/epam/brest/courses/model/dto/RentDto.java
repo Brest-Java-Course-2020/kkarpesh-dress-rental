@@ -2,7 +2,7 @@ package com.epam.brest.courses.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RentDto {
 
@@ -11,9 +11,11 @@ public class RentDto {
     private String client;
 
     @DateTimeFormat(pattern = "MM-dd-yyyy")
-    private Date rentDate;
+    private LocalDate rentDate;
 
     private String dressName;
+
+    private Integer dressId;
 
     public Integer getRentId() {
         return rentId;
@@ -31,11 +33,11 @@ public class RentDto {
         this.client = client;
     }
 
-    public Date getRentDate() {
+    public LocalDate getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(Date rentDate) {
+    public void setRentDate(LocalDate rentDate) {
         this.rentDate = rentDate;
     }
 
@@ -45,6 +47,14 @@ public class RentDto {
 
     public void setDressName(String dressName) {
         this.dressName = dressName;
+    }
+
+    public Integer getDressId() {
+        return dressId;
+    }
+
+    public void setDressId(Integer dressId) {
+        this.dressId = dressId;
     }
 
     @Override

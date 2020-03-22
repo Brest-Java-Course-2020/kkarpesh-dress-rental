@@ -1,12 +1,17 @@
 package com.epam.brest.courses.model;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 public class Rent {
 
     private Integer rentId;
     private String client;
-    private Date rentDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate rentDate;
+
     private Integer dressId;
 
     public Integer getRentId() {
@@ -25,11 +30,11 @@ public class Rent {
         this.client = client;
     }
 
-    public Date getRentDate() {
+    public LocalDate getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(Date rentDate) {
+    public void setRentDate(LocalDate rentDate) {
         this.rentDate = rentDate;
     }
 
