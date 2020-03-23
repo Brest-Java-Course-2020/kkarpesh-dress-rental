@@ -70,9 +70,9 @@
                     </div>
                 </div>
             </form>
-            <div class="navbar-brand mr-auto justify-content-right ">
-                Rents from: <span th:text="${dateFrom}"></span>
-                to: <span th:text="${dateTo}"></span>
+            <div class="navbar-brand mr-auto justify-content-left ">
+                Rents from: <span th:text="${#temporals.format(dateFrom, 'dd MMM yyyy')}"></span>
+                to: <span th:text="${#temporals.format(dateTo, 'dd MMM yyyy')}"></span>
             </div>
         </div>
     </nav>
@@ -98,7 +98,7 @@
                             <tr th:each="rent : ${rents}">
                                 <td th:text="${rent.dressName}"></td>
                                 <td th:text="${rent.client}"></td>
-                                <td th:text="${rent.rentDate}"></td>
+                                <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>
                                 <td>
                                     <a href="#editRentModal" data-toggle="modal"
                                     th:attr="data-id=${rent.rentId}, data-dressid=${rent.dressId},
