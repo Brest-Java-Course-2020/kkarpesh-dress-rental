@@ -12,6 +12,7 @@ CREATE TABLE rent (
     rent_date DATE NOT NULL,
     dress_id INT NOT NULL,
     PRIMARY KEY (rent_id),
+    CONSTRAINT un_dress_id_rent_date UNIQUE (dress_id, rent_date),
     FOREIGN KEY (dress_id) REFERENCES dress(dress_id)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
