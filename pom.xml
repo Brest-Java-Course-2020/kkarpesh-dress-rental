@@ -250,6 +250,11 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
 
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
@@ -281,7 +286,9 @@
                     <version>0.8.5</version>
                 </plugin>
             </plugins>
+
         </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -309,12 +316,11 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
-                            <!--<configLocation>checkstyle.xml</configLocation>-->
+                            <configLocation>checks/checkstyle.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>false</failsOnError>
                             <failOnViolation>false</failOnViolation>
-                            <linkXRef>false</linkXRef>
                         </configuration>
                         <goals>
                             <goal>check</goal>
@@ -423,6 +429,10 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
             </plugin>
 
             <plugin>

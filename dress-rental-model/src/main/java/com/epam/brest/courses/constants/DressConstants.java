@@ -6,7 +6,7 @@ package com.epam.brest.courses.constants;
  * @version 1.0
  * @since 1.0
  */
-public class DressConstants {
+public final class DressConstants {
 
     /**
      * The column name for dress ID.
@@ -22,4 +22,10 @@ public class DressConstants {
      * The limitation for the dress name.
      */
     public static final int DRESS_NAME_SIZE = 30;
+
+    /**
+     * Private constructor.
+     */
+    private DressConstants() {
+    }
 }
