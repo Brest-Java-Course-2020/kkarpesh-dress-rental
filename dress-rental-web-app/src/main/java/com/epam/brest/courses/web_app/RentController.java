@@ -35,15 +35,17 @@ public class RentController {
     @GetMapping
     public final String getRents(
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            @RequestParam(value = "dateFrom", required = false) LocalDate dateFrom,
+            @RequestParam(value = "dateFrom", required = false)
+                    LocalDate dateFrom,
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            @RequestParam(value = "dateTo", required = false) LocalDate dateTo,
+            @RequestParam(value = "dateTo", required = false)
+                    LocalDate dateTo,
             ModelMap modelMap) {
         if (dateFrom == null) {
             dateFrom = LocalDate.of(2000, 01, 01);
         }
         if (dateTo == null) {
-            dateTo = LocalDate.of(2050,01,01);
+            dateTo = LocalDate.of(2050, 01, 01);
         }
         List<RentDto> rents
                 = rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);

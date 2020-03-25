@@ -17,7 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("dresses")
 public class DressRestController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressRestController.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DressRestController.class);
 
     @Autowired
     private DressService dressService;
@@ -28,30 +29,32 @@ public class DressRestController {
     @GetMapping("/{id}")
     public Dress findById(@PathVariable Integer id) {
         LOGGER.debug("Find dress by id = {}", id);
-        return dressService.findById(id).orElseThrow(() -> new DressNotFoundException(id));
+        return dressService.findById(id).orElseThrow(() ->
+                new DressNotFoundException(id));
     }
 
     @GetMapping
-    public List<DressDto> findAllwithNumberOfOrders(){
+    public List<DressDto> findAllwithNumberOfOrders() {
         LOGGER.debug("Find all dresses with number of orders");
         return dressDtoService.findAllWithNumberOfOrders();
     }
 
     @PostMapping
-    public Integer create (@RequestBody Dress dress){
+    public Integer create(@RequestBody Dress dress) {
         LOGGER.debug("Create new dress {}", dress);
         return dressService.create(dress);
     }
 
     @PutMapping("/{id}")
-    public Integer update (@PathVariable Integer id, @RequestBody Dress dress){
+    public Integer update(@PathVariable Integer id,
+                          @RequestBody Dress dress) {
         LOGGER.debug("Update dress {}", id);
         dress.setDressId(id);
         return dressService.update(dress);
     }
 
     @DeleteMapping("/{id}")
-    public Integer delete (@PathVariable Integer id){
+    public Integer delete(@PathVariable Integer id) {
         LOGGER.debug("Delete dress with id = {}", id);
         return dressService.delete(id);
     }

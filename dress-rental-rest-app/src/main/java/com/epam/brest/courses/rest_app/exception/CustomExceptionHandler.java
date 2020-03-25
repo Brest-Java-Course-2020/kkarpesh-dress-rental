@@ -12,10 +12,11 @@ import java.util.List;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-    private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
+    private static final String INCORRECT_REQUEST = "INCORRECT_REQUEST";
 
     @ExceptionHandler(DressNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleUserNotFoundException (DressNotFoundException ex, WebRequest request){
+    public final ResponseEntity<ErrorResponse> handleUserNotFoundException(
+            DressNotFoundException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(INCORRECT_REQUEST, details);

@@ -4,8 +4,17 @@
         "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-    <module name="JavadocPackage"/>
+    <!--
+         If you set the basedir property below, then all reported file
+         names will be relative to the specified directory. See
+         http://checkstyle.sourceforge.net/5.x/config.html#Checker
 
+         <property name="basedir" value="${basedir}"/>
+     -->
+    <property name="fileExtensions" value="java, properties, xml"/>
+
+    <!-- Checks that a package-info.java file exists for each package.     -->
+    <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
     <module name="JavadocPackage"/>
 
     <!-- Checks whether files end with a new line.                        -->
@@ -56,7 +65,6 @@
 
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
-        <module name="AvoidStarImport"/>
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports">
