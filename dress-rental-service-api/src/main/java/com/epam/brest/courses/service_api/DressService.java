@@ -5,17 +5,25 @@ import com.epam.brest.courses.model.Dress;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A a service interface that defines the methods
+ * of working with the Dress model.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
+ */
 public interface DressService {
 
     /**
-     * Find all dresses.
+     * Finds all dresses.
      *
      * @return dresses list.
      */
     List<Dress> findAll();
 
     /**
-     * Find dress by Id.
+     * Finds dress by Id.
      *
      * @param dressId dress Id.
      * @return dress.
@@ -23,7 +31,7 @@ public interface DressService {
     Optional<Dress> findById(Integer dressId);
 
     /**
-     * Create new dress.
+     * Creates new dress.
      *
      * @param dress dress.
      * @return created dress Id.
@@ -31,7 +39,7 @@ public interface DressService {
     Integer create(Dress dress);
 
     /**
-     * Update dress.
+     * Updates dress.
      *
      * @param dress dress.
      * @return number of updated records in the database.
@@ -39,7 +47,7 @@ public interface DressService {
     Integer update(Dress dress);
 
     /**
-     * Delete dress.
+     * Deletes dress.
      *
      * @param dressId dress Id.
      * @return number of deleted records in the database.
