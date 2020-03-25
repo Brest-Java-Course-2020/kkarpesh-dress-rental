@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A a service interface that defines the methods
+ * A service interface that defines the methods
  * of working with the Rent model.
  *
  * @author Kirill Karpesh
@@ -26,7 +26,7 @@ public interface RentService {
      * Finds rent by Id.
      *
      * @param rentId rent Id.
-     * @return dress
+     * @return dress.
      */
     Optional<Rent> findById(Integer rentId);
 

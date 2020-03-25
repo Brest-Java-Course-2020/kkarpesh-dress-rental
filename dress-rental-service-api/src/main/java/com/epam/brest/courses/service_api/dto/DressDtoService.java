@@ -5,7 +5,7 @@ import com.epam.brest.courses.model.dto.DressDto;
 import java.util.List;
 
 /**
- * A a service interface that defines the methods
+ * A service interface that defines the methods
  * of working with the DressDto model.
  *
  * @author Kirill Karpesh

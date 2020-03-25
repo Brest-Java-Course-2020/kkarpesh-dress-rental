@@ -78,7 +78,7 @@ public class DressDaoJdbc implements DressDao {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     /**
-     * Constructor.
+     * Constructs a new object with given JDBC template.
      *
      * @param jdbcTemplate jdbc template.
      */

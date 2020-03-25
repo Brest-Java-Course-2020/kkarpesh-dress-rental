@@ -11,19 +11,43 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * A service class that defines how to work
+ * with the RentDto model.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 @Transactional(readOnly = true)
 public class RentDtoServiceImpl implements RentDtoService {
 
+    /**
+     * Default logger for current class.
+     */
     private static final Logger LOGGER
             = LoggerFactory.getLogger(RentDtoServiceImpl.class);
 
+    /**
+     * A rentDto data access object.
+     */
     private final RentDtoDao rentDtoDao;
 
+    /**
+     * Constructs new object with given DAO object.
+     *
+     * @param rentDtoDao rent DAO.
+     */
     public RentDtoServiceImpl(RentDtoDao rentDtoDao) {
         this.rentDtoDao = rentDtoDao;
     }
 
+    /**
+     * Finds rents with dress name for a given period of time.
+     *
+     * @return rents with dress name for a given period of time.
+     */
     @Override
     public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
                                                     LocalDate dateTo) {

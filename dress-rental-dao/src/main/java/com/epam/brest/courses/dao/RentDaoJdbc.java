@@ -75,7 +75,7 @@ public class RentDaoJdbc implements RentDao {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     /**
-     * Constructor.
+     * Constructs a new object with given JDBC template.
      *
      * @param jdbcTemplate jdbc template.
      */

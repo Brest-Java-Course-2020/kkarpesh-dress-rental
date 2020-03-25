@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * A a service interface that defines the methods
+ * A service interface that defines the methods
  * of working with the RentDto model.
  *
  * @author Kirill Karpesh

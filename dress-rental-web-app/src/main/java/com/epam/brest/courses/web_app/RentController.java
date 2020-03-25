@@ -41,12 +41,7 @@ public class RentController {
             @RequestParam(value = "dateTo", required = false)
                     LocalDate dateTo,
             ModelMap modelMap) {
-        if (dateFrom == null) {
-            dateFrom = LocalDate.of(2000, 01, 01);
-        }
-        if (dateTo == null) {
-            dateTo = LocalDate.of(2050, 01, 01);
-        }
+
         List<RentDto> rents
                 = rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);
 

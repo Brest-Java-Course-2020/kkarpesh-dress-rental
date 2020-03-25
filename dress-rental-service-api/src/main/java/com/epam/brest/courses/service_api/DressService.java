@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A a service interface that defines the methods
+ * A service interface that defines the methods
  * of working with the Dress model.
  *
  * @author Kirill Karpesh
