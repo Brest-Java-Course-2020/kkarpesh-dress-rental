@@ -12,21 +12,48 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * This class contains methods for direct access
+ * to data source using JDBC driver.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
+ */
 public class RentDtoDaoJdbc implements RentDtoDao {
 
+    /**
+     * Default logger for current class.
+     */
     private static final Logger LOGGER
             = LoggerFactory.getLogger(DressDaoJdbc.class);
 
+    /**
+     * The database query to find all rents with dress name
+     * for a given period of time.
+     */
     @Value("${rentDto.findAllWIthDressNameByDate}")
     private String findAllWIthDressNameSql;
 
-
+    /**
+     * Jdbc template to execute actions to data source.
+     */
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
+    /**
+     * Constructor.
+     *
+     * @param jdbcTemplate jdbc template.
+     */
     public RentDtoDaoJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Finds rents with dress name for a given period of time.
+     *
+     * @return rents with dress name for a given period of time.
+     */
     @Override
     public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
                                                     LocalDate dateTo) {
@@ -35,9 +62,9 @@ public class RentDtoDaoJdbc implements RentDtoDao {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("dateFrom", dateFrom);
         namedParameters.addValue("dateTo", dateTo);
-        List<RentDto> rents = jdbcTemplate.query(findAllWIthDressNameSql,
-                namedParameters,
-                BeanPropertyRowMapper.newInstance(RentDto.class));
-        return rents;
+        return jdbcTemplate
+                .query(findAllWIthDressNameSql,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(RentDto.class));
     }
 }

@@ -17,35 +17,77 @@ import java.util.Optional;
 
 import static com.epam.brest.courses.constants.RentConstants.*;
 
+/**
+ * This class contains methods for direct access
+ * to data source using JDBC driver.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
+ */
 public class RentDaoJdbc implements RentDao {
 
+    /**
+     * Default logger for current class.
+     */
     private static final Logger LOGGER
             = LoggerFactory.getLogger(RentDaoJdbc.class);
 
+    /**
+     * The database query to find all rents.
+     */
     @Value("${rent.findAll}")
     private String findAllSql;
 
+    /**
+     * The database query to find rent by ID.
+     */
     @Value("${rent.findById}")
     private String findByIdSql;
 
+    /**
+     * The database query to create a new rent.
+     */
     @Value("${rent.create}")
     private String createSql;
 
+    /**
+     * The database query to update existing rent.
+     */
     @Value("${rent.update}")
     private String updateSql;
 
+    /**
+     * The database query to delete a rent.
+     */
     @Value("${rent.delete}")
     private String deleteSql;
 
+    /**
+     * Mapper to convert a row into a new instance of the rent.
+     */
     private final BeanPropertyRowMapper<Rent> rentRowMapper
             = BeanPropertyRowMapper.newInstance(Rent.class);
 
+    /**
+     * Jdbc template to execute actions to data source.
+     */
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
+    /**
+     * Constructor.
+     *
+     * @param jdbcTemplate jdbc template.
+     */
     public RentDaoJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Finds all rents.
+     *
+     * @return all rents.
+     */
     @Override
     public List<Rent> findAll() {
         LOGGER.debug("Find all rents");
@@ -53,6 +95,12 @@ public class RentDaoJdbc implements RentDao {
         return rents;
     }
 
+    /**
+     * Finds rent by ID.
+     *
+     * @param rentId rent ID.
+     * @return a Optional description of the rent found.
+     */
     @Override
     public Optional<Rent> findById(Integer rentId) {
         LOGGER.debug("Find rent by id {}", rentId);
@@ -63,6 +111,12 @@ public class RentDaoJdbc implements RentDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(result));
     }
 
+    /**
+     * Saves the rent to a data source.
+     *
+     * @param rent rent.
+     * @return created rent ID.
+     */
     @Override
     public Integer create(Rent rent) {
         LOGGER.debug("Create new rent {}", rent);
@@ -75,6 +129,12 @@ public class RentDaoJdbc implements RentDao {
         return keyHolder.getKey().intValue();
     }
 
+    /**
+     * Updates an existing rent with a new object.
+     *
+     * @param rent rent.
+     * @return number of updated records in the database.
+     */
     @Override
     public Integer update(Rent rent) {
         LOGGER.debug("Update rent {}", rent);
@@ -86,6 +146,12 @@ public class RentDaoJdbc implements RentDao {
         return jdbcTemplate.update(updateSql, namedParameters);
     }
 
+    /**
+     * Deletes rent from data source.
+     *
+     * @param rentId rent.
+     * @return number of deleted records in the database.
+     */
     @Override
     public Integer delete(Integer rentId) {
         LOGGER.debug("Delete rent with id = {}", rentId);

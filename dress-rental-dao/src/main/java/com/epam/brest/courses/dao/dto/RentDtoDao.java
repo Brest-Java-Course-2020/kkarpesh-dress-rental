@@ -5,6 +5,14 @@ import com.epam.brest.courses.model.dto.RentDto;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * A simple DAO interface to handle the database operation
+ * required to manipulate a RentDto model.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
+ */
 public interface RentDtoDao {
 
     /**

@@ -7,19 +7,23 @@ import java.util.Optional;
 
 /**
  * A simple DAO interface to handle the database operation
- * required to manipulate a Rent entity.
+ * required to manipulate a Rent model.
+ *
+ * @author Kirill Karpesh
+ * @version 1.0
+ * @since 1.0
  */
 public interface RentDao {
 
     /**
-     * Find all rents.
+     * Finds all rents.
      *
      * @return rents list.
      */
     List<Rent> findAll();
 
     /**
-     * Find rent by Id.
+     * Finds rent by Id.
      *
      * @param rentId rent Id.
      * @return dress
@@ -27,7 +31,7 @@ public interface RentDao {
     Optional<Rent> findById(Integer rentId);
 
     /**
-     * Create new rent.
+     * Creates new rent.
      *
      * @param rent dress.
      * @return created rent Id.
@@ -35,7 +39,7 @@ public interface RentDao {
     Integer create(Rent rent);
 
     /**
-     * Update rent.
+     * Updates rent.
      *
      * @param rent rent.
      * @return number of updated records in the database.
@@ -43,7 +47,7 @@ public interface RentDao {
     Integer update(Rent rent);
 
     /**
-     * Delete rent.
+     * Deletes rent.
      *
      * @param rentId rent Id.
      * @return number of deleted records in the database.
