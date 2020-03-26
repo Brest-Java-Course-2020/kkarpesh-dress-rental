@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +33,10 @@ class DressDaoJdbcIT {
     private static final int EXISTING_DRESS_ID_WITH_RENTS = 2;
 
     private static final int DRESS_ID_WITHOUT_RENTS = 3;
+
+    private static final int DRESS_ID_WITH_ORDERS = 1;
+    private static final int DRESS_ID_WITHOUT_ORDERS = 3;
+
 
     @Test
     void shouldFindAllDresses() {
@@ -68,8 +71,8 @@ class DressDaoJdbcIT {
         assertNotNull(newDressId);
         assertEquals(NUMBER_OF_DRESS_AFTER_CREATE, dressDao.findAll().size());
 
-        Optional<Dress> createdDress = dressDao.findById(newDressId)
-                ;
+        Optional<Dress> createdDress = dressDao.findById(newDressId);
+
         assertTrue(createdDress.isPresent());
         assertEquals(NEW_DRESS_NAME, createdDress.get().getDressName());
     }
@@ -79,7 +82,7 @@ class DressDaoJdbcIT {
         Dress newDressWithExistingName = new Dress();
         newDressWithExistingName.setDressName(EXISTING_DRESS_NAME);
 
-        assertThrows(DuplicateKeyException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dressDao.create(newDressWithExistingName);
         });
     }
@@ -105,7 +108,7 @@ class DressDaoJdbcIT {
         dressWithExistingName.setDressId(DRESS_ID_WITHOUT_RENTS);
         dressWithExistingName.setDressName(EXISTING_DRESS_NAME);
 
-        assertThrows(DuplicateKeyException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             dressDao.update(dressWithExistingName);
         });
     }
@@ -129,8 +132,24 @@ class DressDaoJdbcIT {
 
     @Test
     void shouldThrowExceptionWhenDeleteDressWithRents() {
-        assertThrows(DataIntegrityViolationException.class, () -> {
+        assertThrows(UnsupportedOperationException.class, () -> {
             dressDao.delete(EXISTING_DRESS_ID_WITH_RENTS);
         });
+    }
+
+    @Test
+    void isNameUnique() {
+
+        assertTrue(dressDao.isNameAlreadyExist(EXISTING_DRESS_NAME));
+
+        assertFalse(dressDao.isNameAlreadyExist(NEW_DRESS_NAME));
+    }
+
+    @Test
+    void isDressHasRents() {
+
+        assertTrue(dressDao.isDressHasRents(DRESS_ID_WITH_ORDERS));
+
+        assertFalse(dressDao.isDressHasRents(DRESS_ID_WITHOUT_ORDERS));
     }
 }

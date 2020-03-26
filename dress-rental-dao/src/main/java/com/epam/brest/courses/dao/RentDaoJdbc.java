@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.epam.brest.courses.constants.RentConstants.*;
@@ -126,7 +127,7 @@ public class RentDaoJdbc implements RentDao {
         namedParameters.addValue(DRESS_ID, rent.getDressId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(createSql, namedParameters, keyHolder);
-        return keyHolder.getKey().intValue();
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
     /**

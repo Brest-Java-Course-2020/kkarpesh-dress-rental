@@ -13,10 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.epam.brest.courses.constants.DressConstants.*;
 
@@ -67,6 +64,18 @@ public class DressDaoJdbc implements DressDao {
     private String deleteSql;
 
     /**
+     * The database query to check if name is unique.
+     */
+    @Value("${dress.uniqueName}")
+    private String uniqueNameSql;
+
+    /**
+     * The database query to check if the dress has orders.
+     */
+    @Value("${dress.dressOrders}")
+    private String dressOrders;
+
+    /**
      * Mapper to convert a row into a new instance of the dress.
      */
     private final BeanPropertyRowMapper<Dress> dressRowMapper
@@ -94,9 +103,7 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public List<Dress> findAll() {
         LOGGER.debug("Get all dresses");
-        List<Dress> dresses
-                = jdbcTemplate.query(findAllSql, dressRowMapper);
-        return dresses;
+        return jdbcTemplate.query(findAllSql, dressRowMapper);
     }
 
     /**
@@ -107,7 +114,7 @@ public class DressDaoJdbc implements DressDao {
      */
     @Override
     public Optional<Dress> findById(Integer dressId) {
-        LOGGER.debug("Find dress by ID {}, dressId");
+        LOGGER.debug("Find dress by ID {}", dressId);
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(DRESS_ID, dressId);
         List<Dress> dresses = jdbcTemplate
@@ -124,11 +131,16 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public Integer create(Dress dress) {
         LOGGER.debug("Create new dress {}", dress);
+        if (isNameAlreadyExist(dress.getDressName())) {
+            throw new IllegalArgumentException(
+                    "Dress with the same name is already exists in DB.");
+        }
+
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(DRESS_NAME, dress.getDressName());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(createSql, namedParameters, keyHolder);
-        return keyHolder.getKey().intValue();
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
     /**
@@ -140,6 +152,11 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public Integer update(Dress dress) {
         LOGGER.debug("Update dress {}", dress);
+        if (isNameAlreadyExist(dress.getDressName())) {
+            throw new IllegalArgumentException(
+                    "Dress with the same name is already exists in DB.");
+        }
+
         Map<String, Object> namedParameters = new HashMap<>();
         namedParameters.put(DRESS_ID, dress.getDressId());
         namedParameters.put(DRESS_NAME, dress.getDressName());
@@ -156,9 +173,40 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public Integer delete(Integer dressId) {
         LOGGER.debug("Delete dress with id = {}", dressId);
+        if (isDressHasRents(dressId)) {
+            throw new UnsupportedOperationException(
+                    "This dress has orders and cannot be removed.");
+        }
+
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(DRESS_ID, dressId);
         return jdbcTemplate.update(deleteSql, namedParameters);
     }
 
+    /**
+     * Checks if the name of the dress is already exist.
+     *
+     * @param dressName dress name.
+     * @return the boolean value of the existence of a name.
+     */
+    @SuppressWarnings("ConstantConditions")
+    public boolean isNameAlreadyExist(String dressName) {
+        return jdbcTemplate.queryForObject(uniqueNameSql,
+                new MapSqlParameterSource(DRESS_NAME, dressName),
+                Integer.class) != 0;
+    }
+
+    /**
+     * Checks if the dress with a given ID has orders.
+     *
+     * @param dressId dress ID.
+     * @return the boolean value is there a dress orders.
+     */
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public boolean isDressHasRents(Integer dressId) {
+       return jdbcTemplate.queryForObject(dressOrders,
+               new MapSqlParameterSource(DRESS_ID, dressId),
+               Integer.class) > 0;
+    }
 }
