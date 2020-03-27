@@ -102,7 +102,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Dress name</label>
-                        <input type="text" class="form-control" th:field="*{dressName}" required/>
+                        <input type="text" class="form-control" th:field="*{dressName}" maxlength="30" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -127,7 +127,8 @@
                     <div class="form-group">
                         <input type="hidden" name="dressId" id="dressId" th:value="*{dressId}" required>
                         <label>Dress name</label>
-                        <input type="text" class="form-control" name="dressName" id="dressName" th:value="*{dressName}"required>
+                        <input type="text" class="form-control" name="dressName" id="dressName" th:value="*{dressName}"
+                               maxlength="30" required>
                     </div>
                 </div>
                 <div class="modal-footer">
