@@ -4,7 +4,7 @@ import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.model.dto.DressDto;
 import com.epam.brest.courses.service.DressServiceImpl;
 import com.epam.brest.courses.service.dto.DressDtoServiceImpl;
-import com.epam.brest.courses.web_app.validator.DressValidator;
+import com.epam.brest.courses.web_app.validators.DressValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
