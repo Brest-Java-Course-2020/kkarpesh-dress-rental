@@ -26,7 +26,8 @@ public class DressController {
     /**
      * Default logger for current class.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressController.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DressController.class);
 
     /**
      * Service layer object to get information of dress.
@@ -49,7 +50,8 @@ public class DressController {
 
     @GetMapping
     public final String getAll(Model model) {
-        List<DressDto> dresses = dressDtoService.findAllWithNumberOfOrders();
+        List<DressDto> dresses =
+                dressDtoService.findAllWithNumberOfOrders();
         model.addAttribute("dresses", dresses);
         Dress dress = new Dress();
         model.addAttribute("dress", dress);
@@ -58,7 +60,9 @@ public class DressController {
 
 
     @PostMapping
-    public final String createOrUpdate(@Valid Dress dress, BindingResult result) {
+    public final String createOrUpdate(@Valid Dress dress,
+                                       BindingResult result) {
+
         LOGGER.debug("Create or update dress {}, {}", dress, result);
 
         dressValidator.validate(dress, result);

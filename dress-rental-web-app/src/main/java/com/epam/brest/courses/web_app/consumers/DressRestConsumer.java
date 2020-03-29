@@ -20,7 +20,8 @@ public class DressRestConsumer implements DressService {
     /**
      * Default logger for current class.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DressRestConsumer.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(DressRestConsumer.class);
 
     /**
      * The RESTful source URL.
@@ -41,8 +42,9 @@ public class DressRestConsumer implements DressService {
     public List<Dress> findAll() {
         LOGGER.debug("Gets all dresses");
         ResponseEntity<List<Dress>> responseEntity =
-                restTemplate.exchange(url, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<List<Dress>>() {
+                restTemplate.exchange(url, HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {
                         });
 
         return responseEntity.getBody();

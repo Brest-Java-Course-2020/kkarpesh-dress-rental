@@ -18,8 +18,10 @@ public class DressValidator implements Validator {
     /**
      * Can this Validator validate instances of the supplied clazz?
      *
-     * @param clazz the Class that this Validator is being asked if it can validate
-     * @return true if this Validator can indeed validate instances of the supplied clazz.
+     * @param clazz the Class that this Validator
+     * is being asked if it can validate
+     * @return true if this Validator can indeed
+     * validate instances of the supplied clazz.
      */
     @Override
     public boolean supports(Class<?> clazz) {
@@ -36,12 +38,14 @@ public class DressValidator implements Validator {
      */
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmpty(errors, "dressName", "dressName.empty");
+        ValidationUtils.rejectIfEmpty(errors,
+                "dressName", "dressName.empty");
         Dress dress = (Dress) target;
 
         if (StringUtils.hasLength(dress.getDressName())
                 && dress.getDressName().length() > DRESS_NAME_SIZE) {
-            errors.rejectValue("dressName", "dressName.maxSize");
+            errors.rejectValue("dressName",
+                    "dressName.maxSize");
         }
     }
 }
