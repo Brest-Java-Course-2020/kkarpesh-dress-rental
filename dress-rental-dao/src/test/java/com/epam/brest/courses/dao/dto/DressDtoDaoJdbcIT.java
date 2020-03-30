@@ -15,23 +15,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 class DressDtoDaoJdbcIT {
 
+    private static final int NUMBER_OF_DRESSES = 5;
+    private static final Integer DRESS_ID = 5;
+    private static final String DRESS_NAME = "Floral print dress";
+    private static final Integer NUMBER_OF_ORDERS = 1;
+
     @Autowired
     private DressDtoDao dressDtoDao;
 
     @Test
     void findAllWithNumberOfOrders() {
-        DressDto dressDto = new DressDto();
-        dressDto.setDressId(1);
-        dressDto.setDressName("Dress 1");
-        dressDto.setNumberOfOrders(2);
-
         List<DressDto> dresses = dressDtoDao.findAllWithNumberOfOrders();
-        assertTrue(dresses.size()==5);
+        assertEquals(NUMBER_OF_DRESSES, dresses.size());
 
         DressDto dressDtoFromQuery = dresses.get(0);
-        assertEquals(dressDtoFromQuery.getDressId(), dressDto.getDressId());
-        assertEquals(dressDtoFromQuery.getDressName(), dressDto.getDressName());
-        assertEquals(dressDtoFromQuery.getNumberOfOrders(), dressDto.getNumberOfOrders());
+        assertEquals(DRESS_ID, dressDtoFromQuery.getDressId());
+        assertEquals(DRESS_NAME, dressDtoFromQuery.getDressName());
+        assertEquals(NUMBER_OF_ORDERS, dressDtoFromQuery.getNumberOfOrders());
 
 
     }

@@ -65,6 +65,12 @@ public class RentDaoJdbc implements RentDao {
     private String deleteSql;
 
     /**
+     * The database query to check if dress rented for this date.
+     */
+    @Value("${rent.uniqueOrder}")
+    private String uniqueOrderSql;
+
+    /**
      * Mapper to convert a row into a new instance of the rent.
      */
     private final BeanPropertyRowMapper<Rent> rentRowMapper
@@ -121,6 +127,12 @@ public class RentDaoJdbc implements RentDao {
     @Override
     public Integer create(Rent rent) {
         LOGGER.debug("Create new rent {}", rent);
+        if (hasDressAlreadyBeenRentedForThisDate(rent)) {
+            throw new IllegalArgumentException(
+                    "This dress has already been rented for this date."
+            );
+        }
+
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue(CLIENT, rent.getClient());
         namedParameters.addValue(RENT_DATE, rent.getRentDate());
@@ -139,6 +151,12 @@ public class RentDaoJdbc implements RentDao {
     @Override
     public Integer update(Rent rent) {
         LOGGER.debug("Update rent {}", rent);
+        if (hasDressAlreadyBeenRentedForThisDate(rent)) {
+            throw new IllegalArgumentException(
+                    "This dress has already been rented for this date."
+            );
+        }
+
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue(RENT_ID, rent.getRentId());
         namedParameters.addValue(CLIENT, rent.getClient());
@@ -159,5 +177,22 @@ public class RentDaoJdbc implements RentDao {
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(RENT_ID, rentId);
         return jdbcTemplate.update(deleteSql, namedParameters);
+    }
+
+    /**
+     * Checks if dress rented for this date.
+     *
+     * @param rent rent.
+     * @return true if dress has already been rented
+     * for this date and false if not.
+     */
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue(DRESS_ID, rent.getDressId());
+        parameterSource.addValue(RENT_DATE, rent.getRentDate());
+        return jdbcTemplate.queryForObject(uniqueOrderSql,
+                parameterSource, Integer.class) != 0;
     }
 }

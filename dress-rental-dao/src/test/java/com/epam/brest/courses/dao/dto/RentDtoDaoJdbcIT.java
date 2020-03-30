@@ -19,13 +19,22 @@ class RentDtoDaoJdbcIT {
     @Autowired
     private RentDtoDao rentDtoDao;
 
+    private static final LocalDate dateFrom = LocalDate.of(2020,1, 1);
+    private static final LocalDate dateTo = LocalDate.of(2020, 2, 2);
+    private static final int NUMBER_OF_RENTS = 2;
+
+
     @Test
-    void findAllWIthDressNameByDate() {
-        LocalDate dateFrom = LocalDate.of(2019, 01, 01);
-        LocalDate dateTo = LocalDate.of(2020, 01, 01);
+    void shouldFindAllWIthDressNameByDate() {
         List<RentDto> rents = rentDtoDao.findAllWIthDressNameByDate(dateFrom, dateTo);
         System.out.println(rents.toString());
-        assertTrue(rents.size()==2);
+        assertEquals(NUMBER_OF_RENTS, rents.size());
     }
 
+    @Test
+    void shouldThrowsExceptionIfDateFromIsAfterDateTo() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            rentDtoDao.findAllWIthDressNameByDate(dateTo, dateFrom);
+        });
+    }
 }

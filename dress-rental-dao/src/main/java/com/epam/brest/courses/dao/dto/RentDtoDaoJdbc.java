@@ -59,6 +59,12 @@ public class RentDtoDaoJdbc implements RentDtoDao {
                                                     LocalDate dateTo) {
         LOGGER.debug("Find all rents with dress name from {} to {}",
                 dateFrom, dateTo);
+        if (dateFrom.isAfter(dateTo)) {
+            throw new IllegalArgumentException(
+                    "'Date from' cannot be after 'date to'."
+            );
+        }
+
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("dateFrom", dateFrom);
         namedParameters.addValue("dateTo", dateTo);

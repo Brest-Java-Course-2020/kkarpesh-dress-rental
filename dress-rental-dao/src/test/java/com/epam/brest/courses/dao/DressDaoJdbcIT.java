@@ -4,7 +4,6 @@ import com.epam.brest.courses.model.Dress;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +54,7 @@ class DressDaoJdbcIT {
     }
 
     @Test
-    void shouldReturnNullWhenFindByNonexistentId(){
+    void shouldReturnNullWhenFindByNonexistentId() {
         Optional<Dress> dress = dressDao.findById(NONEXISTENT_DRESS_ID);
 
         assertTrue(dress.isEmpty());
@@ -78,7 +77,7 @@ class DressDaoJdbcIT {
     }
 
     @Test
-    void shouldThrowExceptionWhenCreateNewDressWithExistingName(){
+    void shouldThrowExceptionWhenCreateNewDressWithExistingName() {
         Dress newDressWithExistingName = new Dress();
         newDressWithExistingName.setDressName(EXISTING_DRESS_NAME);
 
@@ -94,7 +93,7 @@ class DressDaoJdbcIT {
         dress.setDressName(NEW_DRESS_NAME);
 
         assertEquals(Integer.valueOf(1), dressDao.update(dress));
-        assertEquals(NUMBER_OF_DRESSES ,dressDao.findAll().size());
+        assertEquals(NUMBER_OF_DRESSES, dressDao.findAll().size());
 
         Optional<Dress> updatedDress = dressDao.findById(EXISTING_DRESS_ID_WITH_RENTS);
 
@@ -103,7 +102,7 @@ class DressDaoJdbcIT {
     }
 
     @Test
-    void shouldThrowExceptionWhenUpdateDressWithExistingName(){
+    void shouldThrowExceptionWhenUpdateDressWithExistingName() {
         Dress dressWithExistingName = new Dress();
         dressWithExistingName.setDressId(DRESS_ID_WITHOUT_RENTS);
         dressWithExistingName.setDressName(EXISTING_DRESS_NAME);
@@ -114,7 +113,7 @@ class DressDaoJdbcIT {
     }
 
     @Test
-    void shouldDoNothingWhenUpdateDressWithNonexistentId(){
+    void shouldDoNothingWhenUpdateDressWithNonexistentId() {
         Dress dressWithNonexistentId = new Dress();
         dressWithNonexistentId.setDressId(NONEXISTENT_DRESS_ID);
         dressWithNonexistentId.setDressName(NEW_DRESS_NAME);

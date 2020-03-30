@@ -73,7 +73,7 @@ public class DressDaoJdbc implements DressDao {
      * The database query to check if the dress has orders.
      */
     @Value("${dress.dressOrders}")
-    private String dressOrders;
+    private String dressOrdersSql;
 
     /**
      * Mapper to convert a row into a new instance of the dress.
@@ -190,6 +190,7 @@ public class DressDaoJdbc implements DressDao {
      * @return the boolean value of the existence of a name.
      */
     @SuppressWarnings("ConstantConditions")
+    @Override
     public boolean isNameAlreadyExist(String dressName) {
         return jdbcTemplate.queryForObject(uniqueNameSql,
                 new MapSqlParameterSource(DRESS_NAME, dressName),
@@ -205,7 +206,7 @@ public class DressDaoJdbc implements DressDao {
     @SuppressWarnings("ConstantConditions")
     @Override
     public boolean isDressHasRents(Integer dressId) {
-       return jdbcTemplate.queryForObject(dressOrders,
+       return jdbcTemplate.queryForObject(dressOrdersSql,
                new MapSqlParameterSource(DRESS_ID, dressId),
                Integer.class) > 0;
     }
