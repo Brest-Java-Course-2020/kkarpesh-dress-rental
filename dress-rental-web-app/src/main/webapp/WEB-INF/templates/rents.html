@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -95,6 +94,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr th:if="${rents.empty}">
+                                <td colspan="4">No rents</td>
+                            </tr>
                             <tr th:each="rent : ${rents}">
                                 <td th:text="${rent.dressName}"></td>
                                 <td th:text="${rent.client}"></td>
