@@ -16,6 +16,7 @@
         <module>dress-rental-service</module>
         <module>dress-rental-service-api</module>
         <module>dress-rental-rest-app</module>
+        <module>dress-rental-service-rest</module>
     </modules>
 
     <properties>

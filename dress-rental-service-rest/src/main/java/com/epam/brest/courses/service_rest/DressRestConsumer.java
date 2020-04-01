@@ -1,4 +1,4 @@
-package com.epam.brest.courses.web_app.consumers;
+package com.epam.brest.courses.service_rest;
 
 import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.service_api.DressService;
@@ -40,7 +40,7 @@ public class DressRestConsumer implements DressService {
      */
     @Override
     public List<Dress> findAll() {
-        LOGGER.debug("Gets all dresses");
+        LOGGER.debug("Gets all dresses from REST");
         ResponseEntity<List<Dress>> responseEntity =
                 restTemplate.exchange(url, HttpMethod.GET,
                         null,
