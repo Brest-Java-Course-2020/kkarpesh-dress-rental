@@ -46,6 +46,8 @@ public class RentDtoServiceImpl implements RentDtoService {
     /**
      * Finds rents with dress name for a given period of time.
      *
+     * @param dateFrom period start date.
+     * @param dateTo period finish date.
      * @return rents with dress name for a given period of time.
      */
     @Override

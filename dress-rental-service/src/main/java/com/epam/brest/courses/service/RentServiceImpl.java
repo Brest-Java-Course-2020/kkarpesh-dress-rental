@@ -104,4 +104,16 @@ public class RentServiceImpl implements RentService {
         return rentDao.delete(rentId);
     }
 
+    /**
+     * Checks if dress rented for this date.
+     *
+     * @param rent rent.
+     * @return true if dress has already been rented
+     * for this date and false if not.
+     */
+    @Override
+    public boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+        return rentDao.hasDressAlreadyBeenRentedForThisDate(rent);
+    }
+
 }

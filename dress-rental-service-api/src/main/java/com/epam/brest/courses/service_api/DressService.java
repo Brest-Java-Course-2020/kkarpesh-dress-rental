@@ -53,4 +53,20 @@ public interface DressService {
      * @return number of deleted records in the database.
      */
     Integer delete(Integer dressId);
+
+    /**
+     * Checks if the name of the dress is already exist.
+     *
+     * @param dressName dress name.
+     * @return the boolean value of the existence of a name.
+     */
+    boolean isNameAlreadyExist(String dressName);
+
+    /**
+     * Checks if the dress with a given ID has orders.
+     *
+     * @param dressId dress ID.
+     * @return the boolean value is there a dress orders.
+     */
+    boolean isDressHasRents(Integer dressId);
 }

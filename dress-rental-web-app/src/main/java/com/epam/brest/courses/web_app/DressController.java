@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Dress controller.
  */
 @Controller
-@RequestMapping("/dresses")
 public class DressController {
 
     /**
@@ -30,13 +30,13 @@ public class DressController {
             LoggerFactory.getLogger(DressController.class);
 
     /**
-     * Service layer object to get information of dress.
+     * Service layer object to get information of dressDto.
      */
     @Autowired
     private DressDtoServiceImpl dressDtoService;
 
     /**
-     * Service layer object to get information of dressDto.
+     * Service layer object to get information of dress.
      */
     @Autowired
     private DressServiceImpl dressService;
@@ -47,42 +47,106 @@ public class DressController {
     @Autowired
     private DressValidator dressValidator;
 
-
-    @GetMapping
+    /**
+     * Goto list of dresses page.
+     *
+     * @param model model to storage information for view rendering.
+     * @return view name.
+     */
+    @GetMapping("/dresses")
     public final String getAll(Model model) {
+        LOGGER.debug("Get all dresses");
         List<DressDto> dresses =
                 dressDtoService.findAllWithNumberOfOrders();
         model.addAttribute("dresses", dresses);
-        Dress dress = new Dress();
-        model.addAttribute("dress", dress);
         return "dresses";
     }
 
-
-    @PostMapping
-    public final String createOrUpdate(@Valid Dress dress,
-                                       BindingResult result) {
-
-        LOGGER.debug("Create or update dress {}, {}", dress, result);
-
-        dressValidator.validate(dress, result);
-        if (result.hasErrors()) {
-            return "redirect:/dresses";
-        } else {
-            if (dress.getDressId() == null) {
-                dressService.create(dress);
-            } else {
-                dressService.update(dress);
-            }
-            return "redirect:/dresses";
-        }
-
+    /**
+     * Goto add dress page.
+     *
+     * @param model model to storage information for view rendering.
+     * @return view name.
+     */
+    @GetMapping("/dress")
+    public final String gotoAddDressPage(Model model) {
+        LOGGER.debug("Goto add dress page {}", model);
+        model.addAttribute("isNew", true);
+        model.addAttribute("dress", new Dress());
+        return "dress";
     }
 
-    @GetMapping("/delete/{id}")
-    public final String delete(@PathVariable Integer id) {
-        dressService.delete(id);
-        return "redirect:/dresses";
+    /**
+     * Goto edit dress page.
+     *
+     * @param id    dress ID.
+     * @param model model to storage information for view rendering.
+     * @return view name.
+     */
+    @GetMapping("/dress/{id}")
+    public final String gotoEditDressPage(@PathVariable Integer id,
+                                          Model model) {
+        Optional<Dress> dress = dressService.findById(id);
+        if (dress.isPresent()) {
+            model.addAttribute("dress", dress.get());
+            return "dress";
+        } else {
+            return "redirect:/dresses";
+        }
+    }
+
+    /**
+     * Update or create new dress.
+     *
+     * @param dress  dress.
+     * @param result binding result
+     * @param model  to storage information for view rendering.
+     * @return view name.
+     */
+    @PostMapping("/dress")
+    public final String createOrUpdate(@Valid Dress dress,
+                                       BindingResult result,
+                                       Model model) {
+        dressValidator.validate(dress, result);
+        if (dress.getDressId() == null) {
+            LOGGER.debug("Create new dress {}, {}", dress, result);
+            if (result.hasErrors()) {
+                model.addAttribute("isNew", true);
+                return "dress";
+            } else {
+                dressService.create(dress);
+                return "redirect:/dresses";
+            }
+        } else {
+            LOGGER.debug("Update dress {}, {}", dress, result);
+            if (result.hasErrors()) {
+                return "dress";
+            } else {
+                dressService.update(dress);
+                return "redirect:/dresses";
+            }
+        }
+    }
+
+    /**
+     * Delete dress by ID.
+     *
+     * @param id    dress ID.
+     * @param model to storage information for view rendering.
+     * @return view name.
+     */
+    @GetMapping("/dress/delete/{id}")
+    public final String delete(@PathVariable Integer id, Model model) {
+        if (dressService.isDressHasRents(id)) {
+            model.addAttribute("removalProhibited", true);
+            List<DressDto> dresses =
+                    dressDtoService.findAllWithNumberOfOrders();
+            model.addAttribute("dresses", dresses);
+            return "dresses";
+        } else {
+            dressService.delete(id);
+            return "redirect:/dresses";
+        }
     }
 
 }

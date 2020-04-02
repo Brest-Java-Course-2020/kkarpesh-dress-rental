@@ -103,4 +103,26 @@ public class DressServiceImpl implements DressService {
         LOGGER.debug("Delete dress by id = {}", dressId);
         return dressDao.delete(dressId);
     }
+
+    /**
+     * Checks if the name of the dress is already exist.
+     *
+     * @param dressName dress name.
+     * @return the boolean value of the existence of a name.
+     */
+    @Override
+    public boolean isNameAlreadyExist(String dressName) {
+        return dressDao.isNameAlreadyExist(dressName);
+    }
+
+    /**
+     * Checks if the dress with a given ID has orders.
+     *
+     * @param dressId dress ID.
+     * @return the boolean value is there a dress orders.
+     */
+    @Override
+    public boolean isDressHasRents(Integer dressId) {
+        return dressDao.isDressHasRents(dressId);
+    }
 }

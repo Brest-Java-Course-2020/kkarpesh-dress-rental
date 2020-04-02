@@ -53,4 +53,13 @@ public interface RentService {
      * @return number of deleted records in the database.
      */
     Integer delete(Integer rentId);
+
+    /**
+     * Checks if dress rented for this date.
+     *
+     * @param rent rent.
+     * @return true if dress has already been rented
+     * for this date and false if not.
+     */
+    boolean hasDressAlreadyBeenRentedForThisDate(Rent rent);
 }

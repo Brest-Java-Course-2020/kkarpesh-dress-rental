@@ -69,4 +69,14 @@ public class DressRestConsumer implements DressService {
     public Integer delete(Integer dressId) {
         return null;
     }
+
+    @Override
+    public boolean isNameAlreadyExist(String dressName) {
+        return false;
+    }
+
+    @Override
+    public boolean isDressHasRents(Integer dressId) {
+        return false;
+    }
 }
