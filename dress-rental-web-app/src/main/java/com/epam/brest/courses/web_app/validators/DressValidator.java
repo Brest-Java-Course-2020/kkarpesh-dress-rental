@@ -1,6 +1,8 @@
 package com.epam.brest.courses.web_app.validators;
 
 import com.epam.brest.courses.model.Dress;
+import com.epam.brest.courses.service_api.DressService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -16,10 +18,16 @@ import static com.epam.brest.courses.constants.DressConstants.DRESS_NAME_SIZE;
 public class DressValidator implements Validator {
 
     /**
+     * Service layer object to get information of dress.
+     */
+    @Autowired
+    private DressService dressService;
+
+    /**
      * Can this Validator validate instances of the supplied clazz?
      *
      * @param clazz the Class that this Validator
-     * is being asked if it can validate
+     *              is being asked if it can validate
      * @return true if this Validator can indeed
      * validate instances of the supplied clazz.
      */
@@ -46,6 +54,10 @@ public class DressValidator implements Validator {
                 && dress.getDressName().length() > DRESS_NAME_SIZE) {
             errors.rejectValue("dressName",
                     "dressName.maxSize");
+        }
+
+        if (dressService.isNameAlreadyExist(dress.getDressName())) {
+            errors.rejectValue("dressName", "dressName.exist");
         }
     }
 }
