@@ -21,37 +21,57 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.*"/>
 
-    <import resource="classpath*:test-db.xml"/>
+<!--    <import resource="classpath*:test-db.xml"/>-->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:dao.properties</value>
+<!--                <value>classpath:dao.properties</value>-->
                 <value>classpath:application.properties</value>
             </list>
         </property>
     </bean>
 
 
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="dressDao" class="com.epam.brest.courses.dao.DressDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="dressServiceRest" class="com.epam.brest.courses.service_rest.DressServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.dresses}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="dressDtoDao" class="com.epam.brest.courses.dao.dto.DressDtoDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="dressDtoServiceRest" class="com.epam.brest.courses.service_rest.DressDtoServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.dress_dtos}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="rentDao" class="com.epam.brest.courses.dao.RentDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="rentServiceRest" class="com.epam.brest.courses.service_rest.RentServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.rents}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="rentDtoDao" class="com.epam.brest.courses.dao.dto.RentDtoDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="rentDtoServiceRest" class="com.epam.brest.courses.service_rest.RentDtoServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.rent_dtos}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
+
+    <bean id="dressController" class="com.epam.brest.courses.web_app.DressController">
+        <constructor-arg index="0" ref="dressServiceRest"/>
+        <constructor-arg index="1" ref="dressDtoServiceRest"/>
+    </bean>
+
+    <bean id="rentController" class="com.epam.brest.courses.web_app.RentController">
+        <constructor-arg index="0" ref="rentServiceRest"/>
+        <constructor-arg index="1" ref="rentDtoServiceRest"/>
+        <constructor-arg index="2" ref="dressServiceRest"/>
+    </bean>
+
 
 
 

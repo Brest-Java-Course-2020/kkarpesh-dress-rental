@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>
-            <artifactId>dress-rental-service</artifactId>
+            <artifactId>dress-rental-service-rest</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -52,6 +52,11 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
