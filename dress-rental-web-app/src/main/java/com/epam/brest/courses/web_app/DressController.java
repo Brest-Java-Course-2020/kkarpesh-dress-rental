@@ -2,8 +2,8 @@ package com.epam.brest.courses.web_app;
 
 import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.model.dto.DressDto;
-import com.epam.brest.courses.service.DressServiceImpl;
-import com.epam.brest.courses.service.dto.DressDtoServiceImpl;
+import com.epam.brest.courses.service_api.DressService;
+import com.epam.brest.courses.service_api.dto.DressDtoService;
 import com.epam.brest.courses.web_app.validators.DressValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,22 +30,31 @@ public class DressController {
             LoggerFactory.getLogger(DressController.class);
 
     /**
-     * Service layer object to get information of dressDto.
-     */
-    @Autowired
-    private DressDtoServiceImpl dressDtoService;
-
-    /**
      * Service layer object to get information of dress.
      */
-    @Autowired
-    private DressServiceImpl dressService;
+    private final DressService dressService;
+
+    /**
+     * Service layer object to get information of dressDto.
+     */
+    private final DressDtoService dressDtoService;
 
     /**
      * Object to validate dress.
      */
     @Autowired
     private DressValidator dressValidator;
+
+    /**
+     * Constructs new object.
+     *
+     * @param dressService    dressService object.
+     * @param dressDtoService dressDtoService object.
+     */
+    public DressController(DressService dressService, DressDtoService dressDtoService) {
+        this.dressService = dressService;
+        this.dressDtoService = dressDtoService;
+    }
 
     /**
      * Goto list of dresses page.

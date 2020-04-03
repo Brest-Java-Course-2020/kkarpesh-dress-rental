@@ -1,61 +1,119 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Dress;
-import com.epam.brest.courses.model.dto.DressDto;
-import com.epam.brest.courses.rest_app.exception.DressNotFoundException;
+import com.epam.brest.courses.rest_app.exception.ErrorResponse;
 import com.epam.brest.courses.service_api.DressService;
-import com.epam.brest.courses.service_api.dto.DressDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Rest controller for work with Dresses.
+ */
 @EnableSwagger2
 @RestController
 @RequestMapping("dresses")
 public class DressRestController {
+
+    /**
+     * Default logger for current class.
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(DressRestController.class);
 
-    @Autowired
-    private DressService dressService;
+    /**
+     * Message for error response.
+     */
+    private static final String DRESS_NOT_FOUND = "dress.not_found";
 
-    @Autowired
-    private DressDtoService dressDtoService;
+    /**
+     * Service layer object to get information about Dresses.
+     */
+    private final DressService dressService;
 
-    @GetMapping("/{id}")
-    public Dress findById(@PathVariable Integer id) {
-        LOGGER.debug("Find dress by id = {}", id);
-        return dressService.findById(id).orElseThrow(() ->
-                new DressNotFoundException(id));
+    /**
+     * Constructs new object with given service layer object.
+     *
+     * @param dressService dressDto service layer object.
+     */
+    @Autowired
+    public DressRestController(DressService dressService) {
+        this.dressService = dressService;
     }
 
+    /**
+     * Finds all Dresses.
+     *
+     * @return List with all found Dresses.
+     */
     @GetMapping
-    public List<DressDto> findAllwithNumberOfOrders() {
-        LOGGER.debug("Find all dresses with number of orders");
-        return dressDtoService.findAllWithNumberOfOrders();
+    public List<Dress> findAll() {
+        LOGGER.debug("Find all dresses");
+        return dressService.findAll();
     }
 
-    @PostMapping
-    public Integer create(@RequestBody Dress dress) {
+    /**
+     * Finds Dress with given ID.
+     *
+     * @param id dress ID.
+     * @return Dress.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Dress> findById(@PathVariable Integer id) {
+        LOGGER.debug("Find dress by id = {}", id);
+        Optional<Dress> dress = dressService.findById(id);
+        return dress.isPresent()
+                ? new ResponseEntity<>(dress.get(), HttpStatus.OK)
+                : new ResponseEntity(
+                new ErrorResponse(DRESS_NOT_FOUND,
+                        Arrays.asList("Dress not found for id:" + id)),
+                HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Creates new dress.
+     *
+     * @param dress dress.
+     * @return created dress ID.
+     */
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> create(@RequestBody Dress dress) {
         LOGGER.debug("Create new dress {}", dress);
-        return dressService.create(dress);
+        return new ResponseEntity<>(dressService.create(dress), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public Integer update(@PathVariable Integer id,
-                          @RequestBody Dress dress) {
-        LOGGER.debug("Update dress {}", id);
-        dress.setDressId(id);
-        return dressService.update(dress);
+    /**
+     * Updates an existing dress with a new object.
+     *
+     * @param dress dress.
+     * @return number of updated records in the database.
+     */
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> update(@RequestBody Dress dress) {
+        LOGGER.debug("Update dress {}", dress);
+        return new ResponseEntity<>(dressService.update(dress), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public Integer delete(@PathVariable Integer id) {
+    /**
+     * Deletes dress from data source.
+     *
+     * @param id dress.
+     * @return number of deleted records in the database.
+     */
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> delete(@PathVariable Integer id) {
         LOGGER.debug("Delete dress with id = {}", id);
-        return dressService.delete(id);
+        return new ResponseEntity<>(dressService.delete(id), HttpStatus.OK);
     }
 }

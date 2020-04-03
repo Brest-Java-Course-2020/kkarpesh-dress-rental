@@ -3,9 +3,9 @@ package com.epam.brest.courses.web_app;
 import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.model.Rent;
 import com.epam.brest.courses.model.dto.RentDto;
-import com.epam.brest.courses.service.RentServiceImpl;
-import com.epam.brest.courses.service.dto.RentDtoServiceImpl;
 import com.epam.brest.courses.service_api.DressService;
+import com.epam.brest.courses.service_api.RentService;
+import com.epam.brest.courses.service_api.dto.RentDtoService;
 import com.epam.brest.courses.web_app.validators.RentValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,22 +38,19 @@ public class RentController {
             LoggerFactory.getLogger(RentController.class);
 
     /**
-     * Service layer object to get information of rentDto.
-     */
-    @Autowired
-    private RentDtoServiceImpl rentDtoService;
-
-    /**
      * Service layer object to get information of rent.
      */
-    @Autowired
-    private RentServiceImpl rentService;
+    private final RentService rentService;
+
+    /**
+     * Service layer object to get information of rentDto.
+     */
+    private final RentDtoService rentDtoService;
 
     /**
      * Service layer object to get information of dress.
      */
-    @Autowired
-    private DressService dressService;
+    private final DressService dressService;
 
     /**
      * Object to validate rent.
@@ -61,6 +58,19 @@ public class RentController {
     @Autowired
     private RentValidator rentValidator;
 
+    /**
+     * Constructs new object.
+     *
+     * @param rentService    rentService object.
+     * @param rentDtoService dressDtoService object.
+     * @param dressService   dressService object.
+     */
+    @Autowired
+    public RentController(RentService rentService, RentDtoService rentDtoService, DressService dressService) {
+        this.rentService = rentService;
+        this.rentDtoService = rentDtoService;
+        this.dressService = dressService;
+    }
 
     /**
      * Goto list of rents by date page.
