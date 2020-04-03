@@ -61,5 +61,5 @@ public interface RentDao {
      * @return true if dress has already been rented
      * for this date and false if not.
      */
-    boolean hasDressAlreadyBeenRentedForThisDate(Rent rent);
+    Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent);
 }

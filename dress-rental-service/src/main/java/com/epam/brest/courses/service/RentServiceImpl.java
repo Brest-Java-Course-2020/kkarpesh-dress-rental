@@ -112,7 +112,7 @@ public class RentServiceImpl implements RentService {
      * for this date and false if not.
      */
     @Override
-    public boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+    public Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
         return rentDao.hasDressAlreadyBeenRentedForThisDate(rent);
     }
 

@@ -191,7 +191,7 @@ public class DressDaoJdbc implements DressDao {
      */
     @SuppressWarnings("ConstantConditions")
     @Override
-    public boolean isNameAlreadyExist(String dressName) {
+    public Boolean isNameAlreadyExist(String dressName) {
         return jdbcTemplate.queryForObject(uniqueNameSql,
                 new MapSqlParameterSource(DRESS_NAME, dressName),
                 Integer.class) != 0;
@@ -205,7 +205,7 @@ public class DressDaoJdbc implements DressDao {
      */
     @SuppressWarnings("ConstantConditions")
     @Override
-    public boolean isDressHasRents(Integer dressId) {
+    public Boolean isDressHasRents(Integer dressId) {
        return jdbcTemplate.queryForObject(dressOrdersSql,
                new MapSqlParameterSource(DRESS_ID, dressId),
                Integer.class) > 0;

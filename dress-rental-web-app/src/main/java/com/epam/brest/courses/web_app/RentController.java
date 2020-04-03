@@ -66,7 +66,9 @@ public class RentController {
      * @param dressService   dressService object.
      */
     @Autowired
-    public RentController(RentService rentService, RentDtoService rentDtoService, DressService dressService) {
+    public RentController(RentService rentService,
+                          RentDtoService rentDtoService,
+                          DressService dressService) {
         this.rentService = rentService;
         this.rentDtoService = rentDtoService;
         this.dressService = dressService;

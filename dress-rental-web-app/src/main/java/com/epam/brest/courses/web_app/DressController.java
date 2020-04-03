@@ -51,7 +51,8 @@ public class DressController {
      * @param dressService    dressService object.
      * @param dressDtoService dressDtoService object.
      */
-    public DressController(DressService dressService, DressDtoService dressDtoService) {
+    public DressController(DressService dressService,
+                           DressDtoService dressDtoService) {
         this.dressService = dressService;
         this.dressDtoService = dressDtoService;
     }

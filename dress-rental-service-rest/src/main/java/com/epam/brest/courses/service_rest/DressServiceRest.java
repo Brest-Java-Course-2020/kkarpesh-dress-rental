@@ -109,13 +109,33 @@ public class DressServiceRest implements DressService {
         return 1;
     }
 
+    /**
+     * Checks if the name of the dress is already exist.
+     *
+     * @param dressName dress name.
+     * @return the boolean value of the existence of a name.
+     */
     @Override
-    public boolean isNameAlreadyExist(String dressName) {
-        return false;
+    public Boolean isNameAlreadyExist(String dressName) {
+        LOGGER.debug("is name exists - {}", dressName);
+        ResponseEntity<Boolean> responseEntity =
+                restTemplate.getForEntity(url + "/isExists?name="  + dressName,
+                        Boolean.class);
+        return responseEntity.getBody();
     }
 
+    /**
+     * Checks if the dress with a given ID has orders.
+     *
+     * @param dressId dress ID.
+     * @return the boolean value is there a dress orders.
+     */
     @Override
-    public boolean isDressHasRents(Integer dressId) {
-        return false;
+    public Boolean isDressHasRents(Integer dressId) {
+        LOGGER.debug("is dress id={} has rents", dressId);
+        ResponseEntity<Boolean> responseEntity =
+                restTemplate.getForEntity(url + "/" + dressId + "/hasRents",
+                        Boolean.class);
+        return responseEntity.getBody();
     }
 }

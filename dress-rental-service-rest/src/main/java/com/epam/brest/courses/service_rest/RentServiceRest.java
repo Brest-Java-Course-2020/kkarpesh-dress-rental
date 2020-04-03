@@ -69,7 +69,7 @@ public class RentServiceRest implements RentService {
     }
 
     @Override
-    public boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+    public Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
         return false;
     }
 }

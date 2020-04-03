@@ -60,7 +60,7 @@ public interface DressService {
      * @param dressName dress name.
      * @return the boolean value of the existence of a name.
      */
-    boolean isNameAlreadyExist(String dressName);
+    Boolean isNameAlreadyExist(String dressName);
 
     /**
      * Checks if the dress with a given ID has orders.
@@ -68,5 +68,5 @@ public interface DressService {
      * @param dressId dress ID.
      * @return the boolean value is there a dress orders.
      */
-    boolean isDressHasRents(Integer dressId);
+    Boolean isDressHasRents(Integer dressId);
 }

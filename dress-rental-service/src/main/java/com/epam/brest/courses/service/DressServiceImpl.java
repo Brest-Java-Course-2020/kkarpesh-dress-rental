@@ -111,7 +111,7 @@ public class DressServiceImpl implements DressService {
      * @return the boolean value of the existence of a name.
      */
     @Override
-    public boolean isNameAlreadyExist(String dressName) {
+    public Boolean isNameAlreadyExist(String dressName) {
         return dressDao.isNameAlreadyExist(dressName);
     }
 
@@ -122,7 +122,7 @@ public class DressServiceImpl implements DressService {
      * @return the boolean value is there a dress orders.
      */
     @Override
-    public boolean isDressHasRents(Integer dressId) {
+    public Boolean isDressHasRents(Integer dressId) {
         return dressDao.isDressHasRents(dressId);
     }
 }

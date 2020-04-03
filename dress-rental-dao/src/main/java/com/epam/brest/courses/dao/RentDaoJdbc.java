@@ -188,7 +188,7 @@ public class RentDaoJdbc implements RentDao {
      */
     @SuppressWarnings("ConstantConditions")
     @Override
-    public boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+    public Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue(DRESS_ID, rent.getDressId());
         parameterSource.addValue(RENT_DATE, rent.getRentDate());

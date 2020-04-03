@@ -116,4 +116,31 @@ public class DressRestController {
         LOGGER.debug("Delete dress with id = {}", id);
         return new ResponseEntity<>(dressService.delete(id), HttpStatus.OK);
     }
+
+    /**
+     * Checks if the name of the dress is already exist.
+     *
+     * @param dressName dress name.
+     * @return the boolean value of the existence of a name.
+     */
+    @GetMapping(value = "/isExists")
+    public ResponseEntity<Boolean> isNameAlreadyExists(
+            @RequestParam(value = "name") String dressName) {
+        LOGGER.debug("is name exists - {}", dressName);
+        return new ResponseEntity<>(dressService.isNameAlreadyExist(dressName),
+                HttpStatus.OK);
+    }
+
+    /**
+     * Checks if the dress with a given ID has orders.
+     *
+     * @param id dress ID.
+     * @return the boolean value is there a dress orders.
+     */
+    @GetMapping(value = "/{id}/hasRents")
+    public ResponseEntity<Boolean> isDressHasRents(@PathVariable Integer id) {
+        LOGGER.debug("is dress id={} has rents", id);
+        return new ResponseEntity<>(dressService.isDressHasRents(id),
+                HttpStatus.OK);
+    }
 }
