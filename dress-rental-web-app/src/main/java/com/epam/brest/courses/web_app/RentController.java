@@ -84,10 +84,10 @@ public class RentController {
      */
     @GetMapping("/rents")
     public final String getRents(
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
             @RequestParam(value = "dateFrom", required = false)
                     LocalDate dateFrom,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
             @RequestParam(value = "dateTo", required = false)
                     LocalDate dateTo,
             ModelMap model) {

@@ -113,6 +113,7 @@ public class RentServiceImpl implements RentService {
      */
     @Override
     public Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
+        LOGGER.debug("is rent exists - {}", rent);
         return rentDao.hasDressAlreadyBeenRentedForThisDate(rent);
     }
 

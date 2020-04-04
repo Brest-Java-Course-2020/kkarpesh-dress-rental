@@ -30,11 +30,6 @@ public class RentDto {
     private LocalDate rentDate;
 
     /**
-     * The dress ID.
-     */
-    private Integer dressId;
-
-    /**
      * The dress name.
      */
     private String dressName;
@@ -91,24 +86,6 @@ public class RentDto {
      */
     public void setRentDate(LocalDate rentDate) {
         this.rentDate = rentDate;
-    }
-
-    /**
-     * Gets the dress ID.
-     *
-     * @return the dress ID.
-     */
-    public Integer getDressId() {
-        return dressId;
-    }
-
-    /**
-     * Sets the dress ID.
-     *
-     * @param dressId A Integer containing the dress ID.
-     */
-    public void setDressId(Integer dressId) {
-        this.dressId = dressId;
     }
 
     /**

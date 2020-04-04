@@ -1,5 +1,6 @@
 package com.epam.brest.courses.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class Rent {
      * The rent date.
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate rentDate;
 
     /**

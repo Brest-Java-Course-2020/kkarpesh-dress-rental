@@ -43,7 +43,7 @@ public class DressRestController {
     /**
      * Constructs new object with given service layer object.
      *
-     * @param dressService dressDto service layer object.
+     * @param dressService dress service layer object.
      */
     @Autowired
     public DressRestController(DressService dressService) {
