@@ -65,7 +65,6 @@ public class RentController {
      * @param rentDtoService dressDtoService object.
      * @param dressService   dressService object.
      */
-    @Autowired
     public RentController(RentService rentService,
                           RentDtoService rentDtoService,
                           DressService dressService) {
@@ -95,6 +94,7 @@ public class RentController {
 
         List<RentDto> rents
                 = rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);
+        LOGGER.debug(rents.toString());
 
         model.addAttribute("rents", rents);
         model.addAttribute("dateFrom", dateFrom);

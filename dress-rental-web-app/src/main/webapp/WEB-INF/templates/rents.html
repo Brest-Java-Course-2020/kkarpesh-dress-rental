@@ -105,7 +105,8 @@
                             <tr th:each="rent : ${rents}">
                                 <td th:text="${rent.dressName}"></td>
                                 <td th:text="${rent.client}"></td>
-                                <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>
+<!--                                <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>-->
+                                <td th:text="${rent.rentDate}"></td>
                                 <td>
                                     <a href="rent.html"
                                         th:href="@{|/rent/${rent.rentId}|}">Edit</a>

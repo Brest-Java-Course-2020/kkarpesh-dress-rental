@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Gets rentDtos data from RESTful source in JSON format.
+ */
 public class RentDtoServiceRest implements RentDtoService {
 
     /**
@@ -39,12 +42,34 @@ public class RentDtoServiceRest implements RentDtoService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Finds rents with dress name for a given period of time.
+     *
+     * @param dateFrom period start date.
+     * @param dateTo   period finish date.
+     * @return rents with dress name for a given period of time.
+     */
     @Override
     public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
                                                     LocalDate dateTo) {
         LOGGER.debug("Gets all dressDtos from REST");
+        String fullUrl = "";
+
+        if (dateFrom == null && dateTo == null) {
+            fullUrl = url;
+        }
+        if (dateFrom != null && dateTo == null) {
+            fullUrl = url + "?dateFrom=" + dateFrom.toString();
+        }
+        if (dateFrom == null && dateTo != null) {
+            fullUrl = url + "?dateTo=" + dateTo.toString();
+        }
+        if (dateFrom != null && dateTo != null) {
+            fullUrl = url + "?dateFrom=" + dateFrom.toString() + "&dateTo=" + dateTo.toString();
+        }
+
         ResponseEntity responseEntity =
-                restTemplate.getForEntity(url, List.class);
+                restTemplate.getForEntity(fullUrl, List.class);
         return (List<RentDto>) responseEntity.getBody();
     }
 }
