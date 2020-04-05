@@ -138,10 +138,19 @@ class DressDaoJdbcIT {
 
     @Test
     void isNameUnique() {
+        Dress dressWithExistingName = new Dress();
+        dressWithExistingName.setDressName(EXISTING_DRESS_NAME);
+        assertTrue(dressDao.isNameAlreadyExist(dressWithExistingName));
+        dressWithExistingName.setDressId(1);
+        assertTrue(dressDao.isNameAlreadyExist(dressWithExistingName));
 
-        assertTrue(dressDao.isNameAlreadyExist(EXISTING_DRESS_NAME));
+        Dress dressWithNewName = new Dress();
+        dressWithNewName.setDressName(NEW_DRESS_NAME);
+        assertFalse(dressDao.isNameAlreadyExist(dressWithNewName));
 
-        assertFalse(dressDao.isNameAlreadyExist(NEW_DRESS_NAME));
+        dressWithExistingName.setDressId(1);
+        assertFalse(dressDao.isNameAlreadyExist(dressWithNewName));
+
     }
 
     @Test

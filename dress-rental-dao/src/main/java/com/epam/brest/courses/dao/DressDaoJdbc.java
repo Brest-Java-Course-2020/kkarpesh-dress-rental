@@ -131,7 +131,7 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public Integer create(Dress dress) {
         LOGGER.debug("Create new dress {}", dress);
-        if (isNameAlreadyExist(dress.getDressName())) {
+        if (isNameAlreadyExist(dress)) {
             throw new IllegalArgumentException(
                     "Dress with the same name is already exists in DB.");
         }
@@ -152,7 +152,7 @@ public class DressDaoJdbc implements DressDao {
     @Override
     public Integer update(Dress dress) {
         LOGGER.debug("Update dress {}", dress);
-        if (isNameAlreadyExist(dress.getDressName())) {
+        if (isNameAlreadyExist(dress)) {
             throw new IllegalArgumentException(
                     "Dress with the same name is already exists in DB.");
         }
@@ -186,14 +186,20 @@ public class DressDaoJdbc implements DressDao {
     /**
      * Checks if the name of the dress is already exist.
      *
-     * @param dressName dress name.
+     * @param dress dress.
      * @return the boolean value of the existence of a name.
      */
     @SuppressWarnings("ConstantConditions")
     @Override
-    public Boolean isNameAlreadyExist(String dressName) {
-        return jdbcTemplate.queryForObject(uniqueNameSql,
-                new MapSqlParameterSource(DRESS_NAME, dressName),
+    public Boolean isNameAlreadyExist(Dress dress) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        if (dress.getDressId() == null) {
+            parameterSource.addValue(DRESS_ID, 0);
+        } else {
+            parameterSource.addValue(DRESS_ID, dress.getDressId());
+        }
+        parameterSource.addValue(DRESS_NAME, dress.getDressName());
+        return jdbcTemplate.queryForObject(uniqueNameSql, parameterSource,
                 Integer.class) != 0;
     }
 
@@ -206,8 +212,8 @@ public class DressDaoJdbc implements DressDao {
     @SuppressWarnings("ConstantConditions")
     @Override
     public Boolean isDressHasRents(Integer dressId) {
-       return jdbcTemplate.queryForObject(dressOrdersSql,
-               new MapSqlParameterSource(DRESS_ID, dressId),
-               Integer.class) > 0;
+        return jdbcTemplate.queryForObject(dressOrdersSql,
+                new MapSqlParameterSource(DRESS_ID, dressId),
+                Integer.class) > 0;
     }
 }

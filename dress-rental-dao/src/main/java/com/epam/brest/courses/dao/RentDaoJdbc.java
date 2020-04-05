@@ -192,6 +192,11 @@ public class RentDaoJdbc implements RentDao {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue(DRESS_ID, rent.getDressId());
         parameterSource.addValue(RENT_DATE, rent.getRentDate());
+        if (rent.getRentId() == null) {
+            parameterSource.addValue(RENT_ID, 0);
+        } else {
+            parameterSource.addValue(RENT_ID, rent.getRentId());
+        }
         return jdbcTemplate.queryForObject(uniqueOrderSql,
                 parameterSource, Integer.class) != 0;
     }

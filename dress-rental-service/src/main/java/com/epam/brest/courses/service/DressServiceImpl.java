@@ -107,12 +107,12 @@ public class DressServiceImpl implements DressService {
     /**
      * Checks if the name of the dress is already exist.
      *
-     * @param dressName dress name.
+     * @param dress dress.
      * @return the boolean value of the existence of a name.
      */
     @Override
-    public Boolean isNameAlreadyExist(String dressName) {
-        return dressDao.isNameAlreadyExist(dressName);
+    public Boolean isNameAlreadyExist(Dress dress) {
+        return dressDao.isNameAlreadyExist(dress);
     }
 
     /**

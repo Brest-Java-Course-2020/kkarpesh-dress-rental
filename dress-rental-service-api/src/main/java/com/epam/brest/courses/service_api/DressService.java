@@ -57,10 +57,10 @@ public interface DressService {
     /**
      * Checks if the name of the dress is already exist.
      *
-     * @param dressName dress name.
+     * @param dress dress.
      * @return the boolean value of the existence of a name.
      */
-    Boolean isNameAlreadyExist(String dressName);
+    Boolean isNameAlreadyExist(Dress dress);
 
     /**
      * Checks if the dress with a given ID has orders.

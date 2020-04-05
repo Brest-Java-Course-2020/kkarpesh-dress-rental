@@ -54,7 +54,8 @@ public class DressServiceRest implements DressService {
         LOGGER.debug("Gets all dresses from REST");
         ResponseEntity<List<Dress>> responseEntity =
                 restTemplate.exchange(url, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<>() { });
+                        new ParameterizedTypeReference<>() {
+                        });
         return responseEntity.getBody();
     }
 
@@ -115,14 +116,14 @@ public class DressServiceRest implements DressService {
     /**
      * Checks if the name of the dress is already exist.
      *
-     * @param dressName dress name.
+     * @param dress dress.
      * @return the boolean value of the existence of a name.
      */
     @Override
-    public Boolean isNameAlreadyExist(String dressName) {
-        LOGGER.debug("is name exists - {}", dressName);
+    public Boolean isNameAlreadyExist(Dress dress) {
+        LOGGER.debug("is name exists - {}", dress);
         ResponseEntity<Boolean> responseEntity =
-                restTemplate.getForEntity(url + "/isExists?name="  + dressName,
+                restTemplate.postForEntity(url + "/isExists", dress,
                         Boolean.class);
         return responseEntity.getBody();
     }

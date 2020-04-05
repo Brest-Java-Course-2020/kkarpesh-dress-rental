@@ -120,14 +120,14 @@ public class DressRestController {
     /**
      * Checks if the name of the dress is already exist.
      *
-     * @param dressName dress name.
+     * @param dress dress.
      * @return the boolean value of the existence of a name.
      */
-    @GetMapping(value = "/isExists")
+    @PostMapping(value = "/isExists")
     public ResponseEntity<Boolean> isNameAlreadyExists(
-            @RequestParam(value = "name") String dressName) {
-        LOGGER.debug("is name exists - {}", dressName);
-        return new ResponseEntity<>(dressService.isNameAlreadyExist(dressName),
+            @RequestBody Dress dress) {
+        LOGGER.debug("is name exists - {}", dress);
+        return new ResponseEntity<>(dressService.isNameAlreadyExist(dress),
                 HttpStatus.OK);
     }
 

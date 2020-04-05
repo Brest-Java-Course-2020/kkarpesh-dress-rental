@@ -56,7 +56,7 @@ public class DressValidator implements Validator {
                     "dressName.maxSize");
         }
 
-        if (dressService.isNameAlreadyExist(dress.getDressName())) {
+        if (dressService.isNameAlreadyExist(dress)) {
             errors.rejectValue("dressName", "dressName.exist");
         }
     }
