@@ -21,6 +21,7 @@ import java.util.Optional;
  * Dress controller.
  */
 @Controller
+@RequestMapping("/dresses")
 public class DressController {
 
     /**
@@ -63,7 +64,7 @@ public class DressController {
      * @param model model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/dresses")
+    @GetMapping
     public final String getAll(Model model) {
         LOGGER.debug("Get all dresses");
         List<DressDto> dresses =
@@ -78,7 +79,7 @@ public class DressController {
      * @param model model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/dress")
+    @GetMapping("/new")
     public final String gotoAddDressPage(Model model) {
         LOGGER.debug("Goto add dress page {}", model);
         model.addAttribute("isNew", true);
@@ -93,7 +94,7 @@ public class DressController {
      * @param model model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/dress/{id}")
+    @GetMapping("/{id}")
     public final String gotoEditDressPage(@PathVariable Integer id,
                                           Model model) {
         Optional<Dress> dress = dressService.findById(id);
@@ -113,7 +114,7 @@ public class DressController {
      * @param model  to storage information for view rendering.
      * @return view name.
      */
-    @PostMapping("/dress")
+    @PostMapping
     public final String createOrUpdate(@Valid Dress dress,
                                        BindingResult result,
                                        Model model) {
@@ -145,7 +146,7 @@ public class DressController {
      * @param model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/dress/delete/{id}")
+    @GetMapping("/delete/{id}")
     public final String delete(@PathVariable Integer id, Model model) {
         if (dressService.isDressHasRents(id)) {
             model.addAttribute("removalProhibited", true);

@@ -64,7 +64,8 @@ public class RentDtoServiceRest implements RentDtoService {
             fullUrl += "?dateTo=" + dateTo.toString();
         }
         if (dateFrom != null && dateTo != null) {
-            fullUrl += "?dateFrom=" + dateFrom.toString() + "&dateTo=" + dateTo.toString();
+            fullUrl += "?dateFrom=" + dateFrom.toString()
+                    + "&dateTo=" + dateTo.toString();
         }
 
         ResponseEntity<List<RentDto>> responseEntity =

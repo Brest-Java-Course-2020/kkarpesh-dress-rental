@@ -48,7 +48,7 @@
                                 th:text="${isNew} ? 'New rent' : 'Edit rent'">Edit rent</span>
                     </div>
 
-                    <form id="rentForm" action="rent.html" th:action="@{/rent/}" th:object="${rent}"
+                    <form id="rentForm" action="rent.html" th:action="@{/rents/}" th:object="${rent}"
                           th:method="@{post}">
                         <div class="card-body">
                             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">

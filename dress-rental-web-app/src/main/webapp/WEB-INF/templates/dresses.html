@@ -39,7 +39,7 @@
         <span class="navbar-brand text-uppercase mr-auto">List of dresses</span>
         <ul class="navbar-nav float-right">
             <li class="nav-item">
-                <a href="dress.html" th:href="@{/dress}" class="btn btn-success"><span>Add</span></a>
+                <a href="dress.html" th:href="@{/dresses/new}" class="btn btn-success"><span>Add</span></a>
             </li>
         </ul>
     </nav>
@@ -74,7 +74,7 @@
                             <td th:text="${dress.numberOfOrders}"></td>
                             <td>
                                 <a href="dress.html"
-                                   th:href="@{|/dress/${dress.dressId}|}">Edit</a>
+                                   th:href="@{|/dresses/${dress.dressId}|}">Edit</a>
                                 <a href="#deleteDressModal" data-toggle="modal"
                                    th:attr="data-id=${dress.dressId},
                                    data-name=${dress.dressName}">Delete</a>
@@ -130,7 +130,7 @@
    var id = $(e.relatedTarget).data('id');
 
    $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + name + '"?');
-   document.getElementById('deleteDressUrl').href = '/dress/delete/' + id;
+   document.getElementById('deleteDressUrl').href = '/dresses/delete/' + id;
  });
 
 

@@ -39,7 +39,7 @@
         <span class="navbar-brand text-uppercase mr-auto">List of rents</span>
         <ul class="navbar-nav float-right">
             <li class="nav-item">
-                <a href="rent.html" th:href="@{/rent}" class="btn btn-success"><span>Add</span></a>
+                <a href="rent.html" th:href="@{/rents/new}" class="btn btn-success"><span>Add</span></a>
             </li>
         </ul>
     </nav>
@@ -111,7 +111,7 @@
                                 <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>
                                 <td>
                                     <a href="rent.html"
-                                        th:href="@{|/rent/${rent.rentId}|}">Edit</a>
+                                        th:href="@{|/rents/${rent.rentId}|}">Edit</a>
                                     <a href="#deleteRentModal" data-toggle="modal"
                                        th:attr="data-id=${rent.rentId}, data-dressname=${rent.dressName},
                                     data-client=${rent.client}, data-date=${rent.rentDate}">Delete</a>
@@ -168,7 +168,7 @@
    var dressName = $(e.relatedTarget).data('dressname');
 
    $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + dressName + '" rented by ' + client + ' on ' + rentDate + '?');
-   document.getElementById('deleteRentUrl').href = '/rent/delete/' + rentId;
+   document.getElementById('deleteRentUrl').href = '/rents/delete/' + rentId;
  });
 
 </script>

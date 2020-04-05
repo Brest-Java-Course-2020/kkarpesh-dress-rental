@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -29,6 +26,7 @@ import java.util.Optional;
  * Rent controller.
  */
 @Controller
+@RequestMapping("/rents")
 public class RentController {
 
     /**
@@ -81,7 +79,7 @@ public class RentController {
      * @param model    model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/rents")
+    @GetMapping
     public final String getRents(
             @DateTimeFormat(pattern = "yyyy-MM-dd")
             @RequestParam(value = "dateFrom", required = false)
@@ -112,7 +110,7 @@ public class RentController {
      * @param model model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/rent")
+    @GetMapping("/new")
     public final String gotoAddRentPage(Model model) {
         LOGGER.debug("Goto add rent page {}", model);
         model.addAttribute("isNew", true);
@@ -129,7 +127,7 @@ public class RentController {
      * @param model model to storage information for view rendering.
      * @return view name.
      */
-    @GetMapping("/rent/{id}")
+    @GetMapping("/{id}")
     public final String gotoEditDressPage(@PathVariable Integer id,
                                           Model model) {
         Optional<Rent> rent = rentService.findById(id);
@@ -151,7 +149,7 @@ public class RentController {
      * @param model  to storage information for view rendering.
      * @return view name.
      */
-    @PostMapping("/rent")
+    @PostMapping
     public final String createOrUpdate(@Valid Rent rent,
                                        BindingResult result,
                                        Model model) {
@@ -184,7 +182,7 @@ public class RentController {
      * @param id rent ID.
      * @return view name.
      */
-    @GetMapping("/rent/delete/{id}")
+    @GetMapping("/delete/{id}")
     public final String delete(@PathVariable Integer id) {
         rentService.delete(id);
         return "redirect:/rents";
