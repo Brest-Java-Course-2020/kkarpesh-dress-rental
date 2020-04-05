@@ -4,6 +4,8 @@ import com.epam.brest.courses.model.Rent;
 import com.epam.brest.courses.service_api.RentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,9 +52,11 @@ public class RentServiceRest implements RentService {
     @Override
     public List<Rent> findAll() {
         LOGGER.debug("Gets all dresses from REST");
-        ResponseEntity responseEntity =
-                restTemplate.getForEntity(url, List.class);
-        return (List<Rent>) responseEntity.getBody();
+
+        ResponseEntity<List<Rent>> responseEntity =
+                restTemplate.exchange(url, HttpMethod.GET,
+                        null, new ParameterizedTypeReference<>() { });
+        return responseEntity.getBody();
     }
 
     /**

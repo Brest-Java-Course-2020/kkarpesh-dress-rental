@@ -92,9 +92,13 @@ public class RentController {
             ModelMap model) {
         LOGGER.debug("Get all rents from {} to {}", dateFrom, dateTo);
 
-        List<RentDto> rents
-                = rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);
-        LOGGER.debug(rents.toString());
+        if (dateFrom != null && dateTo != null && dateFrom.isAfter(dateTo)) {
+            model.addAttribute("incorrectPeriod", true);
+            dateFrom = null;
+            dateTo = null;
+        }
+        List<RentDto> rents =
+                rentDtoService.findAllWIthDressNameByDate(dateFrom, dateTo);
 
         model.addAttribute("rents", rents);
         model.addAttribute("dateFrom", dateFrom);

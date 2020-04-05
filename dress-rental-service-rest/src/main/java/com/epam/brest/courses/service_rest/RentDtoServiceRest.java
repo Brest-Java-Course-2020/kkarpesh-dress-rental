@@ -4,6 +4,8 @@ import com.epam.brest.courses.model.dto.RentDto;
 import com.epam.brest.courses.service_api.dto.RentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,7 +26,7 @@ public class RentDtoServiceRest implements RentDtoService {
     /**
      * The RESTful source URL.
      */
-    private String url;
+    private final String url;
 
     /**
      * Synchronous client to perform HTTP request.
@@ -53,23 +55,21 @@ public class RentDtoServiceRest implements RentDtoService {
     public List<RentDto> findAllWIthDressNameByDate(LocalDate dateFrom,
                                                     LocalDate dateTo) {
         LOGGER.debug("Gets all dressDtos from REST");
-        String fullUrl = "";
+        String fullUrl = url;
 
-        if (dateFrom == null && dateTo == null) {
-            fullUrl = url;
-        }
         if (dateFrom != null && dateTo == null) {
-            fullUrl = url + "?dateFrom=" + dateFrom.toString();
+            fullUrl += "?dateFrom=" + dateFrom.toString();
         }
         if (dateFrom == null && dateTo != null) {
-            fullUrl = url + "?dateTo=" + dateTo.toString();
+            fullUrl += "?dateTo=" + dateTo.toString();
         }
         if (dateFrom != null && dateTo != null) {
-            fullUrl = url + "?dateFrom=" + dateFrom.toString() + "&dateTo=" + dateTo.toString();
+            fullUrl += "?dateFrom=" + dateFrom.toString() + "&dateTo=" + dateTo.toString();
         }
 
-        ResponseEntity responseEntity =
-                restTemplate.getForEntity(fullUrl, List.class);
-        return (List<RentDto>) responseEntity.getBody();
+        ResponseEntity<List<RentDto>> responseEntity =
+                restTemplate.exchange(fullUrl, HttpMethod.GET,
+                        null, new ParameterizedTypeReference<>() { });
+        return responseEntity.getBody();
     }
 }

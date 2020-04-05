@@ -4,6 +4,8 @@ import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.service_api.DressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,9 +52,10 @@ public class DressServiceRest implements DressService {
     @Override
     public List<Dress> findAll() {
         LOGGER.debug("Gets all dresses from REST");
-        ResponseEntity responseEntity =
-                restTemplate.getForEntity(url, List.class);
-        return (List<Dress>) responseEntity.getBody();
+        ResponseEntity<List<Dress>> responseEntity =
+                restTemplate.exchange(url, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<>() { });
+        return responseEntity.getBody();
     }
 
     /**

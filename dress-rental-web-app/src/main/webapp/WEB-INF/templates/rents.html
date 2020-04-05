@@ -70,8 +70,11 @@
                 </div>
             </form>
             <div class="navbar-brand mr-auto justify-content-left ">
-                Rents from: <span th:text="${#temporals.format(dateFrom, 'dd MMM yyyy')}"></span>
-                to: <span th:text="${#temporals.format(dateTo, 'dd MMM yyyy')}"></span>
+                <span th:if="${dateFrom}!=null or ${dateTo}!=null">Rents</span>
+                <span th:if="${dateFrom}!=null"> from:</span>
+                <span th:text="${#temporals.format(dateFrom, 'dd MMM yyyy')}"></span>
+                <span th:if="${dateTo}!=null"> to:</span>
+                <span th:text="${#temporals.format(dateTo, 'dd MMM yyyy')}"></span>
             </div>
             <div th:if="${incorrectPeriod}" class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -105,8 +108,7 @@
                             <tr th:each="rent : ${rents}">
                                 <td th:text="${rent.dressName}"></td>
                                 <td th:text="${rent.client}"></td>
-<!--                                <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>-->
-                                <td th:text="${rent.rentDate}"></td>
+                                <td th:text="${#temporals.format(rent.rentDate, 'dd MMM yyyy')}"></td>
                                 <td>
                                     <a href="rent.html"
                                         th:href="@{|/rent/${rent.rentId}|}">Edit</a>
@@ -116,10 +118,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>Total: "undefined"</b></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="4"><b>Total: <span th:text="${rents.size()}"></span></b></td>
                             </tr>
                             </tbody>
                         </table>

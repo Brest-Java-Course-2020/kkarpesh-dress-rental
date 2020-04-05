@@ -4,6 +4,8 @@ import com.epam.brest.courses.model.dto.DressDto;
 import com.epam.brest.courses.service_api.dto.DressDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,8 +51,9 @@ public class DressDtoServiceRest implements DressDtoService {
     @Override
     public List<DressDto> findAllWithNumberOfOrders() {
         LOGGER.debug("Gets all dressDtos from REST");
-        ResponseEntity responseEntity =
-                restTemplate.getForEntity(url, List.class);
-        return (List<DressDto>) responseEntity.getBody();
+        ResponseEntity<List<DressDto>> responseEntity =
+                restTemplate.exchange(url, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<>() { });
+        return responseEntity.getBody();
     }
 }
