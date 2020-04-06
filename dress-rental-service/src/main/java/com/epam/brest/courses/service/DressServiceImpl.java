@@ -112,6 +112,7 @@ public class DressServiceImpl implements DressService {
      */
     @Override
     public Boolean isNameAlreadyExist(Dress dress) {
+        LOGGER.debug("is name exists - {}", dress);
         return dressDao.isNameAlreadyExist(dress);
     }
 
@@ -123,6 +124,7 @@ public class DressServiceImpl implements DressService {
      */
     @Override
     public Boolean isDressHasRents(Integer dressId) {
+        LOGGER.debug("is dress id={} has rents", dressId);
         return dressDao.isDressHasRents(dressId);
     }
 }

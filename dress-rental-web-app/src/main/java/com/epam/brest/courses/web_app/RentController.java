@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,13 +80,11 @@ public class RentController {
      */
     @GetMapping
     public final String getRents(
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
             @RequestParam(value = "dateFrom", required = false)
-                    LocalDate dateFrom,
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
             @RequestParam(value = "dateTo", required = false)
-                    LocalDate dateTo,
-            ModelMap model) {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo,
+            Model model) {
         LOGGER.debug("Get all rents from {} to {}", dateFrom, dateTo);
 
         if (dateFrom != null && dateTo != null && dateFrom.isAfter(dateTo)) {

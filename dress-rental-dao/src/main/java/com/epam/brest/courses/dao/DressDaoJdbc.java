@@ -192,6 +192,7 @@ public class DressDaoJdbc implements DressDao {
     @SuppressWarnings("ConstantConditions")
     @Override
     public Boolean isNameAlreadyExist(Dress dress) {
+        LOGGER.debug("is name exists - {}", dress);
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         if (dress.getDressId() == null) {
             parameterSource.addValue(DRESS_ID, 0);
@@ -212,6 +213,7 @@ public class DressDaoJdbc implements DressDao {
     @SuppressWarnings("ConstantConditions")
     @Override
     public Boolean isDressHasRents(Integer dressId) {
+        LOGGER.debug("is dress id={} has rents", dressId);
         return jdbcTemplate.queryForObject(dressOrdersSql,
                 new MapSqlParameterSource(DRESS_ID, dressId),
                 Integer.class) > 0;

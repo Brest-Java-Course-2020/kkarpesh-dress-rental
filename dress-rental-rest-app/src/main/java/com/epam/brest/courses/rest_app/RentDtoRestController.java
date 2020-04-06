@@ -48,12 +48,10 @@ public class RentDtoRestController {
      */
     @GetMapping
     public List<RentDto> findAllWIthDressNameByDate(
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            @RequestParam(value = "dateFrom", required = false)
-                    LocalDate dateFrom,
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            @RequestParam(value = "dateTo", required = false)
-                    LocalDate dateTo) {
+            @RequestParam(value = "dateFrom", defaultValue = "2010-01-01")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
+            @RequestParam(value = "dateTo", defaultValue = "2030-01-01")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo) {
         LOGGER.debug("Find all rents with dress name from {} to {}",
                 dateFrom,
                 dateTo);
