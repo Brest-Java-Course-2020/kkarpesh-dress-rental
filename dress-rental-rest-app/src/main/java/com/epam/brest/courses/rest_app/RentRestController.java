@@ -1,7 +1,7 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Rent;
-import com.epam.brest.courses.rest_app.exception.ErrorResponse;
+import com.epam.brest.courses.rest_app.exception_handler.ErrorResponse;
 import com.epam.brest.courses.service_api.RentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class RentRestController {
             LoggerFactory.getLogger(RentRestController.class);
 
     /**
-     * Message for error response.
+     * Short form of rent not found error.
      */
     private static final String RENT_NOT_FOUND = "rent.not_found";
 

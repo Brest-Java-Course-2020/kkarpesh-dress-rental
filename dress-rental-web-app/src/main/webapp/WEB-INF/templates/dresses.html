@@ -16,7 +16,7 @@
 
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-1">
-        <a class="navbar-brand" href="dresses.html">
+        <a class="navbar-brand" href="dresses.html" th:href="@{/dresses}">
             <img src="../../resources/static/img/logo.svg"
                  th:src="@{/resources/static/img/logo.svg}"
                  width="32" height="32" alt="Dress Rental">
@@ -81,9 +81,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Total: <span th:text="${dresses.size()}"></span></b></td>
-                            <td><b>undefined</b></td>
-                            <td></td>
+                            <td colspan="3"><b>Total: <span th:text="${dresses.size()}"></span></b></td>
                         </tr>
                         </tbody>
                     </table>

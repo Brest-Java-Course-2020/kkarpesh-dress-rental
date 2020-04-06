@@ -1,7 +1,7 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Dress;
-import com.epam.brest.courses.rest_app.exception.ErrorResponse;
+import com.epam.brest.courses.rest_app.exception_handler.ErrorResponse;
 import com.epam.brest.courses.service_api.DressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class DressRestController {
             LoggerFactory.getLogger(DressRestController.class);
 
     /**
-     * Message for error response.
+     * Short form of dress not found error.
      */
     private static final String DRESS_NOT_FOUND = "dress.not_found";
 

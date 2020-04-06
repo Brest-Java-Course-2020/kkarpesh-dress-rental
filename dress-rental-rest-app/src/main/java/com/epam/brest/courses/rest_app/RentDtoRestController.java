@@ -39,6 +39,13 @@ public class RentDtoRestController {
         this.rentDtoService = rentDtoService;
     }
 
+    /**
+     * Finds rents with dress name for a given period of time.
+     *
+     * @param dateFrom period start date.
+     * @param dateTo   period finish date.
+     * @return rents with dress name for a given period of time.
+     */
     @GetMapping
     public List<RentDto> findAllWIthDressNameByDate(
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

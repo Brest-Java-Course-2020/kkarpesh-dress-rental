@@ -11,7 +11,7 @@ import org.springframework.web.client.ResourceAccessException;
  * Class for handling errors.
  */
 @ControllerAdvice
-public class ExceptionControllerAdvice {
+public class ExceptionControllerAdviser {
 
     /**
      * Handles http client error exception.
