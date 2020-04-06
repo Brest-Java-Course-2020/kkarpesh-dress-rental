@@ -16,19 +16,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 class RentDtoDaoJdbcIT {
 
-    @Autowired
-    private RentDtoDao rentDtoDao;
+    private final RentDtoDao rentDtoDao;
 
-    private static final LocalDate dateFrom = LocalDate.of(2020,1, 1);
-    private static final LocalDate dateTo = LocalDate.of(2020, 2, 2);
-    private static final int NUMBER_OF_RENTS = 2;
+    @Autowired
+    RentDtoDaoJdbcIT(RentDtoDao rentDtoDao) {
+        this.rentDtoDao = rentDtoDao;
+    }
+
+    private static final LocalDate dateFrom = LocalDate.of(2020, 1, 1);
+    private static final LocalDate dateTo = LocalDate.of(2021, 1, 1);
 
 
     @Test
     void shouldFindAllWIthDressNameByDate() {
+        //when
         List<RentDto> rents = rentDtoDao.findAllWIthDressNameByDate(dateFrom, dateTo);
-        System.out.println(rents.toString());
-        assertEquals(NUMBER_OF_RENTS, rents.size());
+
+        // then
+        assertNotNull(rents);
+        assertTrue(rents.size() > 0);
     }
 
     @Test

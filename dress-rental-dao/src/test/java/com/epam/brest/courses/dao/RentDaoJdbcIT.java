@@ -1,153 +1,246 @@
 package com.epam.brest.courses.dao;
 
+import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.model.Rent;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.epam.brest.courses.constants.DressConstants.DRESS_NAME_SIZE;
+import static com.epam.brest.courses.constants.RentConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
-@Transactional
 class RentDaoJdbcIT {
 
+    private final RentDao rentDao;
+    private final DressDao dressDao;
+
     @Autowired
-    private RentDao rentDao;
-
-    private static final int NUMBER_OF_RENTS = 5;
-    private static final int NUMBER_OF_RENTS_AFTER_CREATE = 6;
-    private static final int NUMBER_OF_RENTS_AFTER_DELETE = 4;
-
-
-    private static final Integer NONEXISTENT_RENT_ID = 6;
-    private static final String NEW_RENT_CLIENT = "Larry Coster";
-    private static final LocalDate NEW_RENT_DATE = LocalDate.of(2020, 2, 3);
-    private static final Integer NEW_RENT_DRESS_ID = 3;
-
-    private static final Integer EXISTING_RENT_ID = 2;
-    private static final String EXISTING_RENT_CLIENT = "Emma Pavlova";
-    private static final LocalDate EXISTING_RENT_DATE = LocalDate.of(2020, 2, 2);
-    private static final Integer EXISTING_RENT_DRESS_ID = 2;
-
-    private static final Integer UPDATED_RENT_ID = 3;
-    private static final LocalDate UPDATED_RENT_DATE = LocalDate.of(2020, 1, 1);
+    RentDaoJdbcIT(RentDao rentDao, DressDao dressDao) {
+        this.rentDao = rentDao;
+        this.dressDao = dressDao;
+    }
 
     @Test
     void shouldFindAllRents() {
+        // when
         List<Rent> rents = rentDao.findAll();
+
+        //then
         assertNotNull(rents);
-        assertEquals(NUMBER_OF_RENTS, rents.size());
+        assertTrue(rents.size() > 0);
     }
 
     @Test
     void shouldFindRentWithExistingId() {
-        Optional<Rent> rent = rentDao.findById(EXISTING_RENT_ID);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
-        assertTrue(rent.isPresent());
-        assertEquals(EXISTING_RENT_CLIENT, rent.get().getClient());
-        assertEquals(EXISTING_RENT_DATE, rent.get().getRentDate());
-        assertEquals(EXISTING_RENT_DRESS_ID, rent.get().getDressId());
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
+
+        // when
+        Optional<Rent> optionalRent = rentDao.findById(rentId);
+
+        // then
+        assertTrue(optionalRent.isPresent());
+        assertEquals(rent.getClient(), optionalRent.get().getClient());
+        assertEquals(rent.getRentDate(), optionalRent.get().getRentDate());
+        assertEquals(rent.getDressId(), optionalRent.get().getDressId());
     }
 
     @Test
     void shouldReturnNullWhenFindByNonexistentId() {
-        Optional<Rent> rent = rentDao.findById(NONEXISTENT_RENT_ID);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
-        assertTrue(rent.isEmpty());
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
+        rentDao.delete(rentId);
+
+        // when
+        Optional<Rent> optionalRent = rentDao.findById(rentId);
+
+        // then
+        assertTrue(optionalRent.isEmpty());
     }
 
     @Test
     void shouldCreateNewRent() {
-        Rent newRent = new Rent();
-        newRent.setClient(NEW_RENT_CLIENT);
-        newRent.setRentDate(NEW_RENT_DATE);
-        newRent.setDressId(NEW_RENT_DRESS_ID);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
-        Integer newRentId = rentDao.create(newRent);
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        Integer numberOfRecordsBefore = rentDao.findAll().size();
 
-        assertNotNull(newRentId);
-        assertEquals(NUMBER_OF_RENTS_AFTER_CREATE, rentDao.findAll().size());
+        // when
+        Integer rentId = rentDao.create(rent);
+        Integer numberOfRecordsAfter = rentDao.findAll().size();
 
-        Optional<Rent> createdRent = rentDao.findById(newRentId);
-
-        assertTrue(createdRent.isPresent());
-        assertEquals(NEW_RENT_CLIENT, createdRent.get().getClient());
-        assertEquals(NEW_RENT_DATE, createdRent.get().getRentDate());
-        assertEquals(NEW_RENT_DRESS_ID, createdRent.get().getDressId());
-
+        // then
+        assertNotNull(rentId);
+        assertEquals(1, numberOfRecordsAfter - numberOfRecordsBefore);
     }
 
     @Test
     void shouldThrowExceptionWhenCreateNewRentIfDressWasRentedOnThisDay() {
-        Rent rentWithRecurringOrder = new Rent();
-        rentWithRecurringOrder.setClient(NEW_RENT_CLIENT);
-        rentWithRecurringOrder.setDressId(EXISTING_RENT_DRESS_ID);
-        rentWithRecurringOrder.setRentDate(EXISTING_RENT_DATE);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        rentDao.create(rent);
+
+        // when -> then
         assertThrows(IllegalArgumentException.class, () -> {
-            rentDao.create(rentWithRecurringOrder);
+            rentDao.create(rent);
         });
     }
 
     @Test
     void shouldUpdatedRent() {
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
+
         Rent rent = new Rent();
-        rent.setRentId(EXISTING_RENT_ID);
-        rent.setClient(EXISTING_RENT_CLIENT);
-        rent.setDressId(NEW_RENT_DRESS_ID);
-        rent.setRentDate(UPDATED_RENT_DATE);
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
 
-        assertEquals(Integer.valueOf(1), rentDao.update(rent));
-        assertEquals(NUMBER_OF_RENTS, rentDao.findAll().size());
+        Optional<Rent> optionalRent = rentDao.findById(rentId);
+        assertTrue(optionalRent.isPresent());
 
-        Optional<Rent> updatedRent = rentDao.findById(EXISTING_RENT_ID);
-        assertTrue(updatedRent.isPresent());
-        assertEquals(EXISTING_RENT_CLIENT, updatedRent.get().getClient());
-        assertEquals(NEW_RENT_DRESS_ID, updatedRent.get().getDressId());
-        assertEquals(UPDATED_RENT_DATE, updatedRent.get().getRentDate());
+        optionalRent.get().setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
 
+        // when
+        int result = rentDao.update(optionalRent.get());
 
+        // then
+        assertEquals(1, result);
+
+        Optional<Rent> updatedOptionalRent = rentDao.findById(rentId);
+        assertTrue(updatedOptionalRent.isPresent());
+        assertEquals(rentId, updatedOptionalRent.get().getRentId());
+        assertEquals(optionalRent.get().getClient(), updatedOptionalRent.get().getClient());
     }
 
     @Test
     void shouldThrowExceptionWhenUpdateRentIfDressWasRentedOnThisDay() {
-        Rent rentWithRecurringOrder = new Rent();
-        rentWithRecurringOrder.setRentId(UPDATED_RENT_ID);
-        rentWithRecurringOrder.setClient(NEW_RENT_CLIENT);
-        rentWithRecurringOrder.setDressId(EXISTING_RENT_DRESS_ID);
-        rentWithRecurringOrder.setRentDate(EXISTING_RENT_DATE);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        LocalDate date = LocalDate.of(2019, 1, 1);
+        rent.setRentDate(date);
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
+        assertNotNull(rentId);
+
+        Rent anotherRent = new Rent();
+        anotherRent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        LocalDate anotherDate = LocalDate.of(2020, 1, 1);
+        anotherRent.setRentDate(anotherDate);
+        anotherRent.setDressId(dressId);
+        Integer anotherRentId = rentDao.create(anotherRent);
+        assertNotNull(anotherRentId);
+
+        Optional<Rent> optionalAnotherRent = rentDao.findById(anotherRentId);
+        assertTrue(optionalAnotherRent.isPresent());
+        optionalAnotherRent.get().setRentDate(date);
+
+        // when -> then
         assertThrows(IllegalArgumentException.class, () -> {
-            rentDao.update(rentWithRecurringOrder);
+            rentDao.update(optionalAnotherRent.get());
         });
-
     }
 
     @Test
     void shouldDeleteRent() {
-        assertEquals(Integer.valueOf(1), rentDao.delete(EXISTING_RENT_ID));
-        assertEquals(NUMBER_OF_RENTS_AFTER_DELETE, rentDao.findAll().size());
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
+
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rent.setRentDate(LocalDate.now());
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
+        assertNotNull(rentId);
+        Integer numberOfRecordsBefore = rentDao.findAll().size();
+        assertNotNull(numberOfRecordsBefore);
+
+        // when
+        int result = rentDao.delete(rentId);
+
+        //then
+        assertEquals(1, result);
+        Integer numberOfRecordsAfter = rentDao.findAll().size();
+
+        assertEquals(1, numberOfRecordsBefore - numberOfRecordsAfter);
     }
 
     @Test
     void hasDressAlreadyBeenRentedForThisDate() {
-        Rent newRent = new Rent();
-        newRent.setDressId(NEW_RENT_DRESS_ID);
-        newRent.setRentDate(NEW_RENT_DATE);
+        // given
+        Dress dress = new Dress();
+        dress.setDressName(RandomStringUtils.randomAlphabetic(DRESS_NAME_SIZE));
+        Integer dressId = dressDao.create(dress);
 
-        Rent duplicatedRent = new Rent();
-        duplicatedRent.setDressId(EXISTING_RENT_DRESS_ID);
-        duplicatedRent.setRentDate(EXISTING_RENT_DATE);
+        Rent rent = new Rent();
+        rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        LocalDate date = LocalDate.of(2019, 1, 1);
+        rent.setRentDate(date);
+        rent.setDressId(dressId);
+        Integer rentId = rentDao.create(rent);
+        assertNotNull(rentId);
 
-        assertTrue(rentDao.hasDressAlreadyBeenRentedForThisDate(duplicatedRent));
-        assertFalse(rentDao.hasDressAlreadyBeenRentedForThisDate(newRent));
+        Rent rentWithTheSameData = new Rent();
+        rentWithTheSameData.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        rentWithTheSameData.setRentDate(date);
+        rentWithTheSameData.setDressId(dressId);
+
+        Rent anotherRent = new Rent();
+        anotherRent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
+        anotherRent.setRentDate(LocalDate.of(2020, 1, 1));
+        anotherRent.setDressId(dressId);
+
+        // when -> then
+        assertTrue(rentDao.hasDressAlreadyBeenRentedForThisDate(rentWithTheSameData));
+        assertFalse(rentDao.hasDressAlreadyBeenRentedForThisDate(anotherRent));
     }
 }
