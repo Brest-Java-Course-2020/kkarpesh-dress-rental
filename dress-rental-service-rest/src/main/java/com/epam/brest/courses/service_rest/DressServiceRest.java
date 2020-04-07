@@ -6,8 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -99,8 +98,14 @@ public class DressServiceRest implements DressService {
     @Override
     public Integer update(Dress dress) {
         LOGGER.debug("Update dress {}", dress);
-        restTemplate.put(url, dress);
-        return 1;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Dress> dressHttpEntity = new HttpEntity<>(dress, headers);
+        ResponseEntity<Integer> responseEntity =
+                restTemplate.exchange(url, HttpMethod.PUT,
+                        dressHttpEntity, Integer.class);
+        return responseEntity.getBody();
     }
 
     /**
@@ -111,9 +116,15 @@ public class DressServiceRest implements DressService {
      */
     @Override
     public Integer delete(Integer dressId) {
-        LOGGER.debug("Delete dress with id = ", dressId);
-        restTemplate.delete(url + "/" + dressId);
-        return 1;
+        LOGGER.debug("Delete dress with id = {}", dressId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Dress> dressHttpEntity = new HttpEntity<>(headers);
+        ResponseEntity<Integer> responseEntity =
+                restTemplate.exchange(url + "/" + dressId,
+                        HttpMethod.DELETE, dressHttpEntity, Integer.class);
+        return responseEntity.getBody();
     }
 
     /**
