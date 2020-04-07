@@ -5,6 +5,7 @@ import com.epam.brest.courses.service_api.dto.DressDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -51,9 +52,13 @@ public class DressDtoServiceRest implements DressDtoService {
     @Override
     public List<DressDto> findAllWithNumberOfOrders() {
         LOGGER.debug("Gets all dressDtos from REST");
+        ResolvableType resolvableType =
+                ResolvableType.forClassWithGenerics(List.class, DressDto.class);
+        ParameterizedTypeReference<List<DressDto>> refType =
+                ParameterizedTypeReference.forType(resolvableType.getType());
         ResponseEntity<List<DressDto>> responseEntity =
                 restTemplate.exchange(url, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<>() { });
+                        refType);
         return responseEntity.getBody();
     }
 }

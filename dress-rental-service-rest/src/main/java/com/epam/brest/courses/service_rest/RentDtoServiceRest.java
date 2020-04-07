@@ -5,6 +5,7 @@ import com.epam.brest.courses.service_api.dto.RentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -68,9 +69,13 @@ public class RentDtoServiceRest implements RentDtoService {
                     + "&dateTo=" + dateTo.toString();
         }
 
+        ResolvableType resolvableType =
+                ResolvableType.forClassWithGenerics(List.class, RentDto.class);
+        ParameterizedTypeReference<List<RentDto>> refType =
+                ParameterizedTypeReference.forType(resolvableType.getType());
         ResponseEntity<List<RentDto>> responseEntity =
                 restTemplate.exchange(fullUrl, HttpMethod.GET,
-                        null, new ParameterizedTypeReference<>() { });
+                        null, refType);
         return responseEntity.getBody();
     }
 }

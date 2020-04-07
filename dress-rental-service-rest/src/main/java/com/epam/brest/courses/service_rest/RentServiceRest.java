@@ -5,6 +5,7 @@ import com.epam.brest.courses.service_api.RentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -52,10 +53,13 @@ public class RentServiceRest implements RentService {
     @Override
     public List<Rent> findAll() {
         LOGGER.debug("Gets all dresses from REST");
-
+        ResolvableType resolvableType =
+                ResolvableType.forClassWithGenerics(List.class, Rent.class);
+        ParameterizedTypeReference<List<Rent>> refType =
+                ParameterizedTypeReference.forType(resolvableType.getType());
         ResponseEntity<List<Rent>> responseEntity =
                 restTemplate.exchange(url, HttpMethod.GET,
-                        null, new ParameterizedTypeReference<>() { });
+                        null, refType);
         return responseEntity.getBody();
     }
 
