@@ -6,8 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -100,8 +99,14 @@ public class RentServiceRest implements RentService {
     @Override
     public Integer update(Rent rent) {
         LOGGER.debug("Update rent {}", rent);
-        restTemplate.put(url, rent);
-        return 1;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Rent> rentHttpEntity = new HttpEntity<>(rent, headers);
+        ResponseEntity<Integer> responseEntity =
+                restTemplate.exchange(url, HttpMethod.PUT,
+                        rentHttpEntity, Integer.class);
+        return responseEntity.getBody();
     }
 
     /**
@@ -112,9 +117,15 @@ public class RentServiceRest implements RentService {
      */
     @Override
     public Integer delete(Integer rentId) {
-        LOGGER.debug("Delete rent with id = ", rentId);
-        restTemplate.delete(url + "/" + rentId);
-        return 1;
+        LOGGER.debug("Delete rent with id = {}", rentId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Rent> rentHttpEntity = new HttpEntity<>(headers);
+        ResponseEntity<Integer> responseEntity =
+                restTemplate.exchange(url + "/" + rentId,
+                        HttpMethod.DELETE, rentHttpEntity, Integer.class);
+        return responseEntity.getBody();
     }
 
     /**
