@@ -16,59 +16,33 @@
     <!-- Use @MVC annotations -->
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
-
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.*"/>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:application.properties</value>
-            </list>
-        </property>
+
+    <bean id="dressService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest.courses.service_api.DressService"/>
     </bean>
 
-
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="dressServiceRest" class="com.epam.brest.courses.service_rest.DressServiceRest">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.dresses}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="dressDtoServiceRest" class="com.epam.brest.courses.service_rest.DressDtoServiceRest">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.dress_dtos}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="rentServiceRest" class="com.epam.brest.courses.service_rest.RentServiceRest">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.rents}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="rentDtoServiceRest" class="com.epam.brest.courses.service_rest.RentDtoServiceRest">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.rent_dtos}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="dressDtoService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest.courses.service_api.dto.DressDtoService"/>
     </bean>
 
     <bean id="dressController" class="com.epam.brest.courses.web_app.DressController">
-        <constructor-arg index="0" ref="dressServiceRest"/>
-        <constructor-arg index="1" ref="dressDtoServiceRest"/>
+        <constructor-arg index="0" ref="dressService"/>
+        <constructor-arg index="1" ref="dressDtoService"/>
     </bean>
 
+    <bean id="rentService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest.courses.service_api.RentService"/>
+    </bean>
+    <bean id="rentDtoService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest.courses.service_api.dto.RentDtoService"/>
+    </bean>
     <bean id="rentController" class="com.epam.brest.courses.web_app.RentController">
-        <constructor-arg index="0" ref="rentServiceRest"/>
-        <constructor-arg index="1" ref="rentDtoServiceRest"/>
-        <constructor-arg index="2" ref="dressServiceRest"/>
+        <constructor-arg index="0" ref="rentService"/>
+        <constructor-arg index="1" ref="rentDtoService"/>
     </bean>
-
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"
