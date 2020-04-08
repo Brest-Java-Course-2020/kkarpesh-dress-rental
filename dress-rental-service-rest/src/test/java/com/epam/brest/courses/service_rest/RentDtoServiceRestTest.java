@@ -40,9 +40,7 @@ class RentDtoServiceRestTest {
     private MockRestServiceServer mockServer;
 
     private ObjectMapper mapper =
-            new ObjectMapper()
-                    .registerModule(new JavaTimeModule())
-                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            new ObjectMapper().registerModule(new JavaTimeModule());
 
     RentDtoServiceRest rentDtoService;
 

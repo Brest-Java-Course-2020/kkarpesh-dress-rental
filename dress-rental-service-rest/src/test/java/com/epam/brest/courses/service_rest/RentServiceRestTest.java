@@ -42,9 +42,7 @@ class RentServiceRestTest {
     private MockRestServiceServer mockServer;
 
     private ObjectMapper mapper =
-            new ObjectMapper()
-                    .registerModule(new JavaTimeModule())
-                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            new ObjectMapper().registerModule(new JavaTimeModule());
 
     RentServiceRest rentService;
 
@@ -108,7 +106,7 @@ class RentServiceRestTest {
         // given
         Rent rent = new Rent();
         rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
-        rent.setDressId((int) (Math.random()*100));
+        rent.setDressId((int) (Math.random() * 100));
         rent.setRentDate(LocalDate.now());
 
         mockServer.expect(ExpectedCount.once(), requestTo(RENTS_URL))
@@ -134,7 +132,7 @@ class RentServiceRestTest {
         rent.setRentId(id);
         rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE));
         rent.setRentDate(LocalDate.now());
-        rent.setDressId((int) (Math.random()*100));
+        rent.setDressId((int) (Math.random() * 100));
 
         mockServer.expect(ExpectedCount.once(), requestTo(RENTS_URL))
                 .andExpect(method(HttpMethod.PUT))
