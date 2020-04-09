@@ -33,7 +33,7 @@ public class RentValidator implements Validator {
      */
     @Override
     public boolean supports(Class<?> clazz) {
-        return Rent.class.equals(clazz);
+        return Rent.class.isAssignableFrom(clazz);
     }
 
     /**
