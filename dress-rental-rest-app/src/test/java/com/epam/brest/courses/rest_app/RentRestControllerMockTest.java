@@ -77,7 +77,7 @@ class RentRestControllerMockTest {
 
         mockMvc.perform(get(RENTS_ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(rents)));
 
         verify(rentService, times(1)).findAll();
@@ -97,7 +97,7 @@ class RentRestControllerMockTest {
 
         mockMvc.perform(get(RENTS_ENDPOINT + "/" + id))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(rent)));
 
         verify(rentService, times(1)).findById(id);
@@ -111,7 +111,7 @@ class RentRestControllerMockTest {
 
         mockMvc.perform(get(RENTS_ENDPOINT + "/" + id))
                 .andExpect(status().isNotFound())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentService, times(1)).findById(id);
     }
@@ -128,11 +128,11 @@ class RentRestControllerMockTest {
         when(rentService.create(any())).thenReturn(id);
 
         mockMvc.perform(post(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(rent))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(id)));
 
         verify(rentService, times(1)).create(any());
@@ -143,11 +143,11 @@ class RentRestControllerMockTest {
         when(rentService.create(any())).thenThrow(new DataIntegrityViolationException("Error"));
 
         mockMvc.perform(post(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentService, times(1)).create(any());
     }
@@ -157,11 +157,11 @@ class RentRestControllerMockTest {
         when(rentService.create(any())).thenThrow(new IllegalArgumentException());
 
         mockMvc.perform(post(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentService, times(1)).create(any());
     }
@@ -171,11 +171,11 @@ class RentRestControllerMockTest {
         when(rentService.update(any())).thenReturn(1);
 
         mockMvc.perform(put(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(1)));
 
         verify(rentService, times(1)).update(any());
@@ -186,11 +186,11 @@ class RentRestControllerMockTest {
         when(rentService.update(any())).thenThrow(new IllegalArgumentException());
 
         mockMvc.perform(put(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentService, times(1)).update(any());
     }
@@ -200,11 +200,11 @@ class RentRestControllerMockTest {
         when(rentService.update(any())).thenThrow(new DataIntegrityViolationException("Error"));
 
         mockMvc.perform(put(RENTS_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentService, times(1)).update(any());
     }
@@ -216,9 +216,9 @@ class RentRestControllerMockTest {
         when(rentService.delete(id)).thenReturn(1);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(RENTS_ENDPOINT + "/" + id)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(1)));
 
         verify(rentService, times(1)).delete(id);
@@ -230,11 +230,11 @@ class RentRestControllerMockTest {
         when(rentService.hasDressAlreadyBeenRentedForThisDate(any())).thenReturn(result);
 
         mockMvc.perform(post(RENTS_ENDPOINT + "/isExists")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Rent()))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(result)));
 
         verify(rentService, times(1)).hasDressAlreadyBeenRentedForThisDate(any());

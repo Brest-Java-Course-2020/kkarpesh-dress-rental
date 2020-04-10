@@ -74,7 +74,7 @@ class RentDtoRestControllerMockTest {
 
         mockMvc.perform(get(RENT_DTOS_ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(rentDtos)));
 
         verify(rentDtoService, times(1)).findAllWIthDressNameByDate(any(), any());
@@ -86,7 +86,7 @@ class RentDtoRestControllerMockTest {
 
         mockMvc.perform(get(RENT_DTOS_ENDPOINT))
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(rentDtoService, times(1)).findAllWIthDressNameByDate(any(), any());
     }

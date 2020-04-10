@@ -69,7 +69,7 @@ class DressRestControllerMockTest {
 
         mockMvc.perform(get(DRESSES_ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(dresses)));
 
         verify(dressService, times(1)).findAll();
@@ -87,7 +87,7 @@ class DressRestControllerMockTest {
 
         mockMvc.perform(get(DRESSES_ENDPOINT + "/" + id))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(dress)));
 
         verify(dressService, times(1)).findById(id);
@@ -101,7 +101,7 @@ class DressRestControllerMockTest {
 
         mockMvc.perform(get(DRESSES_ENDPOINT + "/" + id))
                 .andExpect(status().isNotFound())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).findById(id);
     }
@@ -115,11 +115,11 @@ class DressRestControllerMockTest {
         when(dressService.create(any())).thenReturn(id);
 
         mockMvc.perform(post(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(dress))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(id)));
 
         verify(dressService, times(1)).create(any());
@@ -130,11 +130,11 @@ class DressRestControllerMockTest {
         when(dressService.create(any())).thenThrow(new DataIntegrityViolationException("Error"));
 
         mockMvc.perform(post(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).create(any());
     }
@@ -144,11 +144,11 @@ class DressRestControllerMockTest {
         when(dressService.create(any())).thenThrow(new IllegalArgumentException());
 
         mockMvc.perform(post(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).create(any());
     }
@@ -158,11 +158,11 @@ class DressRestControllerMockTest {
         when(dressService.update(any())).thenReturn(1);
 
         mockMvc.perform(put(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(1)));
 
         verify(dressService, times(1)).update(any());
@@ -173,11 +173,11 @@ class DressRestControllerMockTest {
         when(dressService.update(any())).thenThrow(new IllegalArgumentException());
 
         mockMvc.perform(put(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).update(any());
     }
@@ -187,11 +187,11 @@ class DressRestControllerMockTest {
         when(dressService.update(any())).thenThrow(new DataIntegrityViolationException("Error"));
 
         mockMvc.perform(put(DRESSES_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).update(any());
     }
@@ -203,9 +203,9 @@ class DressRestControllerMockTest {
         when(dressService.delete(id)).thenReturn(1);
 
         mockMvc.perform(MockMvcRequestBuilders.delete(DRESSES_ENDPOINT + "/" + id)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(1)));
 
         verify(dressService, times(1)).delete(id);
@@ -217,9 +217,9 @@ class DressRestControllerMockTest {
         when(dressService.delete(id)).thenThrow(new UnsupportedOperationException());
 
         mockMvc.perform(MockMvcRequestBuilders.delete(DRESSES_ENDPOINT + "/" + id)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         verify(dressService, times(1)).delete(id);
     }
@@ -230,11 +230,11 @@ class DressRestControllerMockTest {
         when(dressService.isNameAlreadyExist(any())).thenReturn(result);
 
         mockMvc.perform(post(DRESSES_ENDPOINT + "/isExists")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new Dress()))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(result)));
 
         verify(dressService, times(1)).isNameAlreadyExist(any());
@@ -247,9 +247,9 @@ class DressRestControllerMockTest {
         when(dressService.isDressHasRents(id)).thenReturn(result);
 
         mockMvc.perform(get(DRESSES_ENDPOINT + "/" + id + "/hasRents")
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(result)));
 
         verify(dressService, times(1)).isDressHasRents(any());

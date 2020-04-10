@@ -60,7 +60,7 @@ class DressDtoRestControllerMockTest {
 
         mockMvc.perform(get(DRESS_DTOS_ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(mapper.writeValueAsString(dressDtos)));
 
         verify(dressDtoService, times(1)).findAllWithNumberOfOrders();
