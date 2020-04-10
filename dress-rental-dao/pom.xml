@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>
-            <artifactId>dress-rental-test</artifactId>
+            <artifactId>dress-rental-test-db</artifactId>
         </dependency>
 
         <dependency>
@@ -48,6 +48,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
