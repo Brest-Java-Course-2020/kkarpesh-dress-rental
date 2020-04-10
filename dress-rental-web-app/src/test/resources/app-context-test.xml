@@ -28,20 +28,11 @@
         <constructor-arg value="com.epam.brest.courses.service_api.dto.DressDtoService"/>
     </bean>
 
-    <bean id="dressController" class="com.epam.brest.courses.web_app.DressController">
-        <constructor-arg index="0" ref="dressService"/>
-        <constructor-arg index="1" ref="dressDtoService"/>
-    </bean>
-
     <bean id="rentService" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="com.epam.brest.courses.service_api.RentService"/>
     </bean>
     <bean id="rentDtoService" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="com.epam.brest.courses.service_api.dto.RentDtoService"/>
-    </bean>
-    <bean id="rentController" class="com.epam.brest.courses.web_app.RentController">
-        <constructor-arg index="0" ref="rentService"/>
-        <constructor-arg index="1" ref="rentDtoService"/>
     </bean>
 
     <!-- Thymeleaf Template Resolver -->
