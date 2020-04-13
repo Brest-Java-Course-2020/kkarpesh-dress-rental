@@ -77,7 +77,7 @@
                                    th:href="@{|/dresses/${dress.dressId}|}">Edit</a>
                                 <a href="#deleteDressModal" data-toggle="modal"
                                    th:attr="data-id=${dress.dressId},
-                                   data-name=${dress.dressName}">Delete</a>
+                                   data-name=${dress.dressName}, data-url=@{|/dresses/|}">Delete</a>
                             </td>
                         </tr>
                         <tr>
@@ -126,9 +126,10 @@
    $('#deleteDressModal').on('show.bs.modal', function(e) {
    var name = $(e.relatedTarget).data('name');
    var id = $(e.relatedTarget).data('id');
+   var url = $(e.relatedTarget).data('url');
 
    $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + name + '"?');
-   document.getElementById('deleteDressUrl').href = '/dresses/delete/' + id;
+   document.getElementById('deleteDressUrl').href = url + '/delete/' + id;
  });
 
 

@@ -105,6 +105,7 @@
     </dependencies>
 
     <build>
+        <finalName>dress-rental-rest</finalName>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>

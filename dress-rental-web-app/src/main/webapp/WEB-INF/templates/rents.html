@@ -114,7 +114,7 @@
                                         th:href="@{|/rents/${rent.rentId}|}">Edit</a>
                                     <a href="#deleteRentModal" data-toggle="modal"
                                        th:attr="data-id=${rent.rentId}, data-dressname=${rent.dressName},
-                                    data-client=${rent.client}, data-date=${rent.rentDate}">Delete</a>
+                                    data-client=${rent.client}, data-date=${rent.rentDate}, data-url=@{|/rents/|}">Delete</a>
                                 </td>
                             </tr>
                             <tr>
@@ -166,9 +166,10 @@
    var client = $(e.relatedTarget).data('client');
    var rentDate = $(e.relatedTarget).data('date');
    var dressName = $(e.relatedTarget).data('dressname');
+   var url = $(e.relatedTarget).data('url');
 
    $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + dressName + '" rented by ' + client + ' on ' + rentDate + '?');
-   document.getElementById('deleteRentUrl').href = '/rents/delete/' + rentId;
+   document.getElementById('deleteRentUrl').href = url + '/delete/' + rentId;
  });
 
 </script>
