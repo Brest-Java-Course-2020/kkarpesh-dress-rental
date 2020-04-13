@@ -2,13 +2,13 @@
 
 # kkarpesh-dress-rental
 Dress rental demo application.
-+ [Environment setting](#environment setting)
++ [Environment setting](#Environment-setting)
 + [Installing](#Installing)
-+ [Build project](#Build project)
-+ [Preparing reports](#Preparing reports)
-+ [Deploy application on Tomcat server](#Deploy application on Tomcat server)
-+ [Run application on Jetty test server](#Run application on Jetty test server)
-    + [Available REST endpoints](#Available REST endpoints)
++ [Build project](#Build-project)
++ [Preparing reports](#Preparing-reports)
++ [Deploy application on Tomcat server](#Deploy-application-on-Tomcat-server)
++ [Run application on Jetty test server](#Run-application-on-Jetty-test-server)
+    + [Available REST endpoints](#Available-REST-endpoints)
         + [dresses](#dresses)
         + [dress_dtos](#dress_dtos)
         + [rents](#rents)
