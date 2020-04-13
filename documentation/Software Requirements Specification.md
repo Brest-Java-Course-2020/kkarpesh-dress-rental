@@ -56,7 +56,7 @@
   * Dress - dress name.
   
   Limitations for data validation:
-  * Dress - maximum 70 characters. The value must be unique in the database.
+  * Dress - maximum 30 characters. The value must be unique in the database.
    
 ## 1.3 Editing dress
   This program mode is designed to edit a dress.
@@ -84,17 +84,17 @@
   * Dress - dress name.
   
   Limitations for data validation:
-  * Dress - maximum 70 characters. The value must be unique in the database.
+  * Dress - maximum 30 characters. The value must be unique in the database.
   
 ## 1.4 Dress removal
   This program mode is designed to remove a dress.
  
   Main scenario:
   * the user is in the dress list view mode and clicks the "Remove" button in the column "Action" for the selected dress;
+  * the confirmation dialog for removal is displayed "Are you sure you want to remove the dress "dress name"?";
+  * the user clicks the "Yes" button;
   * there is a check for the possibility of removing the dress, i.e. whether this dress is on the list of rented dresses;
   * if the dress is on the list of rented dresses, the warning dialog "This dress cannot be remove because it is on the list of rented dresses";
-  * if the dress can be removed, the confirmation dialog for removal is displayed "Are you sure you want to remove the dress "dress name"?";
-  * the user clicks the "Yes" button;
   * the dress is deleted in the database;
   * if an error occurred while deleting data, an error message is displayed "Error data deletion";
   * if the dress has been removed successfully, the form for viewing the list of dresses with updated data would be open.
@@ -135,10 +135,10 @@
 ###### Filter data by date:
   * To view the list of rented dresses for certain periods selecting a filter for the sampling period from and to.
   * The start date of the filter should not be greater than the end date.
-  * If no data is entered, then filtering is not performed.
+  * If no data is entered, then all rents are displaying.
   * If the start date is not entered, then filter by end date only.
   * If the end date is not entered, then filter by start date only.
-  * The default filter is set from the 1st of the current month to the current date.
+  * The default filter shows all rents.
   * Data is updated after selecting filtering data and clicking the "Update" button.
    
 ### 2.2 Adding dress for rent
@@ -171,6 +171,7 @@
   Limitations for data validation:
   * Dress - one value is selected from the list of available dresses. If there is no dress in system, you cannot add a new rented dress.
   * Client - maximum 50 characters.
+  * Dress can only have one rental per day.
   
 ### 2.3 Editing rented dress
   This program mode is designed to edit a dress.
@@ -202,6 +203,7 @@
   Limitations for data validation: 
   * Dress - one value is selected from the list of available dresses. If there is no dress in system, you cannot add a new rented dress.
   * Client - maximum 50 characters.
+  * Dress can only have one rental per day.
   
 ## 2.4 Rented dress removal
   This program mode is designed to remove a rented dress.
