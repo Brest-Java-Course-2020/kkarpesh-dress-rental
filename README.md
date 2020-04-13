@@ -1,9 +1,20 @@
 ![Java CI with Maven](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 # kkarpesh-dress-rental
-Dress rental.
+Dress rental demo application.
++ [Environment setting](#environment setting)
++ [Installing](#Installing)
++ [Build project](#Build project)
++ [Preparing reports](#Preparing reports)
++ [Deploy application on Tomcat server](#Deploy application on Tomcat server)
++ [Run application on Jetty test server](#Run application on Jetty test server)
+    + [Available REST endpoints](#Available REST endpoints)
+        + [dresses](#dresses)
+        + [dress_dtos](#dress_dtos)
+        + [rents](#rents)
+        + [rent_dtos](#rent_dtos)
 
-## Preliminary preparation
+## Environment setting
 ```
 install openjdk11
 install maven3+
@@ -25,10 +36,11 @@ $ mvn clean install
 For preparing reports do:
 ```
 $ mvn site
+$ mvn site:stage
 ```
 and open:
 ```
-../kkarpesh-dress-rental/target/site/index.html
+../kkarpesh-dress-rental/target/staging/index.html
 ```
 ## Deploy application on Tomcat server
 Copy:
