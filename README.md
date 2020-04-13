@@ -3,8 +3,74 @@
 # kkarpesh-dress-rental
 Dress rental.
 
-## Available REST endpoints
+## Preliminary preparation
+```
+install openjdk11
+install maven3+
+install tomcat
+install git
+```
 
+## Installing
+Select the directory for the project and clone the project from github:
+```
+$ git clone https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental.git
+```
+## Build project
+Run command in project directory:
+```
+$ mvn clean install
+```
+## Preparing reports
+For preparing reports do:
+```
+$ mvn site
+```
+and open:
+```
+../kkarpesh-dress-rental/target/site/index.html
+```
+## Deploy application on Tomcat server
+Copy:
+```
+../kkarpesh-dress-rental/dress-rental-web-app/target/dress-rental-web.war
+and
+../kkarpesh-dress-rental/dress-rental-rest-app/target/dress-rental-rest.war
+```
+to tomcat directory:
+```
+../tomcat/webapps/
+```
+For shutdown and removing this apps from server remove this files.
+
+Or, you can use GUI at:
+```
+http://localhost:8080/manager/html
+```
+and select .war files to deploy.
+For shutdown select "stop", for removing "undeploy".
+
+Web-app should be available at:
+```
+http://localhost:8080/dress-rental-web/
+```
+## Run application on Jetty test server
+Run command in project directory in different terminal windows:
+```
+$ mvn -pl dress-rental-web-app/ jetty:run -P jetty
+$ mvn -pl dress-rental-rest-app/ jetty:run
+```
+Web-app should be available at
+```
+http://localhost:8888
+```
+Rest-app at:
+```
+http://localhost:8088
+```
+for shutdown jetty server in terminal window press "CTRL+C"
+## Available REST endpoints
+Then applications run on Jetty test server, the following endpoints are available:
 ### dresses
 
 ##### findAll
