@@ -12,6 +12,8 @@
 
     <artifactId>dress-rental-rest-app</artifactId>
 
+    <name>Dress Rental REST-APP</name>
+
     <dependencies>
         <dependency>
             <groupId>com.epam.brest.courses</groupId>

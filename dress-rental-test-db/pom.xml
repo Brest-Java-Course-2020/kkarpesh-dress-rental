@@ -11,6 +11,8 @@
 
     <artifactId>dress-rental-test-db</artifactId>
 
+    <name>Dress Rental Test DB</name>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
