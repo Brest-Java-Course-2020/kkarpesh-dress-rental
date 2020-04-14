@@ -19,6 +19,8 @@
         <module>dress-rental-service-rest</module>
     </modules>
 
+    <name>Dress Rental</name>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>5.2.5.RELEASE</org.springframework.version>
@@ -316,6 +318,15 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>4.3.0</version>
+                    <configuration>
+                        <repoToken>yourcoverallsprojectrepositorytoken</repoToken>
+                    </configuration>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
@@ -434,6 +445,10 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -450,6 +465,10 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
 
             <plugin>

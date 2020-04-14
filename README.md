@@ -126,7 +126,7 @@ curl -s -X GET 'http://localhost:8088/dresses/1/hasRents'
 ```
 ### dress_dtos
 
-#####findAllWithNumberOfOrders
+##### findAllWithNumberOfOrders
 ```
 curl -s -X GET 'http://localhost:8088/dress_dtos' | json_pp
 ```
