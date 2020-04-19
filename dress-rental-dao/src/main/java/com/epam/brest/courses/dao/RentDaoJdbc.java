@@ -98,8 +98,7 @@ public class RentDaoJdbc implements RentDao {
     @Override
     public List<Rent> findAll() {
         LOGGER.debug("Find all rents");
-        List<Rent> rents = jdbcTemplate.query(findAllSql, rentRowMapper);
-        return rents;
+        return jdbcTemplate.query(findAllSql, rentRowMapper);
     }
 
     /**

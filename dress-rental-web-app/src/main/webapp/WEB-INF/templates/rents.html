@@ -169,7 +169,7 @@
    var url = $(e.relatedTarget).data('url');
 
    $(e.currentTarget).find('.modal-body').text('Are you sure you want to remove the dress "' + dressName + '" rented by ' + client + ' on ' + rentDate + '?');
-   document.getElementById('deleteRentUrl').href = url + '/delete/' + rentId;
+   document.getElementById('deleteRentUrl').href = url + 'delete/' + rentId;
  });
 
 </script>

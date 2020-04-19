@@ -17,7 +17,7 @@ import java.util.List;
  * Rest Controller for work with RentDTOs.
  */
 @RestController
-@RequestMapping("rent_dtos")
+@RequestMapping("/rent_dtos")
 public class RentDtoRestController {
     /**
      * Default logger for current class.

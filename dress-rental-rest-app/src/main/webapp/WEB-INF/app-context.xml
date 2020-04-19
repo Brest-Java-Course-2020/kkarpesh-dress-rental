@@ -22,7 +22,7 @@
 
     <import resource="classpath*:test-db.xml"/>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:dao.properties</value>

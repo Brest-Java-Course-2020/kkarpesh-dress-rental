@@ -19,7 +19,7 @@ import java.util.Optional;
  * Rest Controller for work with Rents.
  */
 @RestController
-@RequestMapping("rents")
+@RequestMapping("/rents")
 public class RentRestController {
 
     /**

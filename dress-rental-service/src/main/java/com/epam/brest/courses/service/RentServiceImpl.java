@@ -112,6 +112,7 @@ public class RentServiceImpl implements RentService {
      * for this date and false if not.
      */
     @Override
+    @Transactional(readOnly = true)
     public Boolean hasDressAlreadyBeenRentedForThisDate(Rent rent) {
         LOGGER.debug("is rent exists - {}", rent);
         return rentDao.hasDressAlreadyBeenRentedForThisDate(rent);

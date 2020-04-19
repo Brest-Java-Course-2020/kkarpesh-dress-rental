@@ -111,6 +111,7 @@ public class DressServiceImpl implements DressService {
      * @return the boolean value of the existence of a name.
      */
     @Override
+    @Transactional(readOnly = true)
     public Boolean isNameAlreadyExist(Dress dress) {
         LOGGER.debug("is name exists - {}", dress);
         return dressDao.isNameAlreadyExist(dress);
@@ -123,6 +124,7 @@ public class DressServiceImpl implements DressService {
      * @return the boolean value is there a dress orders.
      */
     @Override
+    @Transactional(readOnly = true)
     public Boolean isDressHasRents(Integer dressId) {
         LOGGER.debug("is dress id={} has rents", dressId);
         return dressDao.isDressHasRents(dressId);

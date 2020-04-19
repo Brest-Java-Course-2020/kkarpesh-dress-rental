@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,9 +18,8 @@ import java.util.Optional;
 /**
  * Rest controller for work with Dresses.
  */
-@EnableSwagger2
 @RestController
-@RequestMapping("dresses")
+@RequestMapping("/dresses")
 public class DressRestController {
 
     /**
