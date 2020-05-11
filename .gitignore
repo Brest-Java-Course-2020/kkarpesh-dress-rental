@@ -10,6 +10,8 @@
 # IDEA files
 out/
 target/
+build/
+.gradle
 .idea/
 .idea_modules/
 *.iml
