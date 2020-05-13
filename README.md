@@ -1,4 +1,5 @@
 ![Java CI with Maven](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/workflows/Java%20CI%20with%20Maven/badge.svg)
+![Java CI with Gradle](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/workflows/Java%20CI%20with%20Gradle/badge.svg)
 [![Build Status](https://travis-ci.org/Brest-Java-Course-2020/kkarpesh-dress-rental.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2020/kkarpesh-dress-rental)
 # kkarpesh-dress-rental
 Dress rental demo application.
