@@ -21,13 +21,17 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.*"/>
 
-    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:application.properties</value>
-            </list>
-        </property>
-    </bean>
+
+
+<!--    <beans profile="prod">-->
+<!--        <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+<!--            <property name="locations">-->
+<!--                <list>-->
+<!--                    <value>classpath:prod.properties</value>-->
+<!--                </list>-->
+<!--            </property>-->
+<!--        </bean>-->
+<!--    </beans>-->
 
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
@@ -107,4 +111,23 @@
           p:basename="/WEB-INF/messages">
     </bean>
 
+    <beans profile="dev">
+        <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:dev.properties</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="prod">
+        <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:prod.properties</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
 </beans>

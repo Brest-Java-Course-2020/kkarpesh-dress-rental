@@ -13,6 +13,10 @@ gretty {
 
 }
 
+war {
+    archiveName = 'dress-rental-rest.war'
+}
+
 dependencies {
     implementation project(':dress-rental-model')
     implementation project(':dress-rental-test-db')

@@ -32,6 +32,7 @@ Run command in project directory:
 ```
 $ mvn clean install
 ```
+you also can use Gradle for building project [Build_with_gradle.md](build_with_gradle.md)
 ## Preparing reports
 For preparing reports do:
 ```

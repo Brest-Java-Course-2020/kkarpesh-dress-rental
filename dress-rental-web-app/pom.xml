@@ -108,34 +108,30 @@
             <id>tomcat</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>dr</name>
-                    <value>tomcat</value>
-                </property>
+<!--                <property>-->
+<!--                    <name>dr</name>-->
+<!--                    <value>tomcat</value>-->
+<!--                </property>-->
             </activation>
             <properties>
-                <port>8080</port>
-                <point.dresses>dress-rental-rest/dresses</point.dresses>
-                <point.dress_dtos>dress-rental-rest/dress_dtos</point.dress_dtos>
-                <point.rents>dress-rental-rest/rents</point.rents>
-                <point.rent_dtos>dress-rental-rest/rent_dtos</point.rent_dtos>
+                <spring.profiles.active>prod</spring.profiles.active>
+<!--                <port>8080</port>-->
+<!--                <point.dresses>dress-rental-rest/dresses</point.dresses>-->
+<!--                <point.dress_dtos>dress-rental-rest/dress_dtos</point.dress_dtos>-->
+<!--                <point.rents>dress-rental-rest/rents</point.rents>-->
+<!--                <point.rent_dtos>dress-rental-rest/rent_dtos</point.rent_dtos>-->
             </properties>
         </profile>
 
         <profile>
             <id>jetty</id>
-            <activation>
-                <property>
-                    <name>dr</name>
-                    <value>jetty</value>
-                </property>
-            </activation>
             <properties>
-                <port>8088</port>
-                <point.dresses>dresses</point.dresses>
-                <point.dress_dtos>dress_dtos</point.dress_dtos>
-                <point.rents>rents</point.rents>
-                <point.rent_dtos>rent_dtos</point.rent_dtos>
+                <spring.profiles.active>dev</spring.profiles.active>
+<!--                <port>8088</port>-->
+<!--                <point.dresses>dresses</point.dresses>-->
+<!--                <point.dress_dtos>dress_dtos</point.dress_dtos>-->
+<!--                <point.rents>rents</point.rents>-->
+<!--                <point.rent_dtos>rent_dtos</point.rent_dtos>-->
             </properties>
         </profile>
     </profiles>

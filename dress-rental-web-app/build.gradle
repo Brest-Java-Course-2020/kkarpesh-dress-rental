@@ -10,13 +10,12 @@ repositories {
 gretty {
     httpPort = 8888
     contextPath = '/'
+    jvmArgs = ['-Dspring.profiles.active=dev']
 }
 
-ext.set("port", "8088")
-ext.set("point.dresses", "dresses")
-ext.set("point.dress_dtos", "dress_dtos")
-ext.set("point.rents", "rents")
-ext.set("point.rent_dtos", "rent_dtos")
+war {
+    archiveName = 'dress-rental-web.war'
+}
 
 dependencies {
     implementation project(':dress-rental-model')

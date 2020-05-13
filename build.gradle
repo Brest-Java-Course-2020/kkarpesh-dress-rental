@@ -43,11 +43,28 @@ subprojects {
     }
 
     jacocoTestReport {
-        dependsOn test // tests are required to run before generating the report
+        dependsOn test
     }
 
     test.mustRunAfter checkstyleMain, checkstyleTest
 
+}
+
+def exportedProjects = [
+       ':dress-rental-dao',
+       ':dress-rental-model',
+       ':dress-rental-rest-app',
+       ':dress-rental-service',
+       ':dress-rental-service-api',
+       ':dress-rental-service-rest',
+       ':dress-rental-test-db',
+       ':dress-rental-web-app'
+]
+
+task alljavadoc(type: Javadoc) {
+    source exportedProjects.collect { project(it).sourceSets.main.allJava }
+    classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
+    destinationDir = file("${buildDir}/docs/javadoc")
 }
 
 
