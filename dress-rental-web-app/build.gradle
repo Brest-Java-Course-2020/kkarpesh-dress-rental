@@ -10,7 +10,7 @@ repositories {
 gretty {
     httpPort = 8888
     contextPath = '/'
-    jvmArgs = ['-Dspring.profiles.active=dev']
+    jvmArgs = ['-Dspring.profiles.active=jet']
 }
 
 war {

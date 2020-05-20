@@ -22,6 +22,7 @@ install maven3+
 install tomcat
 install git
 ```
+You also can [run with Docker](run_with_Docker.md).
 
 ## Installing
 Select the directory for the project and clone the project from github:
@@ -33,7 +34,7 @@ Run command in project directory:
 ```
 $ mvn clean install
 ```
-you also can use Gradle for building project [Build_with_gradle.md](build_with_gradle.md)
+you also can [build with gradle](build_with_gradle.md).
 ## Preparing reports
 For preparing reports do:
 ```

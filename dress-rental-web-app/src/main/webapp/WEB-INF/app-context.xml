@@ -27,7 +27,7 @@
 <!--        <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
 <!--            <property name="locations">-->
 <!--                <list>-->
-<!--                    <value>classpath:prod.properties</value>-->
+<!--                    <value>classpath:tomcat.properties</value>-->
 <!--                </list>-->
 <!--            </property>-->
 <!--        </bean>-->
@@ -111,21 +111,31 @@
           p:basename="/WEB-INF/messages">
     </bean>
 
-    <beans profile="dev">
+    <beans profile="jet">
         <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
             <property name="locations">
                 <list>
-                    <value>classpath:dev.properties</value>
+                    <value>classpath:jetty.properties</value>
                 </list>
             </property>
         </bean>
     </beans>
 
-    <beans profile="prod">
+    <beans profile="tom">
         <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
             <property name="locations">
                 <list>
-                    <value>classpath:prod.properties</value>
+                    <value>classpath:tomcat.properties</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="docker">
+        <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:docker.properties</value>
                 </list>
             </property>
         </bean>

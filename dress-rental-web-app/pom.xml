@@ -114,7 +114,7 @@
 <!--                </property>-->
             </activation>
             <properties>
-                <spring.profiles.active>prod</spring.profiles.active>
+                <spring.profiles.active>tom</spring.profiles.active>
 <!--                <port>8080</port>-->
 <!--                <point.dresses>dress-rental-rest/dresses</point.dresses>-->
 <!--                <point.dress_dtos>dress-rental-rest/dress_dtos</point.dress_dtos>-->
@@ -126,7 +126,7 @@
         <profile>
             <id>jetty</id>
             <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.profiles.active>jet</spring.profiles.active>
 <!--                <port>8088</port>-->
 <!--                <point.dresses>dresses</point.dresses>-->
 <!--                <point.dress_dtos>dress_dtos</point.dress_dtos>-->

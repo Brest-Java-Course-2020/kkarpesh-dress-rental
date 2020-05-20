@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  web:
+    container_name: web
+    image: dress-rental-web:v1
+    build:
+      context: ./dress-rental-web-app
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8080
+    depends_on:
+      - rest
+
+  rest:
+    container_name: rest
+    image: dress-rental-rest:v1
+    build:
+      context: ./dress-rental-rest-app
+      dockerfile: Dockerfile
+    ports:
+      - 8088:8080
