@@ -1,27 +1,3 @@
-plugins {
-    id 'war'
-    id 'org.gretty' version '3.0.3'
-}
-
-repositories {
-    jcenter()
-}
-
-gretty {
-    httpPort = 8888
-    contextPath = '/'
-    jvmArgs = ['-Dspring.profiles.active=jet']
-}
-
-war {
-    archiveName = 'dress-rental-web.war'
-    enabled = true
-}
-
-bootWar {
-  enabled = false
-}
-
 dependencies {
     implementation project(':dress-rental-model')
     implementation project(':dress-rental-service-api')
@@ -29,7 +5,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        	}
     implementation 'org.apache.commons:commons-lang3:3.9'
 }
 

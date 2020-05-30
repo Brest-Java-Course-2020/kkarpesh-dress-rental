@@ -1,4 +1,4 @@
-package com.epam.brest.courses.rest_app;
+package com.epam.brest.courses.rest_app.controller;
 
 import com.epam.brest.courses.model.Rent;
 import com.epam.brest.courses.rest_app.exception_handler.ErrorResponse;

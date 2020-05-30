@@ -1,4 +1,4 @@
-package com.epam.brest.courses.web_app;
+package com.epam.brest.courses.web_app.controller;
 
 import com.epam.brest.courses.model.Dress;
 import com.epam.brest.courses.model.dto.DressDto;

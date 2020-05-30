@@ -1,4 +1,4 @@
-package com.epam.brest.courses.rest_app;
+package com.epam.brest.courses.rest_app.controller;
 
 import com.epam.brest.courses.model.dto.RentDto;
 import com.epam.brest.courses.service_api.dto.RentDtoService;

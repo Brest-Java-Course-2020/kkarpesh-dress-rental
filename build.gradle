@@ -39,7 +39,7 @@ subprojects {
     checkstyle {
         toolVersion = '8.2'
         showViolations = true
-        ignoreFailures = false
+        ignoreFailures = true
         checkstyleTest.enabled = false
     }
 
