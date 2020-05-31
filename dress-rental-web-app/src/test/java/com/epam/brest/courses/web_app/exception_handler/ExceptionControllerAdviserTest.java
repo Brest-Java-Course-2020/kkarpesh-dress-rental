@@ -3,6 +3,7 @@ package com.epam.brest.courses.web_app.exception_handler;
 import com.epam.brest.courses.service_api.DressService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = "classpath:app-context-test.xml")
+@Disabled
 class ExceptionControllerAdviserTest {
 
     private MockMvc mockMvc;
