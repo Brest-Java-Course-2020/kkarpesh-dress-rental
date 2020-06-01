@@ -1,5 +1,6 @@
 ![Java CI with Maven](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/workflows/Java%20CI%20with%20Maven/badge.svg)
 ![Java CI with Gradle](https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![Build Status](https://travis-ci.org/Brest-Java-Course-2020/kkarpesh-dress-rental.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2020/kkarpesh-dress-rental)
 # kkarpesh-dress-rental
 Dress rental demo application.
 + [Environment setting](#Environment-setting)
@@ -17,7 +18,8 @@ Dress rental demo application.
 ## Environment setting
 ```
 install openjdk11
-install gradle
+install maven3+
+install tomcat
 install git
 ```
 You also can [run with Docker](run_with_Docker.md).
@@ -25,44 +27,53 @@ You also can [run with Docker](run_with_Docker.md).
 ## Installing
 Select the directory for the project and clone the project from github:
 ```
-$ git clone https://github.com/kkarpesh/dress-rental.git
+$ git clone https://github.com/Brest-Java-Course-2020/kkarpesh-dress-rental.git
 ```
 ## Build project
 Run command in project directory:
 ```
-$ gradle build
+$ mvn clean install
 ```
-## Preparing javadoc
+you also can [build with gradle](build_with_gradle.md).
+## Preparing reports
 For preparing reports do:
 ```
-$ gradle alljavadoc
+$ mvn site
+$ mvn site:stage
 ```
 and open:
 ```
-../dress-rental/build/docs/javadoc/index.html
+../kkarpesh-dress-rental/target/staging/index.html
 ```
-## Run application with Gradle
-Run command in project directory in different terminal windows:
+## Deploy application on Tomcat server
+Copy:
 ```
-$ gradle -p dress-rental-web-app/ bootRun
-$ gradle -p dress-rental-rest-app/ bootRun
+../kkarpesh-dress-rental/dress-rental-web-app/target/dress-rental-web.war
+and
+../kkarpesh-dress-rental/dress-rental-rest-app/target/dress-rental-rest.war
 ```
+to tomcat directory:
+```
+../tomcat/webapps/
+```
+For shutdown and removing this apps from server remove this files.
+
+Or, you can use GUI at:
+```
+http://localhost:8080/manager/html
+```
+and select .war files to deploy.
+For shutdown select "stop", for removing "undeploy".
+
 Web-app should be available at:
 ```
-http://localhost:8888
+http://localhost:8080/dress-rental-web/
 ```
-Rest-app at:
-```
-http://localhost:8088
-```
-for shutdown apps in terminal window press "CTRL+C"
-
-## Run applications with java -jar command
+## Run application on Jetty test server
 Run command in project directory in different terminal windows:
 ```
-$ java -jar dress-rental-rest-app/build/libs/dress-rental-rest-app.jar
-$ java -jar dress-rental-web-app/build/libs/dress-rental-web-app.jar
-
+$ mvn -pl dress-rental-web-app/ jetty:run -P jetty
+$ mvn -pl dress-rental-rest-app/ jetty:run
 ```
 Web-app should be available at
 ```
