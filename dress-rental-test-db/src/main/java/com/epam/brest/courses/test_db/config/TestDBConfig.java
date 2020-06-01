@@ -15,7 +15,8 @@ public class TestDBConfig {
 
     @Bean
     public DataSourceTransactionManager transactionManager() {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+        DataSourceTransactionManager transactionManager =
+                new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource());
         return transactionManager;
     }
@@ -28,7 +29,8 @@ public class TestDBConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("");
 
-        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+        ResourceDatabasePopulator databasePopulator =
+                new ResourceDatabasePopulator();
         databasePopulator.addScript(new ClassPathResource("create-db.sql"));
         databasePopulator.addScript(new ClassPathResource("populate-db.sql"));
         DatabasePopulatorUtils.execute(databasePopulator, dataSource);

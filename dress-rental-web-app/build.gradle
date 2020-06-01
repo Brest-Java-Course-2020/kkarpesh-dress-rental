@@ -11,4 +11,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.9'
 }
 
+bootJar {
+   archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
 description = 'Dress Rental WEB-APP'

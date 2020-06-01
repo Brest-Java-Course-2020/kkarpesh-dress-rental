@@ -124,8 +124,8 @@ class RentControllerTest {
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("rents"))
                 .andExpect(model().attribute("incorrectPeriod", true))
-                .andExpect(model().attribute("dateFrom", isEmptyOrNullString()))
-                .andExpect(model().attribute("dateTo", isEmptyOrNullString()))
+                .andExpect(model().attribute("dateFrom", is(emptyOrNullString())))
+                .andExpect(model().attribute("dateTo", is(emptyOrNullString())))
                 .andExpect(model().attribute("rents", rents));
     }
 

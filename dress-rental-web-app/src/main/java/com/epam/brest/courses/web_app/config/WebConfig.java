@@ -36,34 +36,37 @@ public class WebConfig {
     private String pointRentDtos;
 
     @Bean
-    public DressServiceRest dressServiceRest(){
-        String url = protocol + "://" + host + ":" + port + "/" + pointDresses + "/";
+    public DressServiceRest dressServiceRest() {
+        String url = protocol + "://" + host + ":"
+                + port + "/" + pointDresses + "/";
         return new DressServiceRest(url, restTemplate());
     }
 
     @Bean
-    public DressDtoServiceRest dressDtoServiceRest(){
-        String url = protocol + "://" + host + ":" + port + "/" + pointDressDtos + "/";
+    public DressDtoServiceRest dressDtoServiceRest() {
+        String url = protocol + "://" + host + ":"
+                + port + "/" + pointDressDtos + "/";
         return new DressDtoServiceRest(url, restTemplate());
     }
 
     @Bean
-    public RentServiceRest rentServiceRest(){
-        String url = protocol + "://" + host + ":" + port + "/" + pointRents + "/";
+    public RentServiceRest rentServiceRest() {
+        String url = protocol + "://" + host + ":"
+                + port + "/" + pointRents + "/";
         return new RentServiceRest(url, restTemplate());
     }
 
     @Bean
-    public RentDtoServiceRest rentDtoServiceRest(){
-        String url = protocol + "://" + host + ":" + port + "/" + pointRentDtos + "/";
+    public RentDtoServiceRest rentDtoServiceRest() {
+        String url = protocol + "://" + host + ":" + port
+                + "/" + pointRentDtos + "/";
         return new RentDtoServiceRest(url, restTemplate());
     }
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 
 
 }
