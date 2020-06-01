@@ -1,14 +1,6 @@
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework:spring-context:5.2.5.RELEASE'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
-}
-
-bootJar {
-  enabled = false
-}
-
-jar {
-  enabled = true
 }
 
 description = 'Dress Rental Model'

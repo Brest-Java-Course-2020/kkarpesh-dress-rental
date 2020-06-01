@@ -1,6 +1,5 @@
 package com.epam.brest.courses.dao.dto;
 
-import com.epam.brest.courses.dao.config.DaoTestConfig;
 import com.epam.brest.courses.model.dto.DressDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = DaoTestConfig.class)
+@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 class DressDtoDaoJdbcIT {
 
     private final DressDtoDao dressDtoDao;
