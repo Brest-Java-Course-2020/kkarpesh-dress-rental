@@ -9,21 +9,18 @@ import com.epam.brest.courses.service_api.dto.RentDtoService;
 import com.epam.brest.courses.web_app.controller.RentController;
 import com.epam.brest.courses.web_app.validators.RentValidator;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -36,14 +33,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(RentController.class)
 class RentControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     private static final String RENTS_ENDPOINT = "/rents";
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @TestConfiguration
+    static class AdditionalConfig {
+        @Bean
+        public RentValidator rentValidator() {
+            return new RentValidator();
+        }
+    }
 
     @MockBean
     private RentService rentService;
@@ -54,7 +62,7 @@ class RentControllerTest {
     @MockBean
     private DressService dressService;
 
-    @MockBean
+    @Autowired
     private RentValidator rentValidator;
 
     @Test
@@ -187,7 +195,6 @@ class RentControllerTest {
     }
 
     @Test
-    @Disabled
     void shouldReturnRentEditPageIfUpdateRentAfterEditHasErrors() throws Exception {
         Rent rent = new Rent();
         rent.setRentId(1);
@@ -233,7 +240,6 @@ class RentControllerTest {
     }
 
     @Test
-    @Disabled
     void shouldReturnRentAddPageIfCreatedRentHasErrors() throws Exception {
         Rent rent = new Rent();
         rent.setClient(RandomStringUtils.randomAlphabetic(RENT_CLIENT_SIZE + 1));
